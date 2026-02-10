@@ -1,0 +1,105 @@
+@import "tailwindcss";
+@config "../tailwind.config.js";
+
+/* 
+  BWBS Premium Design System v2.0
+  Focus: High-impact BI, Glassmorphism, Mesh Gradients
+*/
+
+@layer base {
+  :root {
+    --background: #f8fafc;
+    --foreground: #020617;
+    --card: rgba(255, 255, 255, 0.7);
+    --card-foreground: #020617;
+    --primary: #9333ea;
+    --primary-foreground: #ffffff;
+    --accent: #AD03DE;
+    --radius: 2rem;
+
+    /* Premium Glows */
+    --glow-primary: rgba(147, 51, 234, 0.15);
+    --glow-accent: rgba(173, 3, 222, 0.15);
+  }
+
+  body {
+    @apply text-foreground font-sans antialiased selection:bg-purple-200 selection:text-purple-900;
+    /* Ultra-premium Mesh Gradient Background */
+    background:
+      radial-gradient(at 0% 0%, rgba(147, 51, 234, 0.05) 0px, transparent 50%),
+      radial-gradient(at 100% 0%, rgba(173, 3, 222, 0.05) 0px, transparent 50%),
+      radial-gradient(at 100% 100%, rgba(59, 130, 246, 0.05) 0px, transparent 50%),
+      radial-gradient(at 0% 100%, rgba(236, 72, 153, 0.05) 0px, transparent 50%),
+      #f8fafc;
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-serif font-black tracking-tight text-slate-900;
+  }
+}
+
+@layer components {
+
+  /* Glassmorphism Card System */
+  .glass-card {
+    @apply bg-white/70 backdrop-blur-xl border border-white/40 shadow-[0_8px_32px_0_#1f268712] rounded-[2.5rem] transition-all duration-500;
+  }
+
+  .glass-card:hover {
+    @apply bg-white/80 border-white/60 shadow-[0_8px_48px_0_#1f26871f] -translate-y-1;
+  }
+
+  /* Interactive Elements */
+  .primary-glow-button {
+    @apply px-8 py-4 bg-slate-900 text-white rounded-2xl font-bold uppercase tracking-widest text-[10px] shadow-xl shadow-slate-200 hover:shadow-2xl hover:shadow-purple-200 hover:bg-purple-600 active:scale-95 transition-all duration-300 flex items-center gap-3;
+  }
+
+  .premium-input {
+    @apply w-full bg-white/50 backdrop-blur-md border border-slate-200 rounded-2xl px-6 py-4 text-sm focus:outline-none focus:ring-4 focus:ring-purple-500/10 focus:border-purple-500/50 transition-all duration-300 placeholder:text-slate-400;
+  }
+}
+
+@layer utilities {
+
+  /* Animation primitives */
+  .animate-reveal {
+    animation: reveal 0.8s cubic-bezier(0, 0, 0.2, 1) forwards;
+  }
+
+  @keyframes reveal {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Text Shapers */
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600;
+  }
+
+  /* Premium Scrollbar */
+  .premium-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .premium-scrollbar::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  .premium-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-slate-200 rounded-full border-2 border-transparent bg-clip-content hover:bg-slate-300 transition-colors;
+  }
+}
