@@ -5,6 +5,7 @@ End-to-end CRM for managing leads, students, applications, visas, finance, and b
 ## Repository Layout
 - `visa_crm_backend/` Django backend
 - `bwbs-crm-frontend/` React frontend
+- `extras/` Documentation, utility scripts, and miscellaneous artifacts
 - `docker-compose.yml` Local stack (Postgres + Redis + backend)
 
 ## Quick Start (Docker)
