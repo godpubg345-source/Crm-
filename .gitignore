@@ -38,3 +38,11 @@ bwbs-crm-frontend/dist/
 # Build artifacts
 build/
 dist/
+
+# Local tool output / scratch logs
+*_err.txt
+build_output*.txt
+build_errors.txt
+lint_output*.txt
+scan_results*.txt
+*.mp4
