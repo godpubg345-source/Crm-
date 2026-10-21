@@ -58,7 +58,7 @@ const pipelineConfig = [
 ];
 
 /**
- * Commission Forecast Widget for HQ Analytics Dashboard
+ * Commission Forecast Widget for Stats Dashboard
  * Displays projected and earned commissions with pipeline breakdown
  */
 export const CommissionForecastWidget: React.FC<CommissionForecastWidgetProps> = ({
@@ -66,7 +66,7 @@ export const CommissionForecastWidget: React.FC<CommissionForecastWidgetProps> =
 }) => {
     if (isLoading || !data) {
         return (
-            <div className="bg-white rounded-3xl border border-slate-100 p-8 animate-pulse">
+            <div className="bg-white rounded-xl border border-slate-200 p-6 animate-pulse">
                 <div className="h-8 bg-slate-100 rounded-xl w-48 mb-6" />
                 <div className="grid grid-cols-4 gap-4">
                     {[1, 2, 3, 4].map((i) => (
@@ -87,17 +87,16 @@ export const CommissionForecastWidget: React.FC<CommissionForecastWidgetProps> =
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="bg-gradient-to-br from-[#AD03DE] to-purple-600 rounded-3xl p-6 text-white relative overflow-hidden"
+                    className="bg-gradient-to-br from-[#7c3aed] to-purple-600 rounded-2xl p-6 text-white relative overflow-hidden"
                 >
-                    <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-2xl" />
                     <div className="relative z-10">
                         <div className="flex items-center gap-2 mb-2">
                             <TrendingUp className="w-5 h-5 text-white/60" />
-                            <span className="text-[9px] font-black uppercase tracking-widest text-white/60">
+                            <span className="text-[11px] font-semibold text-white/60">
                                 Total Forecast
                             </span>
                         </div>
-                        <p className="text-4xl font-serif font-black">
+                        <p className="text-3xl font-semibold">
                             {formatCurrency(summary.total_forecast)}
                         </p>
                         <p className="text-xs text-white/70 mt-2">
@@ -111,15 +110,15 @@ export const CommissionForecastWidget: React.FC<CommissionForecastWidgetProps> =
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.1 }}
-                    className="bg-white rounded-3xl border border-slate-100 p-6"
+                    className="bg-white rounded-xl border border-slate-200 p-6"
                 >
                     <div className="flex items-center gap-2 mb-2">
                         <DollarSign className="w-5 h-5 text-emerald-500" />
-                        <span className="text-[9px] font-black uppercase tracking-widest text-slate-400">
+                        <span className="text-[11px] font-semibold text-slate-400">
                             Confirmed Earned
                         </span>
                     </div>
-                    <p className="text-3xl font-serif font-black text-emerald-600">
+                    <p className="text-3xl font-semibold text-emerald-600">
                         {formatCurrency(summary.total_earned)}
                     </p>
                     <p className="text-xs text-slate-400 mt-2">
@@ -132,15 +131,15 @@ export const CommissionForecastWidget: React.FC<CommissionForecastWidgetProps> =
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2 }}
-                    className="bg-white rounded-3xl border border-slate-100 p-6"
+                    className="bg-white rounded-xl border border-slate-200 p-6"
                 >
                     <div className="flex items-center gap-2 mb-2">
                         <TrendingUp className="w-5 h-5 text-blue-500" />
-                        <span className="text-[9px] font-black uppercase tracking-widest text-slate-400">
+                        <span className="text-[11px] font-semibold text-slate-400">
                             Projected
                         </span>
                     </div>
-                    <p className="text-3xl font-serif font-black text-blue-600">
+                    <p className="text-3xl font-semibold text-blue-600">
                         {formatCurrency(summary.total_projected)}
                     </p>
                     <p className="text-xs text-slate-400 mt-2">
@@ -150,10 +149,10 @@ export const CommissionForecastWidget: React.FC<CommissionForecastWidgetProps> =
             </div>
 
             {/* Pipeline Breakdown */}
-            <div className="bg-white rounded-3xl border border-slate-100 p-6">
+            <div className="bg-white rounded-xl border border-slate-200 p-6">
                 <div className="flex items-center gap-3 mb-6">
-                    <Users className="w-5 h-5 text-[#AD03DE]" />
-                    <h3 className="text-[11px] font-black text-slate-900 uppercase tracking-widest">
+                    <Users className="w-5 h-5 text-[#7c3aed]" />
+                    <h3 className="text-[11px] font-semibold text-slate-900">
                         Pipeline Breakdown
                     </h3>
                 </div>
@@ -178,14 +177,14 @@ export const CommissionForecastWidget: React.FC<CommissionForecastWidgetProps> =
                             >
                                 <div className="flex items-center gap-2 mb-3">
                                     <stage.icon className="w-4 h-4" />
-                                    <span className="text-[9px] font-black uppercase tracking-widest">
+                                    <span className="text-[11px] font-semibold">
                                         {stage.label}
                                     </span>
                                 </div>
-                                <p className="text-2xl font-black mb-1">
+                                <p className="text-2xl font-semibold mb-1">
                                     {stageData.count}
                                 </p>
-                                <p className="text-[10px] font-bold opacity-70">
+                                <p className="text-xs font-bold opacity-70">
                                     {formatCurrency(value)} • {stageData.probability}
                                 </p>
                             </motion.div>
@@ -196,15 +195,15 @@ export const CommissionForecastWidget: React.FC<CommissionForecastWidgetProps> =
 
             {/* Top Revenue Partners */}
             {universities.length > 0 && (
-                <div className="bg-white rounded-3xl border border-slate-100 p-6">
+                <div className="bg-white rounded-xl border border-slate-200 p-6">
                     <div className="flex items-center justify-between mb-6">
                         <div className="flex items-center gap-3">
-                            <TrendingUp className="w-5 h-5 text-[#AD03DE]" />
-                            <h3 className="text-[11px] font-black text-slate-900 uppercase tracking-widest">
+                            <TrendingUp className="w-5 h-5 text-[#7c3aed]" />
+                            <h3 className="text-[11px] font-semibold text-slate-900">
                                 Top Revenue Partners
                             </h3>
                         </div>
-                        <span className="text-[9px] font-bold text-slate-400">
+                        <span className="text-[11px] text-slate-500">
                             {universities.length} partners
                         </span>
                     </div>
@@ -225,17 +224,17 @@ export const CommissionForecastWidget: React.FC<CommissionForecastWidgetProps> =
                                     className="flex items-center gap-4 p-3 bg-slate-50 rounded-2xl hover:bg-slate-100 transition-all cursor-pointer group"
                                 >
                                     <div className="w-8 h-8 bg-white rounded-xl flex items-center justify-center shadow-sm">
-                                        <span className="text-xs font-black text-slate-400">
+                                        <span className="text-xs font-semibold text-slate-400">
                                             #{index + 1}
                                         </span>
                                     </div>
 
                                     <div className="flex-1 min-w-0">
                                         <div className="flex items-center justify-between mb-1">
-                                            <h4 className="text-sm font-black text-slate-900 truncate">
+                                            <h4 className="text-sm font-semibold text-slate-900 truncate">
                                                 {uni.university_name}
                                             </h4>
-                                            <span className="text-sm font-black text-[#AD03DE]">
+                                            <span className="text-sm font-semibold text-[#7c3aed]">
                                                 {formatCurrency(String(totalRevenue))}
                                             </span>
                                         </div>
@@ -245,24 +244,24 @@ export const CommissionForecastWidget: React.FC<CommissionForecastWidgetProps> =
                                                 initial={{ width: 0 }}
                                                 animate={{ width: `${barWidth}%` }}
                                                 transition={{ duration: 0.5, delay: index * 0.05 }}
-                                                className="absolute left-0 top-0 h-full bg-gradient-to-r from-[#AD03DE] to-purple-400 rounded-full"
+                                                className="absolute left-0 top-0 h-full bg-gradient-to-r from-[#7c3aed] to-purple-400 rounded-full"
                                             />
                                         </div>
 
                                         <div className="flex items-center gap-4 mt-2">
-                                            <span className="text-[9px] font-bold text-emerald-600">
+                                            <span className="text-[11px] font-bold text-emerald-600">
                                                 Earned: {formatCurrency(uni.earned)}
                                             </span>
-                                            <span className="text-[9px] font-bold text-blue-600">
+                                            <span className="text-[11px] font-bold text-blue-600">
                                                 Projected: {formatCurrency(uni.projected)}
                                             </span>
-                                            <span className="text-[9px] font-bold text-slate-400">
+                                            <span className="text-[11px] text-slate-500">
                                                 {uni.stats.enrolled} enrolled
                                             </span>
                                         </div>
                                     </div>
 
-                                    <ChevronRight className="w-4 h-4 text-slate-300 group-hover:text-[#AD03DE] transition-colors" />
+                                    <ChevronRight className="w-4 h-4 text-slate-300 group-hover:text-[#7c3aed] transition-colors" />
                                 </motion.div>
                             );
                         })}
@@ -289,22 +288,22 @@ export const CompactCommissionCard: React.FC<CompactCommissionCardProps> = ({
         <div className="p-3 bg-gradient-to-br from-emerald-50 to-teal-50 rounded-xl border border-emerald-100">
             <div className="flex items-center gap-2 mb-2">
                 <DollarSign className="w-3 h-3 text-emerald-500" />
-                <span className="text-[8px] font-black text-emerald-600 uppercase tracking-widest">
+                <span className="text-[11px] font-semibold text-emerald-600">
                     Commission
                 </span>
             </div>
             <div className="flex items-end justify-between">
                 <div>
-                    <p className="text-lg font-black text-emerald-700">
+                    <p className="text-lg font-semibold text-emerald-700">
                         {formatCurrency(earned)}
                     </p>
-                    <p className="text-[9px] font-bold text-emerald-500">
+                    <p className="text-[11px] font-bold text-emerald-500">
                         +{formatCurrency(projected)} projected
                     </p>
                 </div>
                 <div className="text-right">
-                    <p className="text-xs font-black text-slate-600">{enrolledCount}</p>
-                    <p className="text-[8px] font-bold text-slate-400">enrolled</p>
+                    <p className="text-xs font-semibold text-slate-600">{enrolledCount}</p>
+                    <p className="text-[11px] text-slate-500">enrolled</p>
                 </div>
             </div>
         </div>
@@ -334,8 +333,8 @@ export const SmartCommissionForecast: React.FC<{ onBack?: () => void }> = ({ onB
                         <ChevronRight className="w-6 h-6 rotate-180 text-slate-400" />
                     </button>
                     <div>
-                        <h2 className="text-2xl font-serif font-black text-slate-900 uppercase tracking-tight">Commission Intelligence</h2>
-                        <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Financial Performance Vector</p>
+                        <h2 className="text-2xl font-semibold text-slate-900 tracking-tight">Commissions</h2>
+                        <p className="text-xs font-semibold text-slate-400">Expected and earned</p>
                     </div>
                 </div>
             )}

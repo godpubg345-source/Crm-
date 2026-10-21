@@ -1,7 +1,7 @@
 import api from './api';
 
 // ============================================================================
-// APPLICATIONS SERVICE - BWBS Education CRM
+// APPLICATIONS SERVICE - Education Consultancy ERP
 // ============================================================================
 
 export type ApplicationStatus =
@@ -12,10 +12,12 @@ export type ApplicationStatus =
     | 'INTERVIEW_SCHEDULED'
     | 'CONDITIONAL_OFFER'
     | 'UNCONDITIONAL_OFFER'
+    | 'DEPOSIT_PAID'
     | 'OFFER_ACCEPTED'
     | 'OFFER_DECLINED'
     | 'CAS_REQUESTED'
     | 'CAS_RECEIVED'
+    | 'VISA_APPLIED'
     | 'ENROLLED'
     | 'REJECTED'
     | 'WITHDRAWN';
@@ -84,6 +86,10 @@ export interface Application {
         duration?: string;
     } | null;
     course_name_display?: string;
+    university_name?: string;
+    course_name?: string;
+    course_level?: string;
+    course_duration?: string;
     intake: string; // e.g., "September 2026"
     intake_date: string;
     status: ApplicationStatus;
@@ -258,15 +264,17 @@ export const deleteApplication = async (id: string): Promise<void> => {
 export const statusLabels: Record<ApplicationStatus, string> = {
     DRAFT: 'Draft',
     DOCUMENTS_READY: 'Documents Ready',
-    SUBMITTED: 'Submitted',
+    SUBMITTED: 'Applied',
     UNDER_REVIEW: 'Under Review',
     INTERVIEW_SCHEDULED: 'Interview Scheduled',
     CONDITIONAL_OFFER: 'Conditional Offer',
     UNCONDITIONAL_OFFER: 'Unconditional Offer',
+    DEPOSIT_PAID: 'Deposit Paid',
     OFFER_ACCEPTED: 'Offer Accepted',
     OFFER_DECLINED: 'Offer Declined',
     CAS_REQUESTED: 'CAS Requested',
-    CAS_RECEIVED: 'CAS Received',
+    CAS_RECEIVED: 'CAS Issued',
+    VISA_APPLIED: 'Visa Applied',
     ENROLLED: 'Enrolled',
     REJECTED: 'Rejected',
     WITHDRAWN: 'Withdrawn',
@@ -280,10 +288,12 @@ export const statusColors: Record<ApplicationStatus, string> = {
     INTERVIEW_SCHEDULED: 'bg-indigo-500/20 text-indigo-400 border-indigo-500/30',
     CONDITIONAL_OFFER: 'bg-amber-500/20 text-amber-400 border-amber-500/30',
     UNCONDITIONAL_OFFER: 'bg-green-500/20 text-green-400 border-green-500/30',
+    DEPOSIT_PAID: 'bg-emerald-500/20 text-emerald-500 border-emerald-500/30',
     OFFER_ACCEPTED: 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30',
     OFFER_DECLINED: 'bg-rose-500/20 text-rose-400 border-rose-500/30',
     CAS_REQUESTED: 'bg-cyan-500/20 text-cyan-400 border-cyan-500/30',
-    CAS_RECEIVED: 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30',
+    CAS_RECEIVED: 'bg-[#AD03DE]/20 text-[#AD03DE] border-[#AD03DE]/30',
+    VISA_APPLIED: 'bg-fuchsia-500/20 text-fuchsia-500 border-fuchsia-500/30',
     ENROLLED: 'bg-[#AD03DE]/20 text-[#AD03DE] border-[#AD03DE]/30',
     REJECTED: 'bg-red-500/20 text-red-400 border-red-500/30',
     WITHDRAWN: 'bg-gray-500/20 text-gray-400 border-gray-500/30',
@@ -293,15 +303,17 @@ export const statusColors: Record<ApplicationStatus, string> = {
 export const statusTransitions: Record<ApplicationStatus, ApplicationStatus[]> = {
     DRAFT: ['DOCUMENTS_READY', 'WITHDRAWN'],
     DOCUMENTS_READY: ['SUBMITTED', 'WITHDRAWN'],
-    SUBMITTED: ['UNDER_REVIEW', 'INTERVIEW_SCHEDULED', 'REJECTED', 'WITHDRAWN'],
+    SUBMITTED: ['CONDITIONAL_OFFER', 'UNCONDITIONAL_OFFER', 'UNDER_REVIEW', 'INTERVIEW_SCHEDULED', 'REJECTED', 'WITHDRAWN'],
     UNDER_REVIEW: ['CONDITIONAL_OFFER', 'UNCONDITIONAL_OFFER', 'REJECTED', 'WITHDRAWN'],
     INTERVIEW_SCHEDULED: ['UNDER_REVIEW', 'CONDITIONAL_OFFER', 'UNCONDITIONAL_OFFER', 'REJECTED', 'WITHDRAWN'],
-    CONDITIONAL_OFFER: ['UNCONDITIONAL_OFFER', 'OFFER_ACCEPTED', 'OFFER_DECLINED', 'CAS_REQUESTED', 'REJECTED', 'WITHDRAWN'],
-    UNCONDITIONAL_OFFER: ['OFFER_ACCEPTED', 'OFFER_DECLINED', 'CAS_REQUESTED', 'WITHDRAWN'],
+    CONDITIONAL_OFFER: ['UNCONDITIONAL_OFFER', 'DEPOSIT_PAID', 'OFFER_ACCEPTED', 'OFFER_DECLINED', 'CAS_REQUESTED', 'REJECTED', 'WITHDRAWN'],
+    UNCONDITIONAL_OFFER: ['DEPOSIT_PAID', 'OFFER_ACCEPTED', 'OFFER_DECLINED', 'CAS_REQUESTED', 'WITHDRAWN'],
+    DEPOSIT_PAID: ['CAS_REQUESTED', 'OFFER_ACCEPTED', 'WITHDRAWN'],
     OFFER_ACCEPTED: ['CAS_REQUESTED', 'WITHDRAWN'],
     OFFER_DECLINED: ['WITHDRAWN'],
     CAS_REQUESTED: ['CAS_RECEIVED', 'WITHDRAWN'],
-    CAS_RECEIVED: ['ENROLLED', 'WITHDRAWN'],
+    CAS_RECEIVED: ['VISA_APPLIED', 'ENROLLED', 'WITHDRAWN'],
+    VISA_APPLIED: ['ENROLLED'],
     ENROLLED: [],
     REJECTED: [],
     WITHDRAWN: [],

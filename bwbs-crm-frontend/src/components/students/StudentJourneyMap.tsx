@@ -10,7 +10,7 @@ interface StudentJourneyMapProps {
 
 const stages: { id: JourneyStage; label: string; description: string }[] = [
     { id: 'LEAD', label: 'Lead', description: 'Account Created' },
-    { id: 'PROFILE_READY', label: 'Profile', description: '100% Complete' },
+    { id: 'PROFILE_READY', label: 'Profile', description: 'Profile Ready' },
     { id: 'APPLIED', label: 'Applied', description: 'Apps Submitted' },
     { id: 'OFFER_RECEIVED', label: 'Offers', description: 'Offer Secured' },
     { id: 'VISA_FILING', label: 'Visa', description: 'CAS & Filing' },
@@ -31,7 +31,7 @@ const StudentJourneyMap = ({ currentStage, onStageClick }: StudentJourneyMapProp
                     initial={{ width: 0 }}
                     animate={{ width: `${(currentIndex / (stages.length - 1)) * 100}%` }}
                     transition={{ duration: 1, ease: "easeInOut" }}
-                    className="absolute top-1/2 left-8 h-1.5 bg-gradient-to-r from-indigo-500 via-[#AD03DE] to-fuchsia-500 rounded-full -z-10 shadow-[0_0_15px_rgba(173,3,222,0.4)]"
+                    className="absolute top-1/2 left-8 h-1.5 bg-gradient-to-r from-indigo-500 via-[#7c3aed] to-fuchsia-500 rounded-full -z-10"
                 />
 
                 {stages.map((stage, index) => {
@@ -50,33 +50,33 @@ const StudentJourneyMap = ({ currentStage, onStageClick }: StudentJourneyMapProp
                                 initial={false}
                                 animate={{
                                     scale: isActive ? 1.2 : 1,
-                                    backgroundColor: isActive ? '#fff' : isCompleted ? '#AD03DE' : '#f1f5f9',
-                                    borderColor: isActive ? '#AD03DE' : isCompleted ? '#AD03DE' : '#e2e8f0'
+                                    backgroundColor: isActive ? '#fff' : isCompleted ? '#7c3aed' : '#f1f5f9',
+                                    borderColor: isActive ? '#7c3aed' : isCompleted ? '#7c3aed' : '#e2e8f0'
                                 }}
                                 className={`w-10 h-10 rounded-full border-4 flex items-center justify-center z-10 shadow-sm transition-all duration-300 relative
-                                    ${isActive ? 'shadow-[0_0_20px_rgba(173,3,222,0.4)]' : ''}
+                                    ${isActive ? '' : ''}
                                 `}
                             >
                                 {isCompleted ? (
                                     <Check className="w-5 h-5 text-white" />
                                 ) : isActive ? (
-                                    <div className="w-3 h-3 rounded-full bg-[#AD03DE] animate-pulse" />
+                                    <div className="w-3 h-3 rounded-full bg-[#7c3aed] animate-pulse" />
                                 ) : (
-                                    <span className="text-[10px] font-bold text-slate-400">{index + 1}</span>
+                                    <span className="text-xs text-slate-500">{index + 1}</span>
                                 )}
 
                                 {/* Pulse Effect for Active */}
                                 {isActive && (
-                                    <span className="absolute inset-0 rounded-full bg-[#AD03DE] opacity-20 animate-ping" />
+                                    <span className="absolute inset-0 rounded-full bg-[#7c3aed] opacity-20 animate-ping" />
                                 )}
                             </motion.div>
 
                             {/* Label & Description */}
                             <div className="text-center space-y-0.5">
-                                <p className={`text-xs font-bold uppercase tracking-widest transition-colors ${isActive ? 'text-[#AD03DE]' : isCompleted ? 'text-slate-700' : 'text-slate-400'}`}>
+                                <p className={`text-xs font-bold transition-colors ${isActive ? 'text-[#7c3aed]' : isCompleted ? 'text-slate-700' : 'text-slate-400'}`}>
                                     {stage.label}
                                 </p>
-                                <p className="text-[9px] font-bold text-slate-400">
+                                <p className="text-[11px] text-slate-500">
                                     {stage.description}
                                 </p>
                             </div>

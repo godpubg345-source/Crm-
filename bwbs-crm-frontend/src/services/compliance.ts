@@ -1,7 +1,7 @@
 import api from './api';
 
 // ============================================================================
-// COMPLIANCE SERVICE - BWBS Education CRM
+// COMPLIANCE SERVICE - Education Consultancy ERP
 // ============================================================================
 
 export type ComplianceStatus = 'DRAFT' | 'ACTIVE' | 'ARCHIVED';

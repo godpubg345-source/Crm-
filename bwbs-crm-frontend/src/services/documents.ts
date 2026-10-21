@@ -1,7 +1,7 @@
 import api from './api';
 
 // ============================================================================
-// DOCUMENTS SERVICE - BWBS Education CRM
+// DOCUMENTS SERVICE - Education Consultancy ERP
 // ============================================================================
 
 // Backend-aligned category choices (from Document.Category in students/models.py)

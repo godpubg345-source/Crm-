@@ -42,11 +42,11 @@ export const ApplicationTrackerWidget: React.FC<ApplicationTrackerProps> = ({
             <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2">
                     <Users className="w-4 h-4 text-slate-400" />
-                    <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">
+                    <span className="text-[11px] font-semibold text-slate-400">
                         Applications
                     </span>
                 </div>
-                <span className="text-lg font-black text-slate-900">{totalApplications}</span>
+                <span className="text-lg font-semibold text-slate-900">{totalApplications}</span>
             </div>
 
             {/* Mini Status Grid */}
@@ -60,11 +60,11 @@ export const ApplicationTrackerWidget: React.FC<ApplicationTrackerProps> = ({
                             "w-full aspect-square rounded-xl flex items-center justify-center mb-1",
                             status.color
                         )}>
-                            <span className="text-xs font-black">
+                            <span className="text-xs font-semibold">
                                 {stats[status.key as keyof ApplicationStats]}
                             </span>
                         </div>
-                        <p className="text-[7px] font-bold text-slate-400 uppercase">
+                        <p className="text-[11px] text-slate-500">
                             {status.label}
                         </p>
                     </div>
@@ -73,7 +73,7 @@ export const ApplicationTrackerWidget: React.FC<ApplicationTrackerProps> = ({
 
             <button
                 onClick={onViewAll}
-                className="w-full py-2 text-[9px] font-black text-[#AD03DE] uppercase tracking-widest hover:bg-[#AD03DE]/5 rounded-xl transition-all flex items-center justify-center gap-1"
+                className="w-full py-2 text-[11px] font-semibold text-[#7c3aed] hover:bg-[#7c3aed]/5 rounded-xl transition-all flex items-center justify-center gap-1"
             >
                 View All <ChevronRight className="w-3 h-3" />
             </button>
@@ -112,15 +112,15 @@ export const ApplicationBoard: React.FC<ApplicationBoardProps> = ({
         <div className="space-y-6">
             <div className="flex items-center justify-between">
                 <div>
-                    <h3 className="text-xl font-serif font-black text-slate-900 uppercase tracking-tight">
+                    <h3 className="text-xl font-semibold text-slate-900 tracking-tight">
                         Application Pipeline
                     </h3>
-                    <p className="text-[9px] font-black text-[#AD03DE] uppercase tracking-widest">
+                    <p className="text-[11px] font-semibold text-[#7c3aed]">
                         {universityName}
                     </p>
                 </div>
                 <div className="flex items-center gap-2">
-                    <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">
+                    <span className="text-[11px] font-semibold text-slate-400">
                         Total: {applications.length}
                     </span>
                 </div>
@@ -141,10 +141,10 @@ export const ApplicationBoard: React.FC<ApplicationBoardProps> = ({
                                 <status.icon className="w-4 h-4" />
                             </div>
                             <div>
-                                <p className="text-[10px] font-black text-slate-900 uppercase">
+                                <p className="text-xs font-semibold text-slate-900">
                                     {status.label}
                                 </p>
-                                <p className="text-[9px] font-bold text-slate-400">
+                                <p className="text-[11px] text-slate-500">
                                     {grouped[status.key]?.length || 0} apps
                                 </p>
                             </div>
@@ -159,10 +159,10 @@ export const ApplicationBoard: React.FC<ApplicationBoardProps> = ({
                                     animate={{ opacity: 1, y: 0 }}
                                     className="bg-white rounded-xl p-3 shadow-sm hover:shadow-md transition-all cursor-pointer"
                                 >
-                                    <p className="text-[10px] font-black text-slate-900 truncate mb-1">
+                                    <p className="text-xs font-semibold text-slate-900 truncate mb-1">
                                         {app.student_name}
                                     </p>
-                                    <p className="text-[8px] font-bold text-slate-400 truncate">
+                                    <p className="text-[11px] text-slate-500 truncate">
                                         {app.course_name}
                                     </p>
                                 </motion.div>
@@ -171,7 +171,7 @@ export const ApplicationBoard: React.FC<ApplicationBoardProps> = ({
                             {(!grouped[status.key] || grouped[status.key].length === 0) && (
                                 <div className="text-center py-8 text-slate-300">
                                     <FileText className="w-6 h-6 mx-auto mb-2 opacity-50" />
-                                    <p className="text-[8px] font-bold uppercase">No Applications</p>
+                                    <p className="text-[11px] font-bold">No Applications</p>
                                 </div>
                             )}
                         </div>
@@ -205,16 +205,16 @@ export const SuggestedUniversitiesWidget: React.FC<SuggestedUniversitiesProps> =
     if (!suggestions || suggestions.length === 0) return null;
 
     return (
-        <div className="bg-gradient-to-br from-[#AD03DE]/5 to-purple-50 rounded-3xl p-6 border border-purple-100">
+        <div className="bg-gradient-to-br from-[#7c3aed]/5 to-purple-50 rounded-2xl p-6 border border-purple-100">
             <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 bg-[#AD03DE]/10 rounded-xl flex items-center justify-center">
-                    <GraduationCap className="w-5 h-5 text-[#AD03DE]" />
+                <div className="w-10 h-10 bg-[#7c3aed]/10 rounded-xl flex items-center justify-center">
+                    <GraduationCap className="w-5 h-5 text-[#7c3aed]" />
                 </div>
                 <div>
-                    <h4 className="text-sm font-black text-slate-900 uppercase tracking-tight">
+                    <h4 className="text-sm font-semibold text-slate-900 tracking-tight">
                         AI Recommendations
                     </h4>
-                    <p className="text-[8px] font-bold text-[#AD03DE] uppercase tracking-widest">
+                    <p className="text-[11px] font-bold text-[#7c3aed]">
                         Based on Student Profile
                     </p>
                 </div>
@@ -226,24 +226,24 @@ export const SuggestedUniversitiesWidget: React.FC<SuggestedUniversitiesProps> =
                         key={uni.id}
                         className="flex items-center gap-3 bg-white rounded-2xl p-4 shadow-sm hover:shadow-md transition-all group"
                     >
-                        <div className="w-10 h-10 bg-slate-100 rounded-xl flex items-center justify-center text-lg font-black text-slate-400">
+                        <div className="w-10 h-10 bg-slate-100 rounded-xl flex items-center justify-center text-lg font-semibold text-slate-400">
                             {idx + 1}
                         </div>
 
                         <div className="flex-1 min-w-0">
-                            <p className="text-[11px] font-black text-slate-900 truncate">
+                            <p className="text-[11px] font-semibold text-slate-900 truncate">
                                 {uni.name}
                             </p>
-                            <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">
+                            <p className="text-[11px] text-slate-500">
                                 {uni.country}
                             </p>
                         </div>
 
                         <div className="text-right">
-                            <p className="text-lg font-black text-[#AD03DE]">
+                            <p className="text-lg font-semibold text-[#7c3aed]">
                                 {uni.match_score}%
                             </p>
-                            <p className="text-[7px] font-bold text-slate-400 uppercase">Match</p>
+                            <p className="text-[11px] text-slate-500">Match</p>
                         </div>
 
                         <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-all">
@@ -255,16 +255,16 @@ export const SuggestedUniversitiesWidget: React.FC<SuggestedUniversitiesProps> =
                             </button>
                             <button
                                 onClick={() => onAddToShortlist(uni.id)}
-                                className="p-2 bg-[#AD03DE]/10 rounded-lg hover:bg-[#AD03DE]/20 transition-all"
+                                className="p-2 bg-[#7c3aed]/10 rounded-lg hover:bg-[#7c3aed]/20 transition-all"
                             >
-                                <CheckCircle className="w-3 h-3 text-[#AD03DE]" />
+                                <CheckCircle className="w-3 h-3 text-[#7c3aed]" />
                             </button>
                         </div>
                     </div>
                 ))}
             </div>
 
-            <button className="w-full mt-4 py-3 bg-white text-slate-600 rounded-xl text-[9px] font-black uppercase tracking-widest hover:bg-slate-50 transition-all">
+            <button className="w-full mt-4 py-3 bg-white text-slate-600 rounded-xl text-[11px] font-semibold hover:bg-slate-50 transition-all">
                 View All Recommendations
             </button>
         </div>

@@ -1,7 +1,7 @@
 import api from './api';
 
 // ============================================================================
-// AUDIT LOGS SERVICE - BWBS Education CRM
+// AUDIT LOGS SERVICE - Education Consultancy ERP
 // ============================================================================
 
 export type AuditAction = 'CREATE' | 'UPDATE' | 'DELETE';

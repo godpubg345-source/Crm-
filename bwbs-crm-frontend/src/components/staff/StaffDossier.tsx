@@ -115,8 +115,8 @@ export const StaffDossier = ({ isOpen, onClose, staff }: DossierProps) => {
     if (!staff) return null;
 
     const tabs = [
-        { id: 'overview', label: 'Intelligence', icon: Zap },
-        { id: 'employment', label: 'Dossier', icon: ShieldCheck },
+        { id: 'overview', label: 'Overview', icon: Zap },
+        { id: 'employment', label: 'Employment', icon: ShieldCheck },
         { id: 'payroll', label: 'Payroll', icon: CreditCard },
         { id: 'incentives', label: 'Incentives', icon: Trophy },
         { id: 'audit', label: 'Audit Log', icon: Clock },
@@ -132,7 +132,7 @@ export const StaffDossier = ({ isOpen, onClose, staff }: DossierProps) => {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         onClick={onClose}
-                        className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[150]"
+                        className="fixed inset-0 bg-slate-900/60 z-[150]"
                     />
 
                     {/* Side Panel */}
@@ -141,28 +141,28 @@ export const StaffDossier = ({ isOpen, onClose, staff }: DossierProps) => {
                         animate={{ x: 0 }}
                         exit={{ x: '100%' }}
                         transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-                        className="fixed right-0 top-0 h-screen w-full max-w-2xl bg-white shadow-2xl z-[160] overflow-hidden flex flex-col"
+                        className="fixed right-0 top-0 h-screen w-full max-w-2xl bg-white shadow-sm z-[160] overflow-hidden flex flex-col"
                     >
                         {/* Header Section */}
-                        <div className="p-8 bg-slate-900 text-white relative">
+                        <div className="p-6 bg-slate-900 text-white relative">
                             <button
                                 onClick={onClose}
-                                className="absolute top-8 right-8 p-2 rounded-xl bg-white/10 hover:bg-white/20 transition-all font-black text-xs uppercase"
+                                className="absolute top-8 right-8 p-2 rounded-xl bg-white/10 hover:bg-white/20 transition-all font-semibold text-xs"
                             >
                                 <X className="w-5 h-5" />
                             </button>
 
                             <div className="flex items-center gap-6 mt-4">
-                                <div className="w-20 h-20 rounded-[2rem] bg-gradient-to-br from-[#AD03DE] to-indigo-600 flex items-center justify-center text-2xl font-serif font-black shadow-2xl">
+                                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#7c3aed] to-indigo-600 flex items-center justify-center text-2xl font-semibold shadow-sm">
                                     {staff.first_name?.[0]}{staff.last_name?.[0]}
                                 </div>
                                 <div>
-                                    <h2 className="text-3xl font-serif font-black tracking-tight">{staff.first_name} {staff.last_name}</h2>
+                                    <h2 className="text-3xl font-semibold tracking-tight">{staff.first_name} {staff.last_name}</h2>
                                     <div className="flex items-center gap-3 mt-2">
-                                        <span className="px-3 py-1 rounded-lg bg-[#AD03DE] text-[10px] font-black uppercase tracking-widest text-white">
-                                            {staff.role_display || 'Operative'}
+                                        <span className="px-3 py-1 rounded-lg bg-[#7c3aed] text-xs font-semibold text-white">
+                                            {staff.role_display || 'Staff'}
                                         </span>
-                                        <span className="flex items-center gap-1 text-[10px] font-bold text-slate-400">
+                                        <span className="flex items-center gap-1 text-xs text-slate-500">
                                             <Calendar className="w-3 h-3" />
                                             Active Since {formData.joined_date ? new Date(formData.joined_date).getFullYear() : '2024'}
                                         </span>
@@ -171,15 +171,15 @@ export const StaffDossier = ({ isOpen, onClose, staff }: DossierProps) => {
                             </div>
 
                             {/* Nav Tabs */}
-                            <div className="flex items-center gap-1 mt-10 p-1 bg-white/5 rounded-2xl w-fit">
+                            <div className="flex items-center gap-1 mt-6 p-1 bg-white/5 rounded-2xl w-fit">
                                 {tabs.map(tab => (
                                     <button
                                         key={tab.id}
                                         onClick={() => setActiveTab(tab.id as any)}
                                         className={clsx(
-                                            "flex items-center gap-2 px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-wider transition-all",
+                                            "flex items-center gap-2 px-6 py-2.5 rounded-xl text-xs font-semibold transition-all",
                                             activeTab === tab.id
-                                                ? "bg-[#AD03DE] text-white shadow-lg shadow-[#AD03DE]/20"
+                                                ? "bg-[#7c3aed] text-white shadow-sm "
                                                 : "text-slate-400 hover:text-white hover:bg-white/5"
                                         )}
                                     >
@@ -191,7 +191,7 @@ export const StaffDossier = ({ isOpen, onClose, staff }: DossierProps) => {
                         </div>
 
                         {/* Content Scroll Area */}
-                        <div className="flex-1 overflow-y-auto premium-scrollbar p-8">
+                        <div className="flex-1 overflow-y-auto premium-scrollbar p-6">
                             <AnimatePresence mode="wait">
                                 {activeTab === 'overview' && (
                                     <motion.div
@@ -199,51 +199,51 @@ export const StaffDossier = ({ isOpen, onClose, staff }: DossierProps) => {
                                         initial={{ opacity: 0, y: 10 }}
                                         animate={{ opacity: 1, y: 0 }}
                                         exit={{ opacity: 0, y: -10 }}
-                                        className="space-y-10"
+                                        className="space-y-6"
                                     >
                                         <section>
                                             <div className="flex items-center justify-between mb-8">
-                                                <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em]">Forensic Intelligence</h3>
+                                                <h3 className="text-xs font-semibold text-slate-400">Staff profile</h3>
                                                 <div className="w-full h-px bg-slate-100 ml-4" />
                                             </div>
                                             <div className="grid grid-cols-3 gap-6">
-                                                <div className="p-6 bg-slate-50 rounded-[2rem] border border-slate-100 group hover:border-[#AD03DE]/30 transition-all">
+                                                <div className="p-6 bg-slate-50 rounded-2xl border border-slate-100 group hover:border-[#7c3aed]/30 transition-all">
                                                     <div className="w-10 h-10 rounded-2xl bg-amber-500/10 flex items-center justify-center mb-4">
                                                         <Zap className="w-5 h-5 text-amber-500" />
                                                     </div>
-                                                    <p className="text-3xl font-serif font-black text-slate-900">{stats?.conversion_rate || 0}%</p>
-                                                    <p className="text-[9px] font-black text-slate-400 uppercase mt-1 tracking-widest">Enrolment Rate</p>
+                                                    <p className="text-3xl font-semibold text-slate-900">{stats?.conversion_rate || 0}%</p>
+                                                    <p className="text-[11px] font-semibold text-slate-400 mt-1">Enrolment Rate</p>
                                                 </div>
-                                                <div className="p-6 bg-slate-50 rounded-[2rem] border border-slate-100 group hover:border-[#AD03DE]/30 transition-all">
-                                                    <div className="w-10 h-10 rounded-2xl bg-[#AD03DE]/10 flex items-center justify-center mb-4">
-                                                        <Trophy className="w-5 h-5 text-[#AD03DE]" />
+                                                <div className="p-6 bg-slate-50 rounded-2xl border border-slate-100 group hover:border-[#7c3aed]/30 transition-all">
+                                                    <div className="w-10 h-10 rounded-2xl bg-[#7c3aed]/10 flex items-center justify-center mb-4">
+                                                        <Trophy className="w-5 h-5 text-[#7c3aed]" />
                                                     </div>
-                                                    <p className="text-3xl font-serif font-black text-slate-900">{stats?.enrolled_leads || 0}</p>
-                                                    <p className="text-[9px] font-black text-slate-400 uppercase mt-1 tracking-widest">Deployments</p>
+                                                    <p className="text-3xl font-semibold text-slate-900">{stats?.enrolled_leads || 0}</p>
+                                                    <p className="text-[11px] font-semibold text-slate-400 mt-1">Students</p>
                                                 </div>
-                                                <div className="p-6 bg-slate-50 rounded-[2rem] border border-slate-100 group hover:border-[#AD03DE]/30 transition-all">
+                                                <div className="p-6 bg-slate-50 rounded-2xl border border-slate-100 group hover:border-[#7c3aed]/30 transition-all">
                                                     <div className="w-10 h-10 rounded-2xl bg-indigo-500/10 flex items-center justify-center mb-4">
                                                         <AlertCircle className="w-5 h-5 text-indigo-500" />
                                                     </div>
-                                                    <p className="text-3xl font-serif font-black text-slate-900">{stats?.xp || 0}</p>
-                                                    <p className="text-[9px] font-black text-slate-400 uppercase mt-1 tracking-widest">Intel XP</p>
+                                                    <p className="text-3xl font-semibold text-slate-900">{stats?.xp || 0}</p>
+                                                    <p className="text-[11px] font-semibold text-slate-400 mt-1">Points</p>
                                                 </div>
                                             </div>
                                         </section>
 
                                         <section>
                                             <div className="flex items-center justify-between mb-8">
-                                                <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em]">Institutional Stats</h3>
+                                                <h3 className="text-xs font-semibold text-slate-400">Stats</h3>
                                                 <div className="w-full h-px bg-slate-100 ml-4" />
                                             </div>
                                             <div className="space-y-4">
                                                 <div className="flex items-center justify-between p-4 bg-slate-50 rounded-2xl">
-                                                    <span className="text-[10px] font-black uppercase text-slate-500 tracking-widest">Total Revenue Influence</span>
-                                                    <span className="text-lg font-serif font-black text-slate-900">£{Number(stats?.revenue_generated || 0).toLocaleString()}</span>
+                                                    <span className="text-xs font-semibold text-slate-500">Revenue generated</span>
+                                                    <span className="text-lg font-semibold text-slate-900">£{Number(stats?.revenue_generated || 0).toLocaleString()}</span>
                                                 </div>
                                                 <div className="flex items-center justify-between p-4 bg-slate-50 rounded-2xl">
-                                                    <span className="text-[10px] font-black uppercase text-slate-500 tracking-widest">Asset Wallet Balance</span>
-                                                    <span className="text-lg font-serif font-black text-[#AD03DE]">£{Number(stats?.wallet_balance || 0).toLocaleString()}</span>
+                                                    <span className="text-xs font-semibold text-slate-500">Wallet balance</span>
+                                                    <span className="text-lg font-semibold text-[#7c3aed]">£{Number(stats?.wallet_balance || 0).toLocaleString()}</span>
                                                 </div>
                                             </div>
                                         </section>
@@ -257,39 +257,39 @@ export const StaffDossier = ({ isOpen, onClose, staff }: DossierProps) => {
                                         animate={{ opacity: 1, y: 0 }}
                                         exit={{ opacity: 0, y: -10 }}
                                     >
-                                        <form id="dossier-form" onSubmit={handleSubmit} className="space-y-12">
+                                        <form id="dossier-form" onSubmit={handleSubmit} className="space-y-6">
                                             <section>
                                                 <div className="flex items-center justify-between mb-8">
-                                                    <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em]">Operational Protocol</h3>
+                                                    <h3 className="text-xs font-semibold text-slate-400">Details</h3>
                                                     <div className="w-full h-px bg-slate-100 ml-4" />
                                                 </div>
                                                 <div className="grid grid-cols-2 gap-6">
                                                     <div className="col-span-2 grid grid-cols-2 gap-6">
                                                         <div>
-                                                            <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3">Operative First Name</label>
+                                                            <label className="block text-xs font-semibold text-slate-400 mb-3">First name</label>
                                                             <input
                                                                 type="text"
                                                                 value={formData.first_name}
                                                                 onChange={e => setFormData({ ...formData, first_name: e.target.value })}
-                                                                className="w-full px-6 py-4 bg-slate-100 border-none rounded-2xl text-sm font-bold text-slate-900 focus:ring-2 focus:ring-[#AD03DE]/20 outline-none"
+                                                                className="w-full px-6 py-4 bg-slate-100 border-none rounded-2xl text-sm font-bold text-slate-900 focus:ring-2 focus:ring-[#7c3aed]/20 outline-none"
                                                             />
                                                         </div>
                                                         <div>
-                                                            <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3">Operative Last Name</label>
+                                                            <label className="block text-xs font-semibold text-slate-400 mb-3">Last name</label>
                                                             <input
                                                                 type="text"
                                                                 value={formData.last_name}
                                                                 onChange={e => setFormData({ ...formData, last_name: e.target.value })}
-                                                                className="w-full px-6 py-4 bg-slate-100 border-none rounded-2xl text-sm font-bold text-slate-900 focus:ring-2 focus:ring-[#AD03DE]/20 outline-none"
+                                                                className="w-full px-6 py-4 bg-slate-100 border-none rounded-2xl text-sm font-bold text-slate-900 focus:ring-2 focus:ring-[#7c3aed]/20 outline-none"
                                                             />
                                                         </div>
                                                     </div>
                                                     <div className="col-span-2">
-                                                        <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3">Institutional Rank</label>
+                                                        <label className="block text-xs font-semibold text-slate-400 mb-3">Role</label>
                                                         <select
                                                             value={formData.role}
                                                             onChange={e => setFormData({ ...formData, role: e.target.value })}
-                                                            className="w-full px-6 py-4 bg-slate-50 border border-slate-200 rounded-2xl text-sm font-black text-slate-900 focus:ring-2 focus:ring-[#AD03DE]/20 outline-none appearance-none cursor-pointer"
+                                                            className="w-full px-6 py-4 bg-slate-50 border border-slate-200 rounded-2xl text-sm font-semibold text-slate-900 focus:ring-2 focus:ring-[#7c3aed]/20 outline-none appearance-none cursor-pointer"
                                                         >
                                                             <option value="COUNSELOR">Counselor</option>
                                                             <option value="DOC_PROCESSOR">Doc Processor</option>
@@ -298,13 +298,13 @@ export const StaffDossier = ({ isOpen, onClose, staff }: DossierProps) => {
                                                         </select>
                                                     </div>
                                                     <div className="col-span-2">
-                                                        <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3">Asset Deployment (Branch)</label>
+                                                        <label className="block text-xs font-semibold text-slate-400 mb-3">Branch</label>
                                                         <select
                                                             value={formData.branch}
                                                             onChange={e => setFormData({ ...formData, branch: e.target.value })}
-                                                            className="w-full px-6 py-4 bg-slate-50 border border-slate-200 rounded-2xl text-sm font-black text-slate-900 focus:ring-2 focus:ring-[#AD03DE]/20 outline-none appearance-none cursor-pointer"
+                                                            className="w-full px-6 py-4 bg-slate-50 border border-slate-200 rounded-2xl text-sm font-semibold text-slate-900 focus:ring-2 focus:ring-[#7c3aed]/20 outline-none appearance-none cursor-pointer"
                                                         >
-                                                            <option value="">HQ COMMAND</option>
+                                                            <option value="">Head office</option>
                                                             {branches?.map(b => (
                                                                 <option key={b.id} value={b.id}>{b.name}</option>
                                                             ))}
@@ -315,35 +315,35 @@ export const StaffDossier = ({ isOpen, onClose, staff }: DossierProps) => {
 
                                             <section>
                                                 <div className="flex items-center justify-between mb-8">
-                                                    <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em]">Financial Dossier</h3>
+                                                    <h3 className="text-xs font-semibold text-slate-400">Pay</h3>
                                                     <div className="w-full h-px bg-slate-100 ml-4" />
                                                 </div>
                                                 <div className="grid grid-cols-2 gap-6">
                                                     <div>
-                                                        <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3 text-indigo-600">Base Salary (Annual)</label>
+                                                        <label className="block text-xs font-semibold text-slate-400 mb-3 text-indigo-600">Base Salary (Annual)</label>
                                                         <div className="relative">
                                                             <span className="absolute left-6 top-1/2 -translate-y-1/2 text-slate-400 font-bold">£</span>
                                                             <input
                                                                 type="number"
                                                                 value={formData.base_salary}
                                                                 onChange={e => setFormData({ ...formData, base_salary: e.target.value })}
-                                                                className="w-full pl-10 pr-6 py-4 bg-slate-50 border-2 border-slate-100 rounded-2xl text-sm font-black text-slate-900 focus:border-[#AD03DE]/30 outline-none"
+                                                                className="w-full pl-10 pr-6 py-4 bg-slate-50 border-2 border-slate-100 rounded-2xl text-sm font-semibold text-slate-900 focus:border-[#7c3aed]/30 outline-none"
                                                             />
                                                         </div>
                                                     </div>
                                                     <div>
-                                                        <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3">Enlistment Date</label>
+                                                        <label className="block text-xs font-semibold text-slate-400 mb-3">Joined</label>
                                                         <input
                                                             type="date"
                                                             value={formData.joined_date}
                                                             onChange={e => setFormData({ ...formData, joined_date: e.target.value })}
-                                                            className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold text-slate-900 focus:ring-2 focus:ring-[#AD03DE]/20 outline-none"
+                                                            className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold text-slate-900 focus:ring-2 focus:ring-[#7c3aed]/20 outline-none"
                                                         />
                                                     </div>
-                                                    <div className="col-span-2 p-6 bg-slate-900/5 rounded-[2.5rem] border border-slate-100">
+                                                    <div className="col-span-2 p-6 bg-slate-900/5 rounded-2xl border border-slate-100">
                                                         <div className="flex items-center justify-between mb-4">
-                                                            <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest">Contract Integrity</label>
-                                                            <span className="text-[12px] font-serif font-black text-[#AD03DE]">{formData.contract_progress}%</span>
+                                                            <label className="block text-xs font-semibold text-slate-500">Contract</label>
+                                                            <span className="text-[12px] font-semibold text-[#7c3aed]">{formData.contract_progress}%</span>
                                                         </div>
                                                         <input
                                                             type="range"
@@ -351,7 +351,7 @@ export const StaffDossier = ({ isOpen, onClose, staff }: DossierProps) => {
                                                             max="100"
                                                             value={formData.contract_progress}
                                                             onChange={e => setFormData({ ...formData, contract_progress: parseInt(e.target.value) })}
-                                                            className="w-full h-2 bg-slate-200 rounded-full appearance-none cursor-pointer accent-[#AD03DE]"
+                                                            className="w-full h-2 bg-slate-200 rounded-full appearance-none cursor-pointer accent-[#7c3aed]"
                                                         />
                                                     </div>
                                                 </div>
@@ -369,40 +369,40 @@ export const StaffDossier = ({ isOpen, onClose, staff }: DossierProps) => {
                                         className="space-y-8"
                                     >
                                         <div className="flex items-center justify-between mb-4">
-                                            <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em]">Monthly Incentive Ledger</h3>
+                                            <h3 className="text-xs font-semibold text-slate-400">Monthly incentives</h3>
                                             <div className="w-full h-px bg-slate-100 ml-4" />
                                         </div>
 
                                         {!staff.performance_incentives || staff.performance_incentives.length === 0 ? (
-                                            <div className="p-12 text-center bg-slate-50 rounded-[3rem] border border-dashed border-slate-200">
+                                            <div className="p-6 text-center bg-slate-50 rounded-2xl border border-dashed border-slate-200">
                                                 <Trophy className="w-12 h-12 text-slate-200 mx-auto mb-4" />
-                                                <p className="text-sm font-bold text-slate-400">No incentive snapshots generated yet.</p>
+                                                <p className="text-sm font-bold text-slate-400">No incentives yet.</p>
                                             </div>
                                         ) : (
                                             <div className="grid gap-4">
                                                 {staff.performance_incentives.map(inc => (
-                                                    <div key={inc.id} className="p-6 bg-slate-50 rounded-[2rem] border border-slate-100 flex items-center justify-between group hover:border-[#AD03DE]/20 transition-all">
+                                                    <div key={inc.id} className="p-6 bg-slate-50 rounded-2xl border border-slate-100 flex items-center justify-between group hover:border-[#7c3aed]/20 transition-all">
                                                         <div className="flex items-center gap-6">
-                                                            <div className="w-12 h-12 rounded-2xl bg-white border border-slate-100 flex flex-col items-center justify-center text-center">
-                                                                <span className="text-[8px] font-black uppercase text-slate-400 leading-none mb-1">
+                                                            <div className="w-12 h-12 rounded-xl bg-white border border-slate-200 flex flex-col items-center justify-center text-center">
+                                                                <span className="text-[11px] font-semibold text-slate-400 leading-none mb-1">
                                                                     {new Date(inc.month).toLocaleString('default', { month: 'short' })}
                                                                 </span>
-                                                                <span className="text-sm font-black text-slate-900 leading-none">
+                                                                <span className="text-sm font-semibold text-slate-900 leading-none">
                                                                     {new Date(inc.month).getFullYear().toString().slice(-2)}
                                                                 </span>
                                                             </div>
                                                             <div>
-                                                                <p className="text-xs font-black text-slate-900 uppercase tracking-widest">{inc.month_display}</p>
+                                                                <p className="text-xs font-semibold text-slate-900">{inc.month_display}</p>
                                                                 <div className="flex items-center gap-3 mt-1">
-                                                                    <span className="text-[10px] font-bold text-slate-400">Pts: {inc.points_earned}</span>
-                                                                    <span className="text-[10px] font-bold text-slate-400">Apps: {inc.conversions}</span>
+                                                                    <span className="text-xs text-slate-500">Pts: {inc.points_earned}</span>
+                                                                    <span className="text-xs text-slate-500">Apps: {inc.conversions}</span>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div className="text-right">
-                                                            <p className="text-lg font-serif font-black text-[#AD03DE]">£{inc.total_incentive}</p>
+                                                            <p className="text-lg font-semibold text-[#7c3aed]">£{inc.total_incentive}</p>
                                                             <span className={clsx(
-                                                                "text-[8px] font-black uppercase tracking-tighter px-2 py-0.5 rounded-full",
+                                                                "text-[11px] font-semibold tracking-tight px-2 py-0.5 rounded-full",
                                                                 inc.status === 'PAID' ? "bg-emerald-500/10 text-emerald-600" : "bg-amber-500/10 text-amber-600"
                                                             )}>
                                                                 {inc.status_display}
@@ -421,30 +421,30 @@ export const StaffDossier = ({ isOpen, onClose, staff }: DossierProps) => {
                                         initial={{ opacity: 0, y: 10 }}
                                         animate={{ opacity: 1, y: 0 }}
                                         exit={{ opacity: 0, y: -10 }}
-                                        className="space-y-10"
+                                        className="space-y-6"
                                     >
                                         <section>
                                             <div className="flex items-center justify-between mb-8">
-                                                <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em]">Financial Aggregation (6M)</h3>
+                                                <h3 className="text-xs font-semibold text-slate-400">Last 6 months</h3>
                                                 <div className="w-full h-px bg-slate-100 ml-4" />
                                             </div>
 
                                             <div className="grid grid-cols-2 gap-6">
-                                                <div className="p-8 bg-slate-900 rounded-[2.5rem] relative overflow-hidden group">
-                                                    <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-all">
+                                                <div className="p-6 bg-slate-900 rounded-2xl relative overflow-hidden group">
+                                                    <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-all">
                                                         <TrendingUp className="w-16 h-16 text-white" />
                                                     </div>
-                                                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Total Gross Payout</p>
-                                                    <p className="text-3xl font-serif font-black text-white">
+                                                    <p className="text-xs font-semibold text-slate-400 mb-2">Total gross pay</p>
+                                                    <p className="text-3xl font-semibold text-white">
                                                         £{Number(payrollReport?.total_gross || (staff as any).payroll_records?.reduce((acc: number, curr: any) => acc + Number(curr.gross_payout), 0) || 0).toLocaleString()}
                                                     </p>
                                                 </div>
-                                                <div className="p-8 bg-[#AD03DE] rounded-[2.5rem] relative overflow-hidden group">
-                                                    <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-all">
+                                                <div className="p-6 bg-[#7c3aed] rounded-2xl relative overflow-hidden group">
+                                                    <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-all">
                                                         <CreditCard className="w-16 h-16 text-white" />
                                                     </div>
-                                                    <p className="text-[10px] font-black text-slate-100 uppercase tracking-widest mb-2">Net Disbursement</p>
-                                                    <p className="text-3xl font-serif font-black text-white">
+                                                    <p className="text-xs font-semibold text-slate-100 mb-2">Total net pay</p>
+                                                    <p className="text-3xl font-semibold text-white">
                                                         £{Number(payrollReport?.total_net || (staff as any).payroll_records?.reduce((acc: number, curr: any) => acc + Number(curr.net_payout), 0) || 0).toLocaleString()}
                                                     </p>
                                                 </div>
@@ -453,7 +453,7 @@ export const StaffDossier = ({ isOpen, onClose, staff }: DossierProps) => {
 
                                         <section>
                                             <div className="flex items-center justify-between mb-8">
-                                                <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em]">Salary Ledger</h3>
+                                                <h3 className="text-xs font-semibold text-slate-400">Payroll history</h3>
                                                 <button
                                                     type="button"
                                                     onClick={async () => {
@@ -469,32 +469,32 @@ export const StaffDossier = ({ isOpen, onClose, staff }: DossierProps) => {
                                                         }
                                                     }}
                                                     disabled={isGeneratingPayroll}
-                                                    className="px-4 py-2 bg-slate-100 hover:bg-slate-200 rounded-xl text-[9px] font-black uppercase tracking-widest transition-all flex items-center gap-2"
+                                                    className="px-4 py-2 bg-slate-100 hover:bg-slate-200 rounded-xl text-[11px] font-semibold transition-all flex items-center gap-2"
                                                 >
-                                                    {isGeneratingPayroll ? <Loader2 className="w-3 h-3 animate-spin" /> : <Zap className="w-3 h-3 text-[#AD03DE]" />}
+                                                    {isGeneratingPayroll ? <Loader2 className="w-3 h-3 animate-spin" /> : <Zap className="w-3 h-3 text-[#7c3aed]" />}
                                                     Generate Current
                                                 </button>
                                             </div>
 
                                             {(!staff.payroll_records || staff.payroll_records.length === 0) ? (
-                                                <div className="p-12 text-center bg-slate-50 rounded-[3rem] border border-dashed border-slate-200">
+                                                <div className="p-6 text-center bg-slate-50 rounded-2xl border border-dashed border-slate-200">
                                                     <FileText className="w-12 h-12 text-slate-200 mx-auto mb-4" />
-                                                    <p className="text-sm font-bold text-slate-400">No payroll records detected.</p>
+                                                    <p className="text-sm font-bold text-slate-400">No payroll records yet.</p>
                                                 </div>
                                             ) : (
                                                 <div className="grid gap-4">
                                                     {staff.payroll_records.map(pay => (
-                                                        <div key={pay.id} className="p-6 bg-slate-50 rounded-[2.5rem] border border-slate-100 flex items-center justify-between group hover:border-[#AD03DE]/20 transition-all">
+                                                        <div key={pay.id} className="p-6 bg-slate-50 rounded-2xl border border-slate-100 flex items-center justify-between group hover:border-[#7c3aed]/20 transition-all">
                                                             <div className="flex items-center gap-6">
-                                                                <div className="w-12 h-12 rounded-2xl bg-white border border-slate-100 flex items-center justify-center">
-                                                                    <FileText className="w-6 h-6 text-slate-400 group-hover:text-[#AD03DE] transition-colors" />
+                                                                <div className="w-12 h-12 rounded-xl bg-white border border-slate-200 flex items-center justify-center">
+                                                                    <FileText className="w-6 h-6 text-slate-400 group-hover:text-[#7c3aed] transition-colors" />
                                                                 </div>
                                                                 <div>
-                                                                    <p className="text-xs font-black text-slate-900 uppercase tracking-widest">{pay.month_display}</p>
+                                                                    <p className="text-xs font-semibold text-slate-900">{pay.month_display}</p>
                                                                     <div className="flex items-center gap-3 mt-1">
-                                                                        <span className="text-[10px] font-bold text-slate-400 uppercase">Net: £{Number(pay.net_payout).toLocaleString()}</span>
+                                                                        <span className="text-xs text-slate-500">Net: £{Number(pay.net_payout).toLocaleString()}</span>
                                                                         <span className={clsx(
-                                                                            "text-[8px] font-black uppercase tracking-tighter px-2 py-0.5 rounded-full",
+                                                                            "text-[11px] font-semibold tracking-tight px-2 py-0.5 rounded-full",
                                                                             pay.status === 'PAID' ? "bg-emerald-500/10 text-emerald-600" : "bg-indigo-500/10 text-indigo-600"
                                                                         )}>
                                                                             {pay.status_display}
@@ -508,7 +508,7 @@ export const StaffDossier = ({ isOpen, onClose, staff }: DossierProps) => {
                                                                         href={pay.payslip_pdf}
                                                                         target="_blank"
                                                                         rel="noopener noreferrer"
-                                                                        className="p-3 rounded-2xl bg-white border border-slate-100 hover:border-[#AD03DE] hover:text-[#AD03DE] transition-all text-slate-400"
+                                                                        className="p-3 rounded-xl bg-white border border-slate-200 hover:border-[#7c3aed] hover:text-[#7c3aed] transition-all text-slate-400"
                                                                         title="Download Payslip"
                                                                     >
                                                                         <Download className="w-4 h-4" />
@@ -532,35 +532,35 @@ export const StaffDossier = ({ isOpen, onClose, staff }: DossierProps) => {
                                         className="space-y-8"
                                     >
                                         <div className="flex items-center justify-between mb-4">
-                                            <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em]">Forensic Audit Trail</h3>
+                                            <h3 className="text-xs font-semibold text-slate-400">Activity log</h3>
                                             <div className="w-full h-px bg-slate-100 ml-4" />
                                         </div>
 
                                         {!staff.audit_records || staff.audit_records.length === 0 ? (
-                                            <div className="p-12 text-center bg-slate-50 rounded-[3rem] border border-dashed border-slate-200">
+                                            <div className="p-6 text-center bg-slate-50 rounded-2xl border border-dashed border-slate-200">
                                                 <Clock className="w-12 h-12 text-slate-200 mx-auto mb-4" />
-                                                <p className="text-sm font-bold text-slate-400">No forensic events recorded.</p>
+                                                <p className="text-sm font-bold text-slate-400">No activity yet.</p>
                                             </div>
                                         ) : (
                                             <div className="space-y-6 relative before:absolute before:left-[19px] before:top-2 before:bottom-2 before:w-px before:bg-slate-100">
                                                 {staff.audit_records.map(log => (
                                                     <div key={log.id} className="relative pl-12">
-                                                        <div className="absolute left-0 top-1 w-10 h-10 rounded-xl bg-white border border-slate-100 flex items-center justify-center z-10">
-                                                            <ShieldCheck className="w-4 h-4 text-[#AD03DE]" />
+                                                        <div className="absolute left-0 top-1 w-10 h-10 rounded-xl bg-white border border-slate-200 flex items-center justify-center z-10">
+                                                            <ShieldCheck className="w-4 h-4 text-[#7c3aed]" />
                                                         </div>
                                                         <div>
                                                             <div className="flex items-center gap-2">
-                                                                <span className="text-[9px] font-black uppercase tracking-widest text-[#AD03DE]">
+                                                                <span className="text-[11px] font-semibold text-[#7c3aed]">
                                                                     {log.actor_name || 'SYSTEM'}
                                                                 </span>
-                                                                <span className="text-[8px] font-bold text-slate-400">
+                                                                <span className="text-[11px] text-slate-500">
                                                                     {new Date(log.timestamp).toLocaleString()}
                                                                 </span>
                                                             </div>
                                                             <p className="text-xs font-bold text-slate-900 mt-1">
-                                                                Updated <span className="text-[#AD03DE] font-bold">{log.field_name}</span>
+                                                                Updated <span className="text-[#7c3aed] font-bold">{log.field_name}</span>
                                                             </p>
-                                                            <div className="flex items-center gap-2 mt-2 p-3 bg-slate-50 rounded-xl text-[10px] font-semibold">
+                                                            <div className="flex items-center gap-2 mt-2 p-3 bg-slate-50 rounded-xl text-xs font-semibold">
                                                                 <span className="text-slate-400 line-through decoration-rose-400/50">{log.old_value || 'None'}</span>
                                                                 <ArrowRight className="w-3 h-3 text-slate-300" />
                                                                 <span className="text-slate-900">{log.new_value}</span>
@@ -576,7 +576,7 @@ export const StaffDossier = ({ isOpen, onClose, staff }: DossierProps) => {
                         </div>
 
                         {/* Footer Controls */}
-                        <div className="p-8 border-t border-slate-100 flex items-center justify-between bg-white relative z-20">
+                        <div className="p-6 border-t border-slate-100 flex items-center justify-between bg-white relative z-20">
                             <button
                                 type="button"
                                 onClick={() => {
@@ -585,17 +585,17 @@ export const StaffDossier = ({ isOpen, onClose, staff }: DossierProps) => {
                                     }
                                 }}
                                 disabled={deactivateMutation.isPending}
-                                className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-rose-500 hover:text-rose-600 transition-colors"
+                                className="flex items-center gap-2 text-xs font-semibold text-rose-500 hover:text-rose-600 transition-colors"
                             >
                                 <Trash2 className="w-4 h-4" />
-                                Deactivate Unit
+                                Deactivate
                             </button>
 
                             <div className="flex items-center gap-4">
                                 <button
                                     type="button"
                                     onClick={onClose}
-                                    className="px-6 py-3 text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-slate-600 transition-colors"
+                                    className="px-6 py-3 text-xs font-semibold text-slate-400 hover:text-slate-600 transition-colors"
                                 >
                                     Cancel
                                 </button>
@@ -603,10 +603,10 @@ export const StaffDossier = ({ isOpen, onClose, staff }: DossierProps) => {
                                     form="dossier-form"
                                     type="submit"
                                     disabled={updateMutation.isPending}
-                                    className="px-10 py-4 bg-slate-900 text-white rounded-[1.5rem] text-[10px] font-black uppercase tracking-widest shadow-2xl shadow-indigo-200 hover:bg-[#AD03DE] transition-all flex items-center gap-2"
+                                    className="px-4 py-2.5 bg-violet-600 hover:bg-violet-700 text-white rounded-lg text-sm font-semibold shadow-sm hover:bg-[#7c3aed] transition-all flex items-center gap-2"
                                 >
                                     {updateMutation.isPending ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
-                                    Commit Changes
+                                    Save
                                 </button>
                             </div>
                         </div>

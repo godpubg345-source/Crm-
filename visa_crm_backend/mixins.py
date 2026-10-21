@@ -7,7 +7,7 @@ ensuring that users can only access data belonging to their assigned branch.
 
 from rest_framework.exceptions import ValidationError
 
-from core.utils.branch_context import (
+from apps.platform.core.utils.branch_context import (
     resolve_branch_from_request,
     is_hq_user,
     is_country_manager,

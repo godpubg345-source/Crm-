@@ -1,7 +1,7 @@
 import api from './api';
 
 // ============================================================================
-// VISA SERVICE - BWBS Education CRM
+// VISA SERVICE - Education Consultancy ERP
 // ============================================================================
 
 export type VisaOutcome = 'PENDING' | 'GRANTED' | 'REFUSED' | 'WITHDRAWN';
@@ -19,6 +19,12 @@ export interface VisaCase {
         phone: string;
     };
     application: string | null;
+    application_details?: {
+        id: string;
+        university_name: string;
+        course_name: string;
+        status_display: string;
+    };
     cas_number: string | null;
     status: string;
     status_display: string;
@@ -41,6 +47,12 @@ export interface VisaCase {
     appeal_date: string | null;
     notes: string | null;
     priority?: 'NORMAL' | 'URGENT';
+    student_nationality: string;
+    destination_country: string;
+    milestone_stats?: {
+        total: number;
+        completed: number;
+    };
     created_at: string;
     updated_at: string;
 }
@@ -87,7 +99,7 @@ interface PaginatedResponse<T> {
 // ============================================================================
 export const getVisaCases = async (studentId?: string): Promise<PaginatedResponse<VisaCase>> => {
     const query = studentId ? `?student=${studentId}` : '';
-    const response = await api.get<PaginatedResponse<VisaCase>>(`/visa-cases/${query}`);
+    const response = await api.get<PaginatedResponse<VisaCase>>(`/visas/cases/${query}`);
     return response.data;
 };
 
@@ -95,7 +107,7 @@ export const getVisaCases = async (studentId?: string): Promise<PaginatedRespons
 // GET VISA CASE BY ID
 // ============================================================================
 export const getVisaCaseById = async (id: string): Promise<VisaCase> => {
-    const response = await api.get<VisaCase>(`/visa-cases/${id}/`);
+    const response = await api.get<VisaCase>(`/visas/cases/${id}/`);
     return response.data;
 };
 
@@ -103,7 +115,7 @@ export const getVisaCaseById = async (id: string): Promise<VisaCase> => {
 // CREATE VISA CASE
 // ============================================================================
 export const createVisaCase = async (data: VisaCaseCreateData): Promise<VisaCase> => {
-    const response = await api.post<VisaCase>('/visa-cases/', data);
+    const response = await api.post<VisaCase>('/visas/cases/', data);
     return response.data;
 };
 
@@ -111,7 +123,7 @@ export const createVisaCase = async (data: VisaCaseCreateData): Promise<VisaCase
 // UPDATE VISA CASE
 // ============================================================================
 export const updateVisaCase = async (id: string, data: VisaCaseUpdateData): Promise<VisaCase> => {
-    const response = await api.patch<VisaCase>(`/visa-cases/${id}/`, data);
+    const response = await api.patch<VisaCase>(`/visas/cases/${id}/`, data);
     return response.data;
 };
 
@@ -119,7 +131,7 @@ export const updateVisaCase = async (id: string, data: VisaCaseUpdateData): Prom
 // DELETE VISA CASE
 // ============================================================================
 export const deleteVisaCase = async (id: string): Promise<void> => {
-    await api.delete(`/visa-cases/${id}/`);
+    await api.delete(`/visas/cases/${id}/`);
 };
 
 // Outcome labels and colors
@@ -160,22 +172,22 @@ export interface VisaMilestoneCreateData {
 }
 
 export const getVisaMilestones = async (visaCaseId: string): Promise<PaginatedResponse<VisaMilestone>> => {
-    const response = await api.get<PaginatedResponse<VisaMilestone>>(`/visa-milestones/?visa_case=${visaCaseId}`);
+    const response = await api.get<PaginatedResponse<VisaMilestone>>(`/visas/milestones/?visa_case=${visaCaseId}`);
     return response.data;
 };
 
 export const createVisaMilestone = async (data: VisaMilestoneCreateData): Promise<VisaMilestone> => {
-    const response = await api.post<VisaMilestone>('/visa-milestones/', data);
+    const response = await api.post<VisaMilestone>('/visas/milestones/', data);
     return response.data;
 };
 
 export const updateVisaMilestone = async (id: string, data: Partial<VisaMilestone>): Promise<VisaMilestone> => {
-    const response = await api.patch<VisaMilestone>(`/visa-milestones/${id}/`, data);
+    const response = await api.patch<VisaMilestone>(`/visas/milestones/${id}/`, data);
     return response.data;
 };
 
 export const deleteVisaMilestone = async (id: string): Promise<void> => {
-    await api.delete(`/visa-milestones/${id}/`);
+    await api.delete(`/visas/milestones/${id}/`);
 };
 
 export default {

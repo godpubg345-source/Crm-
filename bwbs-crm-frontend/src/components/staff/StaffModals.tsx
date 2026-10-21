@@ -86,8 +86,8 @@ export const StaffManagementModal = ({ isOpen, onClose, staff, initialBranchId }
     ];
 
     return (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-md animate-in fade-in duration-300">
-            <div className="bg-white rounded-[2.5rem] w-full max-w-2xl shadow-2xl border border-slate-100 overflow-hidden relative animate-in zoom-in-95 duration-300">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/40 animate-in fade-in duration-300">
+            <div className="bg-white rounded-xl w-full max-w-2xl border border-slate-200 overflow-hidden relative animate-in zoom-in-95 duration-300">
                 {/* Visual Header */}
                 <div className="h-32 bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 relative">
                     <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white/20 via-transparent to-transparent" />
@@ -97,19 +97,19 @@ export const StaffManagementModal = ({ isOpen, onClose, staff, initialBranchId }
                     >
                         <X className="w-5 h-5" />
                     </button>
-                    <div className="absolute -bottom-6 left-10 w-20 h-20 rounded-3xl bg-white shadow-xl flex items-center justify-center border border-slate-50">
-                        <div className="w-16 h-16 rounded-2xl bg-slate-50 flex items-center justify-center">
-                            <UserIcon className="w-8 h-8 text-[#AD03DE]" />
+                    <div className="absolute -bottom-6 left-10 w-10 h-10 rounded-lg bg-white flex items-center justify-center border border-slate-200">
+                        <div className="w-10 h-10 rounded-lg bg-slate-50 flex items-center justify-center">
+                            <UserIcon className="w-8 h-8 text-[#7c3aed]" />
                         </div>
                     </div>
                 </div>
 
-                <div className="p-10 pt-12">
-                    <div className="mb-10">
-                        <h2 className="text-3xl font-serif font-black text-slate-900 tracking-tight">
+                <div className="p-6 pt-12">
+                    <div className="mb-6">
+                        <h2 className="text-3xl font-semibold text-slate-900 tracking-tight">
                             {staff ? 'Operational Redeployment' : 'Elite Talent Recruitment'}
                         </h2>
-                        <p className="text-[10px] font-black text-[#AD03DE] uppercase tracking-[0.3em] mt-1">
+                        <p className="text-xs font-semibold text-[#7c3aed] mt-1">
                             {staff ? `Modifying Profile: ${staff.first_name} ${staff.last_name}` : 'Scaling Branch Performance Units'}
                         </p>
                     </div>
@@ -119,13 +119,13 @@ export const StaffManagementModal = ({ isOpen, onClose, staff, initialBranchId }
                             {/* Personal Info */}
                             <div className="space-y-6">
                                 <div>
-                                    <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-3">Professional Name</label>
+                                    <label className="block text-xs font-semibold text-slate-500 mb-3">Name</label>
                                     <div className="flex gap-4">
                                         <input
                                             type="text"
                                             value={formData.first_name}
                                             onChange={e => setFormData({ ...formData, first_name: e.target.value })}
-                                            className="w-full px-5 py-4 bg-slate-50 border-none rounded-2xl text-sm font-semibold text-slate-900 focus:ring-2 focus:ring-[#AD03DE]/20 placeholder:text-slate-300 transition-all outline-none"
+                                            className="w-full px-5 py-4 bg-slate-50 border-none rounded-2xl text-sm font-semibold text-slate-900 focus:ring-2 focus:ring-[#7c3aed]/20 placeholder:text-slate-300 transition-all outline-none"
                                             placeholder="First"
                                             required
                                         />
@@ -133,7 +133,7 @@ export const StaffManagementModal = ({ isOpen, onClose, staff, initialBranchId }
                                             type="text"
                                             value={formData.last_name}
                                             onChange={e => setFormData({ ...formData, last_name: e.target.value })}
-                                            className="w-full px-5 py-4 bg-slate-50 border-none rounded-2xl text-sm font-semibold text-slate-900 focus:ring-2 focus:ring-[#AD03DE]/20 placeholder:text-slate-300 transition-all outline-none"
+                                            className="w-full px-5 py-4 bg-slate-50 border-none rounded-2xl text-sm font-semibold text-slate-900 focus:ring-2 focus:ring-[#7c3aed]/20 placeholder:text-slate-300 transition-all outline-none"
                                             placeholder="Last"
                                             required
                                         />
@@ -141,27 +141,27 @@ export const StaffManagementModal = ({ isOpen, onClose, staff, initialBranchId }
                                 </div>
 
                                 <div>
-                                    <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-3">Communication Hub</label>
+                                    <label className="block text-xs font-semibold text-slate-500 mb-3">Contact</label>
                                     <div className="space-y-4">
                                         <div className="relative group">
-                                            <Mail className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-300 group-focus-within:text-[#AD03DE] transition-colors" />
+                                            <Mail className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-300 group-focus-within:text-[#7c3aed] transition-colors" />
                                             <input
                                                 type="email"
                                                 value={formData.email}
                                                 onChange={e => setFormData({ ...formData, email: e.target.value })}
                                                 disabled={!!staff}
-                                                className="w-full pl-14 pr-5 py-4 bg-slate-50 border-none rounded-2xl text-sm font-semibold text-slate-900 focus:ring-2 focus:ring-[#AD03DE]/20 placeholder:text-slate-300 transition-all outline-none disabled:opacity-50"
-                                                placeholder="Professional Email"
+                                                className="w-full pl-14 pr-5 py-4 bg-slate-50 border-none rounded-2xl text-sm font-semibold text-slate-900 focus:ring-2 focus:ring-[#7c3aed]/20 placeholder:text-slate-300 transition-all outline-none disabled:opacity-50"
+                                                placeholder="Email"
                                                 required
                                             />
                                         </div>
                                         <div className="relative group">
-                                            <Phone className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-300 group-focus-within:text-[#AD03DE] transition-colors" />
+                                            <Phone className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-300 group-focus-within:text-[#7c3aed] transition-colors" />
                                             <input
                                                 type="tel"
                                                 value={formData.phone}
                                                 onChange={e => setFormData({ ...formData, phone: e.target.value })}
-                                                className="w-full pl-14 pr-5 py-4 bg-slate-50 border-none rounded-2xl text-sm font-semibold text-slate-900 focus:ring-2 focus:ring-[#AD03DE]/20 placeholder:text-slate-300 transition-all outline-none"
+                                                className="w-full pl-14 pr-5 py-4 bg-slate-50 border-none rounded-2xl text-sm font-semibold text-slate-900 focus:ring-2 focus:ring-[#7c3aed]/20 placeholder:text-slate-300 transition-all outline-none"
                                                 placeholder="Contact Number"
                                             />
                                         </div>
@@ -172,14 +172,14 @@ export const StaffManagementModal = ({ isOpen, onClose, staff, initialBranchId }
                             {/* Role & Deployment */}
                             <div className="space-y-6">
                                 <div>
-                                    <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-3">Asset Deployment</label>
+                                    <label className="block text-xs font-semibold text-slate-500 mb-3">Branch</label>
                                     <select
                                         value={formData.branch}
                                         onChange={e => setFormData({ ...formData, branch: e.target.value })}
-                                        className="w-full px-6 py-4 bg-slate-50 border-none rounded-2xl text-sm font-bold text-slate-900 focus:ring-2 focus:ring-[#AD03DE]/20 outline-none appearance-none cursor-pointer"
+                                        className="w-full px-6 py-4 bg-slate-50 border-none rounded-2xl text-sm font-bold text-slate-900 focus:ring-2 focus:ring-[#7c3aed]/20 outline-none appearance-none cursor-pointer"
                                         required
                                     >
-                                        <option value="">Select Target Branch</option>
+                                        <option value="">Select branch</option>
                                         {branches?.map(b => (
                                             <option key={b.id} value={b.id}>{b.name}</option>
                                         ))}
@@ -187,7 +187,7 @@ export const StaffManagementModal = ({ isOpen, onClose, staff, initialBranchId }
                                 </div>
 
                                 <div>
-                                    <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-3">Operational Role</label>
+                                    <label className="block text-xs font-semibold text-slate-500 mb-3">Role</label>
                                     <div className="grid grid-cols-1 gap-3">
                                         {roles.map(role => (
                                             <button
@@ -197,22 +197,22 @@ export const StaffManagementModal = ({ isOpen, onClose, staff, initialBranchId }
                                                 className={clsx(
                                                     "px-5 py-4 rounded-2xl border text-left transition-all relative flex items-center gap-4 group/role",
                                                     formData.role === role.id
-                                                        ? "bg-[#AD03DE]/5 border-[#AD03DE] shadow-inner"
+                                                        ? "bg-[#7c3aed]/5 border-[#7c3aed] "
                                                         : "bg-white border-slate-100 hover:border-slate-200"
                                                 )}
                                             >
                                                 <div className={clsx(
                                                     "w-10 h-10 rounded-xl flex items-center justify-center transition-all",
-                                                    formData.role === role.id ? "bg-[#AD03DE] text-white" : "bg-slate-50 text-slate-400 group-hover/role:bg-slate-100"
+                                                    formData.role === role.id ? "bg-[#7c3aed] text-white" : "bg-slate-50 text-slate-400 group-hover/role:bg-slate-100"
                                                 )}>
                                                     <role.icon className="w-5 h-5" />
                                                 </div>
                                                 <div>
                                                     <p className={clsx("text-sm font-bold", formData.role === role.id ? "text-slate-900" : "text-slate-600")}>{role.name}</p>
-                                                    <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Active Deployment</p>
+                                                    <p className="text-[11px] text-slate-500">Active</p>
                                                 </div>
                                                 {formData.role === role.id && (
-                                                    <div className="absolute right-5 w-2 h-2 rounded-full bg-[#AD03DE] animate-pulse" />
+                                                    <div className="absolute right-5 w-2 h-2 rounded-full bg-[#7c3aed] animate-pulse" />
                                                 )}
                                             </button>
                                         ))}
@@ -222,18 +222,18 @@ export const StaffManagementModal = ({ isOpen, onClose, staff, initialBranchId }
                         </div>
 
                         {!staff && (
-                            <div className="p-6 bg-amber-50 rounded-3xl border border-amber-100/50 flex items-center gap-4">
+                            <div className="p-6 bg-amber-50 rounded-2xl border border-amber-100/50 flex items-center gap-4">
                                 <div className="w-12 h-12 rounded-2xl bg-amber-100 flex items-center justify-center flex-shrink-0">
                                     <ShieldCheck className="w-6 h-6 text-amber-600" />
                                 </div>
                                 <div className="space-y-1">
-                                    <p className="text-xs font-black text-amber-900 uppercase tracking-widest">Temporary Access Code</p>
+                                    <p className="text-xs font-semibold text-amber-900">Temporary password</p>
                                     <input
                                         type="password"
                                         value={formData.password}
                                         onChange={e => setFormData({ ...formData, password: e.target.value })}
                                         className="w-full bg-transparent border-none p-0 text-sm font-bold text-amber-900 focus:ring-0 placeholder:text-amber-300"
-                                        placeholder="Enter Initial Password"
+                                        placeholder="Set a temporary password"
                                         required={!staff}
                                     />
                                 </div>
@@ -244,14 +244,14 @@ export const StaffManagementModal = ({ isOpen, onClose, staff, initialBranchId }
                             <button
                                 type="button"
                                 onClick={onClose}
-                                className="px-8 py-4 rounded-2xl text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 hover:text-slate-600 hover:bg-slate-50 transition-all font-mono"
+                                className="px-8 py-4 rounded-2xl text-xs font-semibold text-slate-400 hover:text-slate-600 hover:bg-slate-50 transition-all font-mono"
                             >
-                                Cancel Operation
+                                Cancel
                             </button>
                             <button
                                 type="submit"
                                 disabled={mutation.isPending}
-                                className="px-12 py-4 bg-slate-900 text-white rounded-2xl text-[10px] font-black uppercase tracking-[0.3em] shadow-2xl shadow-slate-200 hover:bg-[#AD03DE] active:scale-95 transition-all flex items-center gap-3 disabled:opacity-50 font-mono"
+                                className="px-4 py-2.5 bg-violet-600 hover:bg-violet-700 text-white rounded-lg text-sm font-semibold shadow-sm hover:bg-[#7c3aed] transition-all flex items-center gap-3 disabled:opacity-50 font-mono"
                             >
                                 {mutation.isPending && <Loader2 className="w-4 h-4 animate-spin" />}
                                 {staff ? 'Commit Redeployment' : 'Activate Recruitment'}

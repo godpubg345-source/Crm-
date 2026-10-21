@@ -1,7 +1,7 @@
 import api from './api';
 
 // ============================================================================
-// STUDENTS SERVICE - BWBS Education CRM
+// STUDENTS SERVICE - Education Consultancy ERP
 // ============================================================================
 
 export type StudentSource = 'WALK_IN' | 'WEBSITE' | 'FACEBOOK' | 'REFERRAL' | 'EVENT' | 'OTHER';

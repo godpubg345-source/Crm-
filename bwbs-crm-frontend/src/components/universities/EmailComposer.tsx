@@ -28,10 +28,10 @@ const emailTemplates: EmailTemplate[] = [
     {
         id: 'onboard_welcome',
         name: 'Welcome to Partnership',
-        subject: 'Welcome to BWBS Partnership Network - {{university_name}}',
+        subject: 'Welcome to Our Partnership Network - {{university_name}}',
         body: `Dear { { contact_name } },
 
-We are delighted to officially welcome { { university_name } } to the BWBS Education Partnership Network!
+We are delighted to officially welcome { { university_name } } to the Our Education Partnership Network!
 
 As your dedicated partner, we are committed to providing high - quality student referrals and supporting your international recruitment goals.
 
@@ -43,7 +43,7 @@ As your dedicated partner, we are committed to providing high - quality student 
 We look forward to a successful and mutually beneficial partnership.
 
 Best regards,
-    BWBS Education Team`,
+    Education Consultancy Team`,
         category: 'onboarding'
     },
     {
@@ -62,7 +62,7 @@ This is a friendly reminder that the application deadline for the {{ intake_mont
 Please let us know if you have any updates on scholarship availability or last - minute seat availability for this intake.
 
 Best regards,
-        BWBS Education Team`,
+        Education Consultancy Team`,
         category: 'intake'
     },
     {
@@ -83,7 +83,7 @@ Please share these at your earliest convenience.You can upload directly to your 
 Thank you for your continued partnership.
 
 Best regards,
-    BWBS Education Team`,
+    Education Consultancy Team`,
         category: 'document'
     },
     {
@@ -104,7 +104,7 @@ Timely feedback would help us guide students through their decision - making pro
 Thank you for your support.
 
 Best regards,
-        BWBS Education Team`,
+        Education Consultancy Team`,
         category: 'follow_up'
     },
     {
@@ -188,20 +188,20 @@ export const EmailComposer: React.FC<EmailComposerProps> = ({
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 onClick={onClose}
-                className="absolute inset-0 bg-slate-900/60 backdrop-blur-md"
+                className="absolute inset-0 bg-slate-900/60"
             />
 
             <motion.div
                 initial={{ opacity: 0, scale: 0.95, y: 30 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95, y: 30 }}
-                className="relative w-full max-w-4xl bg-white rounded-[3rem] shadow-2xl overflow-hidden max-h-[90vh] flex"
+                className="relative w-full max-w-4xl bg-white rounded-2xl shadow-sm overflow-hidden max-h-[90vh] flex"
             >
                 {/* Template Sidebar */}
                 <div className="w-72 bg-slate-50 border-r border-slate-100 p-6 flex flex-col">
                     <div className="flex items-center gap-3 mb-6">
-                        <FileText className="w-5 h-5 text-[#AD03DE]" />
-                        <h3 className="text-[11px] font-black text-slate-900 uppercase tracking-widest">
+                        <FileText className="w-5 h-5 text-[#7c3aed]" />
+                        <h3 className="text-[11px] font-semibold text-slate-900">
                             Templates
                         </h3>
                     </div>
@@ -214,19 +214,19 @@ export const EmailComposer: React.FC<EmailComposerProps> = ({
                                 className={clsx(
                                     "w-full p-4 rounded-2xl text-left transition-all",
                                     selectedTemplate?.id === template.id
-                                        ? "bg-white shadow-lg ring-2 ring-[#AD03DE]/20"
+                                        ? "bg-white shadow-sm ring-2 ring-[#7c3aed]/20"
                                         : "hover:bg-white hover:shadow-sm"
                                 )}
                             >
                                 <div className="flex items-center gap-2 mb-2">
                                     <span className={clsx(
-                                        "text-[8px] font-black uppercase px-2 py-1 rounded-lg border",
+                                        "text-[11px] font-semibold px-2 py-1 rounded-lg border",
                                         categoryColors[template.category]
                                     )}>
                                         {template.category}
                                     </span>
                                 </div>
-                                <p className="text-[11px] font-black text-slate-900">
+                                <p className="text-[11px] font-semibold text-slate-900">
                                     {template.name}
                                 </p>
                             </button>
@@ -239,14 +239,14 @@ export const EmailComposer: React.FC<EmailComposerProps> = ({
                     {/* Header */}
                     <div className="p-6 border-b border-slate-100 flex items-center justify-between">
                         <div className="flex items-center gap-4">
-                            <div className="w-10 h-10 bg-[#AD03DE]/10 rounded-xl flex items-center justify-center">
-                                <Mail className="w-5 h-5 text-[#AD03DE]" />
+                            <div className="w-10 h-10 bg-[#7c3aed]/10 rounded-xl flex items-center justify-center">
+                                <Mail className="w-5 h-5 text-[#7c3aed]" />
                             </div>
                             <div>
-                                <h2 className="text-lg font-serif font-black text-slate-900 uppercase tracking-tight">
+                                <h2 className="text-lg font-semibold text-slate-900 tracking-tight">
                                     Compose Email
                                 </h2>
-                                <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest">
+                                <p className="text-[11px] font-semibold text-slate-400">
                                     {universityName}
                                 </p>
                             </div>
@@ -256,9 +256,9 @@ export const EmailComposer: React.FC<EmailComposerProps> = ({
                             <button
                                 onClick={() => setIsPreview(!isPreview)}
                                 className={clsx(
-                                    "px-4 py-2 rounded-xl text-[10px] font-black uppercase flex items-center gap-2 transition-all",
+                                    "px-4 py-2 rounded-xl text-xs font-semibold flex items-center gap-2 transition-all",
                                     isPreview
-                                        ? "bg-[#AD03DE] text-white"
+                                        ? "bg-[#7c3aed] text-white"
                                         : "bg-slate-100 text-slate-600 hover:bg-slate-200"
                                 )}
                             >
@@ -281,11 +281,11 @@ export const EmailComposer: React.FC<EmailComposerProps> = ({
                                 <motion.div
                                     initial={{ scale: 0 }}
                                     animate={{ scale: 1 }}
-                                    className="w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center mb-6"
+                                    className="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center mb-6"
                                 >
                                     <CheckCircle className="w-10 h-10 text-emerald-500" />
                                 </motion.div>
-                                <h3 className="text-2xl font-serif font-black text-slate-900 mb-2">
+                                <h3 className="text-2xl font-semibold text-slate-900 mb-2">
                                     Email Sent!
                                 </h3>
                                 <p className="text-sm text-slate-500">
@@ -296,22 +296,22 @@ export const EmailComposer: React.FC<EmailComposerProps> = ({
                             <div className="bg-slate-50 rounded-2xl p-6">
                                 <div className="space-y-4 mb-6">
                                     <div>
-                                        <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest">To</p>
+                                        <p className="text-[11px] font-semibold text-slate-400">To</p>
                                         <p className="text-sm font-bold text-slate-900">{recipientEmail}</p>
                                     </div>
                                     <div>
-                                        <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Subject</p>
+                                        <p className="text-[11px] font-semibold text-slate-400">Subject</p>
                                         <p className="text-sm font-bold text-slate-900">{subject}</p>
                                     </div>
                                 </div>
-                                <div className="bg-white rounded-xl p-6 border border-slate-100 prose prose-sm max-w-none whitespace-pre-wrap">
+                                <div className="bg-white rounded-xl p-6 border border-slate-200 prose prose-sm max-w-none whitespace-pre-wrap">
                                     {body}
                                 </div>
                             </div>
                         ) : (
                             <>
                                 <div>
-                                    <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-2 block">
+                                    <label className="text-[11px] font-semibold text-slate-400 mb-2 block">
                                         Recipient Email
                                     </label>
                                     <input
@@ -319,12 +319,12 @@ export const EmailComposer: React.FC<EmailComposerProps> = ({
                                         value={recipientEmail}
                                         onChange={(e) => setRecipientEmail(e.target.value)}
                                         placeholder="partner@university.edu"
-                                        className="w-full px-4 py-3 border border-slate-200 rounded-xl text-sm font-bold focus:outline-none focus:ring-2 focus:ring-[#AD03DE]/20"
+                                        className="w-full px-4 py-3 border border-slate-200 rounded-xl text-sm font-bold focus:outline-none focus:ring-2 focus:ring-[#7c3aed]/20"
                                     />
                                 </div>
 
                                 <div>
-                                    <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-2 block">
+                                    <label className="text-[11px] font-semibold text-slate-400 mb-2 block">
                                         Subject Line
                                     </label>
                                     <input
@@ -332,12 +332,12 @@ export const EmailComposer: React.FC<EmailComposerProps> = ({
                                         value={subject}
                                         onChange={(e) => setSubject(e.target.value)}
                                         placeholder="Enter email subject..."
-                                        className="w-full px-4 py-3 border border-slate-200 rounded-xl text-sm font-bold focus:outline-none focus:ring-2 focus:ring-[#AD03DE]/20"
+                                        className="w-full px-4 py-3 border border-slate-200 rounded-xl text-sm font-bold focus:outline-none focus:ring-2 focus:ring-[#7c3aed]/20"
                                     />
                                 </div>
 
                                 <div className="flex-1">
-                                    <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-2 block">
+                                    <label className="text-[11px] font-semibold text-slate-400 mb-2 block">
                                         Message Body
                                     </label>
                                     <textarea
@@ -345,13 +345,13 @@ export const EmailComposer: React.FC<EmailComposerProps> = ({
                                         onChange={(e) => setBody(e.target.value)}
                                         placeholder="Compose your message..."
                                         rows={12}
-                                        className="w-full px-4 py-3 border border-slate-200 rounded-xl text-sm font-bold focus:outline-none focus:ring-2 focus:ring-[#AD03DE]/20 resize-none"
+                                        className="w-full px-4 py-3 border border-slate-200 rounded-xl text-sm font-bold focus:outline-none focus:ring-2 focus:ring-[#7c3aed]/20 resize-none"
                                     />
                                 </div>
 
                                 <div className="p-4 bg-slate-50 rounded-xl flex items-center gap-3">
-                                    <Sparkles className="w-4 h-4 text-[#AD03DE]" />
-                                    <p className="text-[9px] font-bold text-slate-500">
+                                    <Sparkles className="w-4 h-4 text-[#7c3aed]" />
+                                    <p className="text-[11px] font-bold text-slate-500">
                                         <strong>Pro Tip:</strong> Use placeholders like {'{{university_name}}'}, {'{{contact_name}}'} for personalization
                                     </p>
                                 </div>
@@ -364,7 +364,7 @@ export const EmailComposer: React.FC<EmailComposerProps> = ({
                         <div className="p-6 border-t border-slate-100 flex items-center justify-between">
                             <button
                                 onClick={onClose}
-                                className="px-6 py-3 bg-slate-100 text-slate-600 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-slate-200 transition-all"
+                                className="px-6 py-3 bg-slate-100 text-slate-600 rounded-xl text-xs font-semibold hover:bg-slate-200 transition-all"
                             >
                                 Cancel
                             </button>
@@ -372,7 +372,7 @@ export const EmailComposer: React.FC<EmailComposerProps> = ({
                             <button
                                 onClick={handleSend}
                                 disabled={!recipientEmail || !subject || !body || isSending}
-                                className="px-8 py-3 bg-[#AD03DE] text-white rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-purple-600 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                                className="px-4 py-2.5 bg-violet-600 text-white rounded-lg text-sm font-semibold hover:bg-purple-600 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
                             >
                                 {isSending ? 'Sending...' : 'Send Email'}
                                 <Send className="w-4 h-4" />

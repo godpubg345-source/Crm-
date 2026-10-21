@@ -113,29 +113,28 @@ export const DocumentVault: React.FC<DocumentVaultProps> = ({
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 onClick={onClose}
-                className="absolute inset-0 bg-slate-900/60 backdrop-blur-md"
+                className="absolute inset-0 bg-slate-900/60"
             />
 
             <motion.div
                 initial={{ opacity: 0, scale: 0.95, y: 30 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95, y: 30 }}
-                className="relative w-full max-w-4xl bg-white rounded-[3rem] shadow-2xl overflow-hidden max-h-[85vh] flex flex-col"
+                className="relative w-full max-w-4xl bg-white rounded-2xl shadow-sm overflow-hidden max-h-[85vh] flex flex-col"
             >
                 {/* Header */}
-                <div className="p-8 bg-slate-900 relative overflow-hidden">
-                    <div className="absolute top-0 right-0 w-40 h-40 bg-[#AD03DE]/20 rounded-full blur-3xl" />
+                <div className="p-6 bg-slate-900 relative overflow-hidden">
 
                     <div className="relative z-10 flex items-center justify-between">
                         <div className="flex items-center gap-4">
-                            <div className="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center backdrop-blur-md border border-white/10">
-                                <FolderOpen className="w-6 h-6 text-[#AD03DE]" />
+                            <div className="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center border border-white/10">
+                                <FolderOpen className="w-6 h-6 text-[#7c3aed]" />
                             </div>
                             <div>
-                                <h2 className="text-2xl font-serif font-black text-white uppercase tracking-tight">
+                                <h2 className="text-2xl font-semibold text-white tracking-tight">
                                     Document Vault
                                 </h2>
-                                <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest">
+                                <p className="text-[11px] font-semibold text-slate-400">
                                     {universityName}
                                 </p>
                             </div>
@@ -151,15 +150,15 @@ export const DocumentVault: React.FC<DocumentVaultProps> = ({
                 </div>
 
                 {/* Upload Zone */}
-                <div className="p-8 border-b border-slate-100">
+                <div className="p-6 border-b border-slate-100">
                     <div
                         onDragOver={handleDragOver}
                         onDragLeave={handleDragLeave}
                         onDrop={handleDrop}
                         className={clsx(
-                            "border-2 border-dashed rounded-3xl p-8 text-center transition-all",
+                            "border-2 border-dashed rounded-2xl p-6 text-center transition-all",
                             isDragging
-                                ? "border-[#AD03DE] bg-[#AD03DE]/5"
+                                ? "border-[#7c3aed] bg-[#7c3aed]/5"
                                 : "border-slate-200 hover:border-slate-300",
                             uploadFile && "border-emerald-500 bg-emerald-50"
                         )}
@@ -168,7 +167,7 @@ export const DocumentVault: React.FC<DocumentVaultProps> = ({
                             <div className="space-y-4">
                                 <div className="flex items-center justify-center gap-3">
                                     <Check className="w-6 h-6 text-emerald-500" />
-                                    <span className="text-sm font-black text-slate-900">{uploadFile.name}</span>
+                                    <span className="text-sm font-semibold text-slate-900">{uploadFile.name}</span>
                                 </div>
 
                                 <div className="flex gap-4 justify-center">
@@ -193,14 +192,14 @@ export const DocumentVault: React.FC<DocumentVaultProps> = ({
                                 <div className="flex gap-3 justify-center">
                                     <button
                                         onClick={() => setUploadFile(null)}
-                                        className="px-4 py-2 bg-slate-100 text-slate-600 rounded-xl text-[10px] font-black uppercase"
+                                        className="px-4 py-2 bg-slate-100 text-slate-600 rounded-xl text-xs font-semibold"
                                     >
                                         Cancel
                                     </button>
                                     <button
                                         onClick={handleUpload}
                                         disabled={isUploading}
-                                        className="px-6 py-2 bg-emerald-500 text-white rounded-xl text-[10px] font-black uppercase flex items-center gap-2 disabled:opacity-50"
+                                        className="px-6 py-2 bg-emerald-500 text-white rounded-xl text-xs font-semibold flex items-center gap-2 disabled:opacity-50"
                                     >
                                         {isUploading ? 'Uploading...' : 'Upload Document'}
                                         <Upload className="w-4 h-4" />
@@ -210,11 +209,11 @@ export const DocumentVault: React.FC<DocumentVaultProps> = ({
                         ) : (
                             <>
                                 <Upload className="w-10 h-10 text-slate-300 mx-auto mb-4" />
-                                <p className="text-[11px] font-black text-slate-400 uppercase tracking-widest mb-2">
+                                <p className="text-[11px] font-semibold text-slate-400 mb-2">
                                     Drag & Drop Files Here
                                 </p>
-                                <p className="text-[9px] text-slate-300 mb-4">or</p>
-                                <label className="px-6 py-3 bg-slate-900 text-white rounded-xl text-[10px] font-black uppercase cursor-pointer hover:bg-black transition-all inline-block">
+                                <p className="text-[11px] text-slate-300 mb-4">or</p>
+                                <label className="px-4 py-2.5 bg-slate-900 text-white rounded-lg text-sm font-semibold cursor-pointer hover:bg-black transition-all inline-block">
                                     Browse Files
                                     <input
                                         type="file"
@@ -229,11 +228,11 @@ export const DocumentVault: React.FC<DocumentVaultProps> = ({
                 </div>
 
                 {/* Document List */}
-                <div className="flex-1 overflow-y-auto p-8">
+                <div className="flex-1 overflow-y-auto p-6">
                     {documents.length === 0 ? (
-                        <div className="text-center py-16">
+                        <div className="text-center py-12">
                             <FileText className="w-12 h-12 text-slate-200 mx-auto mb-4" />
-                            <p className="text-[11px] font-black text-slate-400 uppercase tracking-widest">
+                            <p className="text-[11px] font-semibold text-slate-400">
                                 No Documents Uploaded
                             </p>
                         </div>
@@ -249,15 +248,15 @@ export const DocumentVault: React.FC<DocumentVaultProps> = ({
                                     </div>
 
                                     <div className="flex-1 min-w-0">
-                                        <h4 className="text-sm font-black text-slate-900 truncate">{doc.title}</h4>
+                                        <h4 className="text-sm font-semibold text-slate-900 truncate">{doc.title}</h4>
                                         <div className="flex items-center gap-3 mt-1">
                                             <span className={clsx(
-                                                "text-[8px] font-black uppercase px-2 py-1 rounded-lg border",
+                                                "text-[11px] font-semibold px-2 py-1 rounded-lg border",
                                                 getTypeColor(doc.document_type)
                                             )}>
                                                 {doc.document_type}
                                             </span>
-                                            <span className="text-[9px] text-slate-400">
+                                            <span className="text-[11px] text-slate-400">
                                                 {formatDate(doc.uploaded_at)}
                                             </span>
                                         </div>

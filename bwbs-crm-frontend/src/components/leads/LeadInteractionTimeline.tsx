@@ -40,17 +40,17 @@ const LeadInteractionTimeline = ({ lead, isOpen, onClose, onInteractionAdded }: 
     const [isRecording, setIsRecording] = useState(false);
 
     return (
-        <div className="fixed inset-0 z-[60] flex items-center justify-end bg-black/40 backdrop-blur-sm animate-in fade-in duration-500">
-            <div className="bg-white w-full max-w-xl h-full shadow-[-30px_0_80px_rgba(0,0,0,0.1)] border-l border-slate-100 flex flex-col animate-in slide-in-from-right duration-500 ease-out">
+        <div className="fixed inset-0 z-[60] flex items-center justify-end bg-black/40 animate-in fade-in duration-200">
+            <div className="bg-white w-full max-w-xl h-full border-l border-slate-100 flex flex-col animate-in slide-in-from-right duration-200 ease-out">
                 {/* Header */}
-                <div className="p-8 border-b border-slate-50 flex items-center justify-between bg-slate-50/30">
+                <div className="p-6 border-b border-slate-50 flex items-center justify-between bg-slate-50/30">
                     <div>
-                        <h2 className="text-3xl font-serif font-bold text-slate-900">Interaction Feed</h2>
-                        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] mt-1">
+                        <h2 className="text-3xl font-bold text-slate-900">Activity</h2>
+                        <p className="text-xs text-slate-500 mt-1">
                             {lead.first_name} {lead.last_name} &bull; {lead.priority_display}
                         </p>
                     </div>
-                    <button onClick={onClose} className="p-3 bg-white hover:bg-slate-100 text-slate-400 hover:text-slate-900 rounded-2xl transition-all border border-slate-100 shadow-sm active:scale-90">
+                    <button onClick={onClose} className="p-3 bg-white hover:bg-slate-100 text-slate-400 hover:text-slate-900 rounded-xl transition-all border border-slate-200">
                         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                         </svg>
@@ -58,18 +58,18 @@ const LeadInteractionTimeline = ({ lead, isOpen, onClose, onInteractionAdded }: 
                 </div>
 
                 {/* Timeline Content */}
-                <div className="flex-1 overflow-y-auto px-8 py-10 space-y-8 premium-scrollbar">
+                <div className="flex-1 overflow-y-auto px-8 py-6 space-y-8 premium-scrollbar">
                     {/* Log New Interaction */}
-                    <div className="p-6 bg-white border-2 border-slate-50 rounded-[2.5rem] shadow-sm mb-12">
-                        <label className="block text-[10px] font-extrabold text-slate-400 uppercase tracking-[0.3em] mb-4 ml-2">Log Interaction Event</label>
+                    <div className="p-6 bg-white border-2 border-slate-50 rounded-2xl shadow-sm mb-6">
+                        <label className="block text-xs font-semibold text-slate-400 mb-4 ml-2">Log interaction</label>
                         <div className="flex gap-2 mb-4">
                             {(['NOTE', 'CALL', 'WHATSAPP', 'EMAIL', 'MEETING'] as InteractionType[]).map((t) => (
                                 <button
                                     key={t}
                                     onClick={() => setType(t)}
-                                    className={`px-4 py-2 text-[10px] font-bold rounded-xl transition-all border ${type === t
-                                        ? 'bg-[#AD03DE] text-white border-[#AD03DE] shadow-lg shadow-[#AD03DE]/20'
-                                        : 'bg-white text-slate-500 border-slate-100 hover:border-[#AD03DE]/30'
+                                    className={`px-4 py-2 text-xs font-bold rounded-xl transition-all border ${type === t
+                                        ? 'bg-[#7c3aed] text-white border-[#7c3aed] shadow-sm '
+                                        : 'bg-white text-slate-500 border-slate-100 hover:border-[#7c3aed]/30'
                                         }`}
                                 >
                                     {t}
@@ -89,12 +89,12 @@ const LeadInteractionTimeline = ({ lead, isOpen, onClose, onInteractionAdded }: 
                         ) : (
                             <>
                                 {audioBlob && (
-                                    <div className="mb-4 p-4 bg-[#AD03DE]/5 border border-[#AD03DE]/20 rounded-2xl flex items-center justify-between group">
+                                    <div className="mb-4 p-4 bg-[#7c3aed]/5 border border-[#7c3aed]/20 rounded-2xl flex items-center justify-between group">
                                         <div className="flex items-center gap-3">
-                                            <div className="w-8 h-8 rounded-full bg-[#AD03DE] flex items-center justify-center text-white">
+                                            <div className="w-8 h-8 rounded-full bg-[#7c3aed] flex items-center justify-center text-white">
                                                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z" /><path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z" /></svg>
                                             </div>
-                                            <span className="text-xs font-bold text-[#AD03DE]">Voice Note Attached</span>
+                                            <span className="text-xs font-bold text-[#7c3aed]">Voice Note Attached</span>
                                         </div>
                                         <button
                                             onClick={() => setAudioBlob(null)}
@@ -107,16 +107,16 @@ const LeadInteractionTimeline = ({ lead, isOpen, onClose, onInteractionAdded }: 
                                 <textarea
                                     value={content}
                                     onChange={(e) => setContent(e.target.value)}
-                                    placeholder="Briefly describe the outcome of this engagement..."
+                                    placeholder="What happened?"
                                     rows={3}
-                                    className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-slate-900 text-sm focus:outline-none focus:ring-4 focus:ring-[#AD03DE]/10 focus:border-[#AD03DE] transition-all resize-none mb-4"
+                                    className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-slate-900 text-sm focus:outline-none focus:ring-4 focus:ring-[#7c3aed]/10 focus:border-[#7c3aed] transition-all resize-none mb-4"
                                 />
                                 <div className="flex gap-2 mb-4">
                                     <button
                                         onClick={() => setIsRecording(true)}
-                                        className="flex-1 py-3 bg-white border border-slate-200 text-slate-600 text-[10px] font-bold uppercase tracking-widest rounded-xl hover:bg-slate-50 transition-all flex items-center justify-center gap-2"
+                                        className="flex-1 py-3 bg-white border border-slate-200 text-slate-600 text-xs font-bold rounded-xl hover:bg-slate-50 transition-all flex items-center justify-center gap-2"
                                     >
-                                        <svg className="w-4 h-4 text-[#AD03DE]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" /></svg>
+                                        <svg className="w-4 h-4 text-[#7c3aed]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" /></svg>
                                         Record Voice
                                     </button>
                                     <button
@@ -125,16 +125,16 @@ const LeadInteractionTimeline = ({ lead, isOpen, onClose, onInteractionAdded }: 
                                             navigator.clipboard.writeText(link);
                                             alert('Booking link copied to clipboard!');
                                         }}
-                                        className="flex-1 py-3 bg-white border border-slate-200 text-slate-600 text-[10px] font-bold uppercase tracking-widest rounded-xl hover:bg-slate-50 transition-all flex items-center justify-center gap-2"
+                                        className="flex-1 py-3 bg-white border border-slate-200 text-slate-600 text-xs font-bold rounded-xl hover:bg-slate-50 transition-all flex items-center justify-center gap-2"
                                     >
-                                        <svg className="w-4 h-4 text-[#AD03DE]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                                        <svg className="w-4 h-4 text-[#7c3aed]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
                                         Copy Booking Link
                                     </button>
                                 </div>
                                 <button
                                     onClick={() => mutation.mutate({ lead: lead.id, type, content, audio_file: audioBlob || undefined })}
                                     disabled={mutation.isPending || (!content && !audioBlob)}
-                                    className="w-full py-4 bg-slate-900 hover:bg-black text-white text-[11px] font-bold uppercase tracking-widest rounded-2xl transition-all shadow-xl shadow-slate-200 disabled:opacity-50 active:scale-95"
+                                    className="w-full py-2.5 bg-slate-900 hover:bg-black text-white text-sm font-bold rounded-lg transition-all shadow-sm disabled:opacity-50"
                                 >
                                     {mutation.isPending ? 'Propagating Event...' : 'Commit to Timeline'}
                                 </button>
@@ -143,7 +143,7 @@ const LeadInteractionTimeline = ({ lead, isOpen, onClose, onInteractionAdded }: 
                     </div>
 
                     {/* Timeline visualization */}
-                    <div className="relative pl-8 border-l-2 border-slate-50 ml-4 space-y-12">
+                    <div className="relative pl-8 border-l-2 border-slate-50 ml-4 space-y-6">
                         {isLoading ? (
                             [...Array(3)].map((_, i) => (
                                 <div key={i} className="animate-pulse flex gap-4">
@@ -152,23 +152,23 @@ const LeadInteractionTimeline = ({ lead, isOpen, onClose, onInteractionAdded }: 
                                 </div>
                             ))
                         ) : interactions.length === 0 ? (
-                            <div className="py-12 text-center -ml-8">
-                                <p className="text-slate-400 text-sm font-bold font-serif">Original silence. Log the first engagement to begin the legacy.</p>
+                            <div className="py-6 text-center -ml-8">
+                                <p className="text-slate-400 text-sm font-bold">No interactions yet. Log the first one.</p>
                             </div>
                         ) : interactions.map((interaction) => (
                             <div key={interaction.id} className="relative group">
                                 {/* Timeline Dot/Icon */}
-                                <div className="absolute -left-[45px] top-0 w-8 h-8 rounded-xl bg-white border-2 border-slate-50 flex items-center justify-center text-[#AD03DE] shadow-sm transform group-hover:scale-110 transition-transform">
+                                <div className="absolute -left-[45px] top-0 w-8 h-8 rounded-xl bg-white border-2 border-slate-50 flex items-center justify-center text-[#7c3aed] shadow-sm transform transition-transform">
                                     <InteractionIcon type={interaction.type} className="w-4 h-4" />
                                 </div>
 
-                                <div className="p-6 bg-slate-50/50 hover:bg-white rounded-[2rem] border border-transparent hover:border-slate-100 hover:shadow-xl transition-all duration-500">
+                                <div className="p-6 bg-slate-50/50 hover:bg-white rounded-2xl border border-transparent hover:border-slate-100 hover:shadow-md transition-all duration-200">
                                     <div className="flex justify-between items-start mb-3">
                                         <div className="flex flex-col">
-                                            <span className="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest leading-none mb-1">{interaction.type_display}</span>
-                                            <span className="text-sm font-bold text-slate-900 font-serif">by {interaction.staff_details?.first_name || 'System'}</span>
+                                            <span className="text-xs font-semibold text-slate-400 leading-none mb-1">{interaction.type_display}</span>
+                                            <span className="text-sm font-bold text-slate-900">by {interaction.staff_details?.first_name || 'System'}</span>
                                         </div>
-                                        <span className="text-[9px] font-bold text-slate-300 uppercase tracking-tighter">
+                                        <span className="text-[11px] font-bold text-slate-300 tracking-tight">
                                             {new Date(interaction.timestamp).toLocaleString([], { dateStyle: 'medium', timeStyle: 'short' })}
                                         </span>
                                     </div>

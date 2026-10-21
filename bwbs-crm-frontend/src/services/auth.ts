@@ -1,45 +1,22 @@
-import api, { API_BASE_URL } from './api';
+import api, { API_BASE_URL } from '../api/axiosInstance';
 import axios from 'axios';
-import { getAccessToken, setAccessToken, setUser, getUser, clearAuth, type StoredUser } from './authStore';
+import { getAccessToken, setAccessToken, setUser, getUser, clearAuth } from './authStore';
+import { API_ENDPOINTS } from '../api/endpoints';
+import { 
+    type User, type Branch, type LoginResponse, 
+    BRANCH_SWITCHING_ROLES 
+} from '../types';
 
 // ============================================================================
-// AUTH SERVICE - BWBS Education CRM
+// AUTH SERVICE - Education Consultancy ERP
 // ============================================================================
 
-interface User {
-    id: string;
-    email: string;
-    first_name: string;
-    last_name: string;
-    role: string;
-    is_superuser?: boolean;
-    branch?: string;
-    branch_details?: {
-        id: string;
-        name: string;
-        code: string;
-        country?: string;
-    };
-}
-
-export interface Branch {
-    id: string;
-    name: string;
-    code: string;
-    country?: string;
-}
-
-// SimpleJWT returns { access } and sets refresh in httpOnly cookie
-interface LoginResponse {
-    access: string;
-}
-
-const canSwitchBranchRole = (role?: string) =>
-    role === 'SUPER_ADMIN' || role === 'AUDITOR' || role === 'COUNTRY_MANAGER';
+const canSwitchBranchRole = (role?: string) => 
+    role && BRANCH_SWITCHING_ROLES.includes(role as any);
 
 const fetchCurrentUser = async (): Promise<User> => {
-    const response = await api.get<User>('/users/me/');
-    setUser(response.data as StoredUser);
+    const response = await api.get<User>(API_ENDPOINTS.USERS.ME);
+    setUser(response.data);
     return response.data;
 };
 
@@ -48,7 +25,7 @@ const fetchCurrentUser = async (): Promise<User> => {
 // ============================================================================
 export const login = async (email: string, password: string): Promise<LoginResponse> => {
     try {
-        const response = await api.post<LoginResponse>('/auth/login/', {
+        const response = await api.post<LoginResponse>(API_ENDPOINTS.AUTH.LOGIN, {
             email,
             password,
         });
@@ -87,7 +64,7 @@ export const login = async (email: string, password: string): Promise<LoginRespo
 // ============================================================================
 export const logout = async (): Promise<void> => {
     try {
-        await api.post('/auth/logout/', {});
+        await api.post(API_ENDPOINTS.AUTH.LOGOUT, {});
     } catch {
         // Ignore logout errors; proceed to clear local state
     } finally {
@@ -102,7 +79,7 @@ export const logout = async (): Promise<void> => {
 // GET CURRENT USER - Retrieve stored user data
 // ============================================================================
 export const getCurrentUser = (): User | null => {
-    return getUser() as User | null;
+    return getUser();
 };
 
 // ============================================================================
@@ -118,7 +95,7 @@ export const isAuthenticated = (): boolean => {
 export const refreshAccessToken = async (): Promise<string | null> => {
     try {
         const response = await axios.post<{ access: string }>(
-            `${API_BASE_URL}/auth/refresh/`,
+            `${API_BASE_URL}${API_ENDPOINTS.AUTH.REFRESH}`,
             {},
             { withCredentials: true }
         );
@@ -140,7 +117,7 @@ export const refreshAccessToken = async (): Promise<string | null> => {
 // ============================================================================
 export const getBranches = async (): Promise<Branch[]> => {
     try {
-        const response = await api.get<{ results?: Branch[] }>('/branches/');
+        const response = await api.get<{ results?: Branch[] }>(API_ENDPOINTS.BRANCHES.LIST);
         // Handle pagination if results key exists
         if (response.data.results) {
             return response.data.results;
@@ -161,8 +138,8 @@ export const getBranches = async (): Promise<Branch[]> => {
 // UPDATE PROFILE - Update current user details
 // ============================================================================
 export const updateProfile = async (data: Partial<User>): Promise<User> => {
-    const response = await api.patch<User>('/users/me/', data);
-    setUser(response.data as StoredUser);
+    const response = await api.patch<User>(API_ENDPOINTS.USERS.ME, data);
+    setUser(response.data);
     return response.data;
 };
 
@@ -170,7 +147,7 @@ export const updateProfile = async (data: Partial<User>): Promise<User> => {
 // CHANGE PASSWORD - Secure password update
 // ============================================================================
 export const changePassword = async (data: Record<string, string>): Promise<void> => {
-    await api.post('/users/change-password/', data);
+    await api.post(API_ENDPOINTS.USERS.CHANGE_PASSWORD, data);
 };
 
 export default {
@@ -185,3 +162,4 @@ export default {
 };
 
 export { fetchCurrentUser };
+

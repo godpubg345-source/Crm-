@@ -1,7 +1,7 @@
 import api from './api';
 
 // ============================================================================
-// FINANCE SERVICE - BWBS Education CRM
+// FINANCE SERVICE - Education Consultancy ERP
 // ============================================================================
 
 export interface Transaction {

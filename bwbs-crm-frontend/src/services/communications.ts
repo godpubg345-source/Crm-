@@ -1,7 +1,7 @@
 import api from './api';
 
 // ============================================================================
-// COMMUNICATIONS SERVICE - BWBS Education CRM
+// COMMUNICATIONS SERVICE - Education Consultancy ERP
 // ============================================================================
 
 export type CommunicationType = 'CALL' | 'EMAIL' | 'SMS' | 'MEETING' | 'WHATSAPP' | 'OTHER';

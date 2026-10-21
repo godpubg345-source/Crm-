@@ -1,7 +1,7 @@
 import api from './api';
 
 // ============================================================================
-// UNIVERSITIES SERVICE - BWBS Education CRM
+// UNIVERSITIES SERVICE - Education Consultancy ERP
 // ============================================================================
 
 export interface University {
@@ -13,6 +13,7 @@ export interface University {
     website?: string;
     logo_url?: string;
     is_active?: boolean;
+    is_partner?: boolean;
 }
 
 export type CourseLevel = 'FOUNDATION' | 'UG' | 'PG' | 'PHD' | 'PRE_MASTERS' | 'DIPLOMA';

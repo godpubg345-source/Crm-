@@ -1,7 +1,7 @@
 import api from './api';
 
 // ============================================================================
-// REVIEWS SERVICE - BWBS Education CRM
+// REVIEWS SERVICE - Education Consultancy ERP
 // ============================================================================
 
 export type ReviewStatus = 'PENDING' | 'ASSIGNED' | 'IN_REVIEW' | 'APPROVED' | 'REJECTED';

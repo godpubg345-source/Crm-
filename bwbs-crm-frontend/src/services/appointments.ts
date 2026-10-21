@@ -1,7 +1,7 @@
 import api from './api';
 
 // ============================================================================
-// APPOINTMENTS SERVICE - BWBS Education CRM
+// APPOINTMENTS SERVICE - Education Consultancy ERP
 // ============================================================================
 
 export type AppointmentStatus = 'SCHEDULED' | 'COMPLETED' | 'CANCELLED' | 'NO_SHOW';

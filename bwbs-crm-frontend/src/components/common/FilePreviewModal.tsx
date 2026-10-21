@@ -26,17 +26,17 @@ const FilePreviewModal = ({ isOpen, onClose, fileUrl, fileName, fileType }: File
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
             {/* Backdrop */}
             <div
-                className="absolute inset-0 bg-slate-900/80 backdrop-blur-sm animate-fade-in"
+                className="absolute inset-0 bg-slate-900/80 animate-fade-in"
                 onClick={onClose}
             />
 
             {/* Modal Content */}
-            <div className="bg-white rounded-[2rem] w-full max-w-5xl h-[85vh] shadow-2xl relative z-50 flex flex-col overflow-hidden animate-zoom-in">
+            <div className="bg-white rounded-2xl w-full max-w-5xl h-[85vh] shadow-sm relative z-50 flex flex-col overflow-hidden animate-zoom-in">
 
                 {/* Header */}
                 <div className="flex items-center justify-between px-8 py-5 border-b border-slate-100 bg-white">
                     <div className="flex items-center gap-4">
-                        <div className="w-10 h-10 rounded-xl bg-[#AD03DE]/5 flex items-center justify-center text-[#AD03DE]">
+                        <div className="w-10 h-10 rounded-xl bg-[#7c3aed]/5 flex items-center justify-center text-[#7c3aed]">
                             {isPdf ? (
                                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
@@ -51,7 +51,7 @@ const FilePreviewModal = ({ isOpen, onClose, fileUrl, fileName, fileType }: File
                             <h3 className="text-lg font-bold text-slate-900 truncate max-w-md">{fileName}</h3>
                             <button
                                 onClick={() => window.open(fileUrl, '_blank')}
-                                className="text-xs font-medium text-[#AD03DE] hover:underline"
+                                className="text-xs font-medium text-[#7c3aed] hover:underline"
                             >
                                 Open in New Tab
                             </button>
@@ -84,7 +84,7 @@ const FilePreviewModal = ({ isOpen, onClose, fileUrl, fileName, fileType }: File
                 <div className="flex-1 bg-slate-50 relative overflow-hidden flex items-center justify-center p-4">
                     {isLoading && (
                         <div className="absolute inset-0 flex items-center justify-center z-10 bg-slate-50">
-                            <div className="w-10 h-10 border-4 border-[#AD03DE]/30 border-t-[#AD03DE] rounded-full animate-spin" />
+                            <div className="w-10 h-10 border-4 border-[#7c3aed]/30 border-t-[#7c3aed] rounded-full animate-spin" />
                         </div>
                     )}
 
@@ -103,8 +103,8 @@ const FilePreviewModal = ({ isOpen, onClose, fileUrl, fileName, fileType }: File
                             onLoad={() => setIsLoading(false)}
                         />
                     ) : (
-                        <div className="text-center p-10">
-                            <div className="w-16 h-16 bg-slate-100 rounded-2xl flex items-center justify-center mx-auto mb-4 text-slate-400">
+                        <div className="text-center p-6">
+                            <div className="w-10 h-10 bg-slate-100 rounded-lg flex items-center justify-center mx-auto mb-4 text-slate-400">
                                 <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                                 </svg>
@@ -113,7 +113,7 @@ const FilePreviewModal = ({ isOpen, onClose, fileUrl, fileName, fileType }: File
                             <a
                                 href={fileUrl}
                                 download={fileName}
-                                className="inline-block mt-4 px-6 py-2 bg-[#AD03DE] text-white text-sm font-bold rounded-xl hover:bg-[#9302bb] transition-colors"
+                                className="inline-block mt-4 px-6 py-2 bg-[#7c3aed] text-white text-sm font-bold rounded-xl hover:bg-[#9302bb] transition-colors"
                             >
                                 Download File
                             </a>

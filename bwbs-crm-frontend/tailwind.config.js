@@ -7,7 +7,7 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['"Outfit"', 'sans-serif'],
+                sans: ['"Inter"', 'system-ui', 'sans-serif'],
                 serif: ['"Cormorant Garamond"', 'serif'],
             },
             colors: {

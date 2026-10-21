@@ -10,6 +10,7 @@ https://docs.djangoproject.com/en/6.0/topics/settings/
 
 
 import os
+import sys
 from decimal import Decimal
 from pathlib import Path
 import environ
@@ -40,7 +41,9 @@ PAYROLL_TAX_RATE = Decimal(env('PAYROLL_TAX_RATE', default='0.20'))
 # -----------------------------------------------------------------------------
 # Security Hardening (enabled automatically when DEBUG=False)
 # -----------------------------------------------------------------------------
-if not DEBUG:
+IS_TESTING = any(arg == 'test' for arg in sys.argv)
+
+if not DEBUG and not IS_TESTING:
     SECURE_SSL_REDIRECT = True
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
@@ -70,33 +73,58 @@ INSTALLED_APPS = [
     'corsheaders',
     'django_filters',
     'rest_framework_simplejwt.token_blacklist',
+    'drf_spectacular',
+
+    # Local apps - Domain Driven Structure
     
-    # Local apps
-    'core',
-    'audit',
-    'accounts',
-    'branches',
-    'students',
-    'applications',
-    'visas',
-    'finance',
-    'tasks',
-    'universities',
-    'requirements',
-    'magic_links',
-    'communications',
-    'reviews',
-    'compliance',
-    'messaging',
-    'campaigns',
-    'automation',
-    'analytics',
-    'governance',
-    'operations',
-    'portal',
-    'appointments',
-    'resources',
+    # Identity & Access
+    'apps.identity.accounts',
+    'apps.identity.audit',
+    
+    # CRM & Core Data
+    'apps.crm.students',
+    'apps.crm.applications',
+    
+    # Operations
+    'apps.operations.branches',
+    'apps.operations.finance',
+    'apps.operations.tasks',
+    'apps.operations.governance',
+    'apps.operations.operations',
+    
+    # Engagement & Marketing
+    'apps.engagement.campaigns',
+    'apps.engagement.communications',
+    'apps.engagement.messaging',
+    'apps.engagement.appointments',
+    'apps.engagement.reviews',
+    
+    # External Partners
+    'apps.partners.universities',
+    
+    # Platform & Utilities
+    'apps.platform.core',
+    'apps.platform.analytics',
+    'apps.platform.automation',
+    'apps.platform.magic_links',
+    'apps.platform.portal',
+    'apps.platform.resources',
+    'apps.platform.data',
+    'apps.platform.extras',
+    'apps.platform.requirements',
 ]
+
+# ---------------------------------------------------------------------------
+# Immigration Suite — SEPARATE PRODUCT, physically kept in /immigration/
+# (visas + compliance apps). Mounted only when enabled so the Education
+# Consultancy ERP can be sold standalone.
+# ---------------------------------------------------------------------------
+ENABLE_IMMIGRATION_MODULE = env.bool('ENABLE_IMMIGRATION_MODULE', True)
+if ENABLE_IMMIGRATION_MODULE:
+    INSTALLED_APPS += [
+        'immigration.visas',
+        'immigration.compliance',
+    ]
 
 USE_S3 = env.bool('USE_S3', False)
 if USE_S3:
@@ -109,7 +137,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'branches.middleware.BranchMiddleware',  # Branch Context
+    'apps.operations.branches.middleware.BranchMiddleware',  # Branch Context
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
@@ -191,7 +219,7 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
     {
-        'NAME': 'accounts.validators.PasswordComplexityValidator',
+        'NAME': 'apps.identity.accounts.validators.PasswordComplexityValidator',
     },
 ]
 
@@ -221,15 +249,15 @@ ENABLE_CELERY_BEAT = env.bool('ENABLE_CELERY_BEAT', False)
 if ENABLE_CELERY_BEAT:
     CELERY_BEAT_SCHEDULE = {
         'escalate-overdue-tasks-hourly': {
-            'task': 'automation.tasks.escalate_overdue_tasks',
+            'task': 'apps.platform.automation.tasks.escalate_overdue_tasks',
             'schedule': 60 * 60,
         },
         'create-appointment-reminders-every-15m': {
-            'task': 'appointments.tasks.create_appointment_reminders',
+            'task': 'apps.engagement.appointments.tasks.create_appointment_reminders',
             'schedule': 15 * 60,
         },
         'check-document-expiries-daily': {
-            'task': 'core.tasks.check_document_expiries',
+            'task': 'apps.platform.core.tasks.check_document_expiries',
             'schedule': 24 * 60 * 60,  # Once every 24 hours
         },
     }
@@ -288,7 +316,19 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 20,
     # Custom exception handler for standardized error responses
-    'EXCEPTION_HANDLER': 'core.exception_handler.custom_exception_handler',
+    'EXCEPTION_HANDLER': 'apps.platform.core.exception_handler.custom_exception_handler',
+    # OpenAPI schema generation
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+# DRF-Spectacular Settings (Swagger/OpenAPI)
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Education Consultancy ERP API',
+    'DESCRIPTION': 'Unified API for Admin, Employee, Student, and CEO portals.',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    'COMPONENT_SPLIT_REQUEST': True,
+    'SCHEMA_PATH_PREFIX': r'/api/v1/',
 }
 
 

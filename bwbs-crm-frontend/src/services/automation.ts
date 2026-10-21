@@ -1,7 +1,7 @@
 import api from './api';
 
 // ============================================================================
-// AUTOMATION SERVICE - BWBS Education CRM
+// AUTOMATION SERVICE - Education Consultancy ERP
 // ============================================================================
 
 export type AutomationTrigger = 'LEAD_CREATED' | 'STUDENT_CREATED' | 'APPLICATION_STATUS_CHANGED' | 'VISA_STATUS_CHANGED' | 'TASK_OVERDUE' | 'DOCUMENT_UPLOADED';

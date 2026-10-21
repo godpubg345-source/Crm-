@@ -1,7 +1,7 @@
 import api from './api';
 
 // ============================================================================
-// USERS SERVICE - BWBS Education CRM
+// USERS SERVICE - Education Consultancy ERP
 // ============================================================================
 
 export interface EmployeePerformance {
@@ -167,6 +167,11 @@ export const getCounselors = async (): Promise<UserListItem[]> => {
     return getUsers('COUNSELOR');
 };
 
+export const getUserById = async (userId: string): Promise<UserListItem> => {
+    const response = await api.get(`/users/${userId}/`);
+    return response.data;
+};
+
 export const getEmployeePerformance = async (): Promise<EmployeePerformance> => {
     const response = await api.get('/users/performance/');
     return response.data;
@@ -194,7 +199,11 @@ export const updateUser = async (userId: string, data: any): Promise<UserListIte
 };
 
 export const deleteUser = async (userId: string): Promise<void> => {
-    await api.delete(`/users/${userId}//`);
+    await api.delete(`/users/${userId}/`);
+};
+
+export const updateSpecialties = async (userId: string, specialties: string[]): Promise<void> => {
+    await api.patch(`/users/${userId}/update_specialties/`, { specialties });
 };
 
 export const generatePayroll = async (userId: string, month: string): Promise<EmployeePayroll> => {
@@ -253,6 +262,39 @@ export const rejectLeave = async (id: string, notes?: string): Promise<void> => 
     await api.post(`/leave-requests/${id}/reject/`, { notes });
 };
 
+export const clockIn = async (branchId: string, notes?: string) => {
+    const response = await api.post('/attendance/', {
+        branch: branchId,
+        date: new Date().toISOString().split('T')[0],
+        clock_in: new Date().toISOString(),
+        notes
+    });
+    return response.data;
+};
+
+export const clockOut = async (logId: string) => {
+    const response = await api.patch(`/attendance/${logId}/`, {
+        clock_out: new Date().toISOString()
+    });
+    return response.data;
+};
+
+export const createLeaveRequest = async (data: {
+    branch: string;
+    leave_type: string;
+    start_date: string;
+    end_date: string;
+    reason: string;
+}) => {
+    const response = await api.post('/leave-requests/', data);
+    return response.data;
+};
+
+export const getMyProfile = async (): Promise<UserListItem> => {
+    const response = await api.get('/users/me/');
+    return response.data;
+};
+
 export default {
     getUsers,
     getCounselors,
@@ -270,4 +312,8 @@ export default {
     getLeaveRequests,
     approveLeave,
     rejectLeave,
+    clockIn,
+    clockOut,
+    createLeaveRequest,
+    getMyProfile,
 };

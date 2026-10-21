@@ -41,12 +41,12 @@ const GlobalNetworkGlobe = ({ branches }: GlobalNetworkGlobeProps) => {
             lat: Number(b.latitude),
             lng: Number(b.longitude),
             size: b.is_hq ? 0.3 : 0.1,
-            color: b.is_hq ? '#AD03DE' : '#6366f1',
+            color: b.is_hq ? '#7c3aed' : '#6366f1',
             label: b.name
         }));
 
     return (
-        <div id="globe-container" className="w-full h-full relative overflow-hidden rounded-[3rem] bg-slate-900 shadow-2xl">
+        <div id="globe-container" className="w-full h-full relative overflow-hidden rounded-2xl bg-slate-900 shadow-sm">
             <Globe
                 ref={globeEl}
                 width={dimensions.width}
@@ -67,10 +67,10 @@ const GlobalNetworkGlobe = ({ branches }: GlobalNetworkGlobeProps) => {
             />
             {/* Overlay */}
             <div className="absolute top-10 left-10 z-10">
-                <p className="text-[10px] font-black text-white/40 uppercase tracking-[0.5em] mb-2">Live Network Status</p>
+                <p className="text-xs font-semibold text-white/40 mb-2">Branches</p>
                 <div className="flex items-center gap-2">
                     <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                    <p className="text-xl font-serif font-bold text-white tracking-tight">Vanguard Visualization</p>
+                    <p className="text-xl font-bold text-white tracking-tight">Map</p>
                 </div>
             </div>
         </div>

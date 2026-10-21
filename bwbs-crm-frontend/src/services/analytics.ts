@@ -1,7 +1,7 @@
 import api from './api';
 
 // ============================================================================
-// ANALYTICS SERVICE - BWBS Education CRM
+// ANALYTICS SERVICE - Education Consultancy ERP
 // ============================================================================
 
 export interface BranchPerformance {
@@ -65,6 +65,10 @@ interface PaginatedResponse<T> {
 export interface AnalyticsQuery {
     branch?: string;
     period?: string;
+    /** Backend window size in days (branch_performance, counselor_kpis) */
+    period_days?: number;
+    /** Backend look-back/forecast horizon in months (forecast) */
+    months?: number;
     start_date?: string;
     end_date?: string;
     page?: number;
@@ -75,6 +79,8 @@ export const getBranchPerformance = async (params: AnalyticsQuery = {}): Promise
     const qs = new URLSearchParams();
     if (params.branch) qs.append('branch', params.branch);
     if (params.period) qs.append('period', params.period);
+    if (params.period_days) qs.append('period_days', String(params.period_days));
+    if (params.months) qs.append('months', String(params.months));
     if (params.start_date) qs.append('start_date', params.start_date);
     if (params.end_date) qs.append('end_date', params.end_date);
     const response = await api.get(`/analytics/reports/branch_performance/?${qs.toString()}`);
@@ -86,6 +92,8 @@ export const getCounselorKpis = async (params: AnalyticsQuery = {}): Promise<any
     const qs = new URLSearchParams();
     if (params.branch) qs.append('branch', params.branch);
     if (params.period) qs.append('period', params.period);
+    if (params.period_days) qs.append('period_days', String(params.period_days));
+    if (params.months) qs.append('months', String(params.months));
     const response = await api.get(`/analytics/reports/counselor_kpis/?${qs.toString()}`);
     return response.data;
 };
@@ -95,6 +103,8 @@ export const getForecast = async (params: AnalyticsQuery = {}): Promise<any> => 
     const qs = new URLSearchParams();
     if (params.branch) qs.append('branch', params.branch);
     if (params.period) qs.append('period', params.period);
+    if (params.period_days) qs.append('period_days', String(params.period_days));
+    if (params.months) qs.append('months', String(params.months));
     const response = await api.get(`/analytics/reports/forecast/?${qs.toString()}`);
     return response.data;
 };

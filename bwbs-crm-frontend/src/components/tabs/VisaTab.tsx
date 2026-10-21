@@ -10,7 +10,7 @@ import {
 import SmartChecklist from '../applications/SmartChecklist';
 
 // ============================================================================
-// VISA TAB COMPONENT - BWBS Education CRM
+// VISA TAB COMPONENT - Education Consultancy ERP
 // ============================================================================
 
 interface VisaTabProps {
@@ -37,8 +37,8 @@ const VisaTab = ({ studentId, nationality }: VisaTabProps) => {
     if (isLoading) {
         return (
             <div className="animate-pulse space-y-6">
-                <div className="h-48 bg-slate-50 rounded-3xl border border-border" />
-                <div className="h-96 bg-slate-50 rounded-3xl border border-border" />
+                <div className="h-48 bg-slate-50 rounded-2xl border border-border" />
+                <div className="h-96 bg-slate-50 rounded-2xl border border-border" />
             </div>
         );
     }
@@ -60,27 +60,27 @@ const VisaTab = ({ studentId, nationality }: VisaTabProps) => {
             <div className="space-y-8">
                 <SmartChecklist studentId={studentId} destinationCountry="UK" studentNationality={nationality || 'Unknown'} />
 
-                <div className="text-center py-20 bg-slate-50/30 rounded-[2.5rem] border-2 border-dashed border-slate-100 flex flex-col items-center">
-                    <div className="w-24 h-24 rounded-3xl bg-white flex items-center justify-center mb-8 border border-slate-100 text-[#AD03DE] shadow-xl group hover:rotate-6 transition-all duration-700">
+                <div className="text-center py-12 bg-slate-50/30 rounded-2xl border-2 border-dashed border-slate-100 flex flex-col items-center">
+                    <div className="w-24 h-24 rounded-xl bg-white flex items-center justify-center mb-8 border border-slate-200 text-[#7c3aed] group transition-all duration-200">
                         <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                         </svg>
                     </div>
-                    <h3 className="text-2xl font-serif font-bold text-slate-900 mb-3">Immigration Roadmap Required</h3>
-                    <p className="text-slate-500 font-medium mb-10 max-w-sm mx-auto leading-relaxed">
+                    <h3 className="text-2xl font-bold text-slate-900 mb-3">No visa case yet</h3>
+                    <p className="text-slate-500 font-medium mb-6 max-w-sm mx-auto leading-relaxed">
                         The scholar's UK visa journey has not been initialized. Establish a strategic tracker to monitor CAS induction and biometric milestones.
                     </p>
                     <button
                         onClick={() => createMutation.mutate({ student: studentId })}
                         disabled={createMutation.isPending}
-                        className="inline-flex items-center gap-3 px-10 py-4 bg-[#AD03DE] hover:bg-[#9302bb] text-white font-bold rounded-2xl transition-all shadow-xl shadow-[#AD03DE]/30 disabled:opacity-50 active:scale-95 group"
+                        className="inline-flex items-center gap-3 px-4 py-2.5 bg-violet-600 hover:bg-[#9302bb] text-white font-bold rounded-lg transition-all shadow-sm disabled:opacity-50 group"
                     >
                         {createMutation.isPending ? 'Initializing...' : (
                             <>
                                 <svg className="w-5 h-5 group-hover:animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 4v16m8-8H4" />
                                 </svg>
-                                Start Visa Induction
+                                Start visa case
                             </>
                         )}
                     </button>
@@ -170,25 +170,25 @@ const VisaTrackerForm = ({ visaCase, studentId }: VisaTrackerFormProps) => {
     };
 
     return (
-        <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
+        <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-200">
             {/* Header with Status */}
-            <div className="flex items-center justify-between bg-white p-6 rounded-2xl border border-border shadow-sm">
+            <div className="flex items-center justify-between bg-white p-6 rounded-xl border border-border">
                 <div className="flex items-center gap-5">
-                    <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#AD03DE] via-brand-600 to-brand-800 flex items-center justify-center text-white shadow-xl shadow-[#AD03DE]/20">
+                    <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#7c3aed] via-brand-600 to-brand-800 flex items-center justify-center text-white shadow-sm">
                         <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10.5 19l-1.5 3-.5-3.5L3 15l15-9 3 3-9 15-2.5-5z" />
                         </svg>
                     </div>
                     <div>
-                        <h3 className="text-xl font-serif font-bold text-slate-900">Visa Milestone Tracker</h3>
-                        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-0.5">
+                        <h3 className="text-xl font-bold text-slate-900">Visa progress</h3>
+                        <p className="text-xs text-slate-500 mt-0.5">
                             Case Opened {new Date(visaCase.created_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
                         </p>
                     </div>
                 </div>
                 <div className="flex flex-col items-end gap-1">
-                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mr-1">Current Verdict</span>
-                    <span className={`px-4 py-1.5 rounded-xl border text-xs font-bold uppercase tracking-widest shadow-sm ${visaCase.decision_status === 'APPROVED' ? 'bg-emerald-50 text-emerald-600 border-emerald-100' :
+                    <span className="text-xs text-slate-500 mr-1">Decision</span>
+                    <span className={`px-4 py-1.5 rounded-xl border text-xs font-bold shadow-sm ${visaCase.decision_status === 'APPROVED' ? 'bg-emerald-50 text-emerald-600 border-emerald-100' :
                         visaCase.decision_status === 'REJECTED' ? 'bg-rose-50 text-rose-600 border-rose-100' :
                             'bg-amber-50 text-amber-600 border-amber-100'
                         }`}>
@@ -200,59 +200,59 @@ const VisaTrackerForm = ({ visaCase, studentId }: VisaTrackerFormProps) => {
             {/* Form Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {/* CAS Number */}
-                <div className="bg-white p-6 rounded-2xl border border-border shadow-sm group hover:border-[#AD03DE]/30 transition-all">
-                    <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-3 ml-1">UK CAS Identifier</label>
+                <div className="bg-white p-6 rounded-xl border border-border group hover:border-[#7c3aed]/30 transition-all">
+                    <label className="block text-xs text-slate-500 mb-3 ml-1">CAS number</label>
                     <input
                         type="text"
                         value={formData.cas_number || ''}
                         onChange={(e) => handleInputChange('cas_number', e.target.value)}
                         placeholder="E.g., E4G4BK2E123456"
-                        className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl text-slate-900 font-mono font-bold text-sm placeholder-slate-300 focus:outline-none focus:ring-2 focus:ring-[#AD03DE]/30 focus:border-[#AD03DE] transition-all shadow-inner"
+                        className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl text-slate-900 font-mono font-bold text-sm placeholder-slate-300 focus:outline-none focus:ring-2 focus:ring-[#7c3aed]/30 focus:border-[#7c3aed] transition-all"
                     />
                 </div>
 
                 {/* VFS Appointment Date */}
-                <div className="bg-white p-6 rounded-2xl border border-border shadow-sm group hover:border-[#AD03DE]/30 transition-all">
-                    <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-3 ml-1">VFS Appointment Schedule</label>
+                <div className="bg-white p-6 rounded-xl border border-border group hover:border-[#7c3aed]/30 transition-all">
+                    <label className="block text-xs text-slate-500 mb-3 ml-1">VFS appointment</label>
                     <input
                         type="datetime-local"
                         value={formData.vfs_date || ''}
                         onChange={(e) => handleInputChange('vfs_date', e.target.value)}
-                        className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl text-slate-900 font-bold text-sm focus:outline-none focus:ring-2 focus:ring-[#AD03DE]/30 focus:border-[#AD03DE] transition-all shadow-inner"
+                        className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl text-slate-900 font-bold text-sm focus:outline-none focus:ring-2 focus:ring-[#7c3aed]/30 focus:border-[#7c3aed] transition-all"
                     />
                 </div>
 
                 {/* IHS Reference */}
-                <div className="bg-white p-6 rounded-2xl border border-border shadow-sm group hover:border-[#AD03DE]/30 transition-all">
-                    <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-3 ml-1">IHS Reference Number</label>
+                <div className="bg-white p-6 rounded-xl border border-border group hover:border-[#7c3aed]/30 transition-all">
+                    <label className="block text-xs text-slate-500 mb-3 ml-1">IHS Reference Number</label>
                     <input
                         type="text"
                         value={formData.ihs_reference || ''}
                         onChange={(e) => handleInputChange('ihs_reference', e.target.value)}
                         placeholder="E.g., IHS123456789"
-                        className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl text-slate-900 font-mono font-bold text-sm placeholder-slate-300 focus:outline-none focus:ring-2 focus:ring-[#AD03DE]/30 focus:border-[#AD03DE] transition-all shadow-inner"
+                        className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl text-slate-900 font-mono font-bold text-sm placeholder-slate-300 focus:outline-none focus:ring-2 focus:ring-[#7c3aed]/30 focus:border-[#7c3aed] transition-all"
                     />
                 </div>
 
                 {/* VFS Location */}
-                <div className="bg-white p-6 rounded-2xl border border-border shadow-sm group hover:border-[#AD03DE]/30 transition-all">
-                    <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-3 ml-1">Processing Center Location</label>
+                <div className="bg-white p-6 rounded-xl border border-border group hover:border-[#7c3aed]/30 transition-all">
+                    <label className="block text-xs text-slate-500 mb-3 ml-1">VFS centre</label>
                     <input
                         type="text"
                         value={formData.vfs_location || ''}
                         onChange={(e) => handleInputChange('vfs_location', e.target.value)}
                         placeholder="Enter City / Center Code"
-                        className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl text-slate-900 font-bold text-sm placeholder-slate-300 focus:outline-none focus:ring-2 focus:ring-[#AD03DE]/30 focus:border-[#AD03DE] transition-all shadow-inner"
+                        className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl text-slate-900 font-bold text-sm placeholder-slate-300 focus:outline-none focus:ring-2 focus:ring-[#7c3aed]/30 focus:border-[#7c3aed] transition-all"
                     />
                 </div>
 
                 {/* Visa Decision Status */}
-                <div className="bg-white p-6 rounded-2xl border border-border shadow-sm group hover:border-[#AD03DE]/30 transition-all">
-                    <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-3 ml-1">Official Decision State</label>
+                <div className="bg-white p-6 rounded-xl border border-border group hover:border-[#7c3aed]/30 transition-all">
+                    <label className="block text-xs text-slate-500 mb-3 ml-1">Decision</label>
                     <select
                         value={formData.decision_status}
                         onChange={(e) => handleInputChange('decision_status', e.target.value)}
-                        className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl text-slate-900 font-bold text-sm focus:outline-none focus:ring-2 focus:ring-[#AD03DE]/30 focus:border-[#AD03DE] transition-all shadow-inner"
+                        className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl text-slate-900 font-bold text-sm focus:outline-none focus:ring-2 focus:ring-[#7c3aed]/30 focus:border-[#7c3aed] transition-all"
                     >
                         <option value="PENDING">Pending Decision</option>
                         <option value="APPROVED">Visa Granted</option>
@@ -262,15 +262,14 @@ const VisaTrackerForm = ({ visaCase, studentId }: VisaTrackerFormProps) => {
             </div>
 
             {/* Checkboxes */}
-            <div className="bg-slate-50/50 rounded-3xl p-8 border border-slate-100 relative overflow-hidden group">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 rounded-full blur-3xl -mr-16 -mt-16 group-hover:bg-emerald-500/10 transition-colors" />
-                <h4 className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] mb-8 flex items-center gap-2">
+            <div className="bg-slate-50/50 rounded-2xl p-6 border border-slate-100 relative overflow-hidden group">
+                <h4 className="text-xs text-slate-500 mb-8 flex items-center gap-2">
                     <div className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-                    Process Verification Checklist
+                    Checklist
                 </h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
                     <CheckboxItem
-                        label="Biometrics Inducted"
+                        label="Biometrics done"
                         checked={formData.biometric_done || false}
                         onChange={(checked) => handleInputChange('biometric_done', checked)}
                     />
@@ -288,33 +287,33 @@ const VisaTrackerForm = ({ visaCase, studentId }: VisaTrackerFormProps) => {
             </div>
 
             {/* Notes */}
-            <div className="bg-white p-6 rounded-2xl border border-border shadow-sm">
-                <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-3 ml-1">Strategic Case Remarks</label>
+            <div className="bg-white p-6 rounded-xl border border-border">
+                <label className="block text-xs text-slate-500 mb-3 ml-1">Notes</label>
                 <textarea
                     value={formData.notes || ''}
                     onChange={(e) => handleInputChange('notes', e.target.value)}
-                    placeholder="Document subtle case details or officer remarks..."
+                    placeholder="Notes or officer remarks..."
                     rows={4}
-                    className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl text-slate-900 font-bold text-sm placeholder-slate-300 focus:outline-none focus:ring-2 focus:ring-[#AD03DE]/30 focus:border-[#AD03DE] transition-all shadow-inner resize-none font-serif font-bold"
+                    className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl text-slate-900 font-bold text-sm placeholder-slate-300 focus:outline-none focus:ring-2 focus:ring-[#7c3aed]/30 focus:border-[#7c3aed] transition-all resize-none"
                 />
             </div>
 
             {/* Save Button */}
             <div className="flex items-center justify-between pt-8 border-t border-slate-100">
-                <p className="text-[10px] font-bold text-slate-300 uppercase tracking-widest pl-2">
-                    {hasChanges ? 'Induction Updates Detected' : 'Dossier in Equilibrium'}
+                <p className="text-xs font-bold text-slate-300 pl-2">
+                    {hasChanges ? 'Unsaved changes' : 'All changes saved'}
                 </p>
                 <button
                     onClick={handleSave}
                     disabled={!hasChanges || updateMutation.isPending}
-                    className="inline-flex items-center gap-3 px-8 py-3.5 bg-slate-900 hover:bg-black text-white text-xs font-bold rounded-2xl transition-all shadow-xl shadow-slate-200 disabled:opacity-20 active:scale-95"
+                    className="inline-flex items-center gap-3 px-4 py-2.5 bg-violet-600 hover:bg-violet-700 text-white text-sm font-bold rounded-lg transition-all shadow-sm disabled:opacity-20"
                 >
                     {updateMutation.isPending ? 'Syncing...' : (
                         <>
                             <svg className="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                             </svg>
-                            Commit Case Updates
+                            Save
                         </>
                     )}
                 </button>
@@ -334,8 +333,8 @@ const CheckboxItem = ({ label, checked, onChange }: CheckboxItemProps) => (
     <label className="flex items-center gap-4 cursor-pointer group">
         <div
             className={`w-10 h-10 rounded-xl border flex items-center justify-center transition-all duration-500 ${checked
-                ? 'bg-emerald-50 border-emerald-200 text-emerald-600 shadow-inner'
-                : 'bg-white border-slate-100 group-hover:border-[#AD03DE]/30 group-hover:bg-[#AD03DE]/5 text-slate-200'
+                ? 'bg-emerald-50 border-emerald-200 text-emerald-600 '
+                : 'bg-white border-slate-100 group-hover:border-[#7c3aed]/30 group-hover:bg-[#7c3aed]/5 text-slate-200'
                 }`}
             onClick={() => onChange(!checked)}
         >
@@ -344,11 +343,11 @@ const CheckboxItem = ({ label, checked, onChange }: CheckboxItemProps) => (
             </svg>
         </div>
         <div className="flex-1 min-w-0">
-            <span className={`text-[10px] uppercase tracking-widest block transition-colors duration-500 font-bold ${checked ? 'text-emerald-600' : 'text-slate-400 group-hover:text-[#AD03DE]'}`}>
+            <span className={`text-xs block transition-colors duration-500 font-bold ${checked ? 'text-emerald-600' : 'text-slate-400 group-hover:text-[#7c3aed]'}`}>
                 {label}
             </span>
-            <span className={`text-[9px] font-medium block transition-colors duration-500 ${checked ? 'text-emerald-600/60' : 'text-slate-300'}`}>
-                {checked ? 'Verified & Committed' : 'Induction Pending'}
+            <span className={`text-[11px] font-medium block transition-colors duration-500 ${checked ? 'text-emerald-600/60' : 'text-slate-300'}`}>
+                {checked ? 'Verified & Committed' : 'Not started'}
             </span>
         </div>
     </label>

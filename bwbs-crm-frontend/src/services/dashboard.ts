@@ -1,7 +1,7 @@
 import api from './api';
 
 // ============================================================================
-// DASHBOARD SERVICE - BWBS Education CRM
+// DASHBOARD SERVICE - Education Consultancy ERP
 // ============================================================================
 
 // User permission flags from backend RBAC
@@ -46,6 +46,8 @@ export interface DashboardStats {
     total_students: number;
     total_leads: number;
     active_applications: number;
+    total_applications: number;
+    offers_pending_deposit: number;
     pending_visas: number;
     visa_success_rate: number;
     new_leads_today: number;

@@ -15,49 +15,55 @@ export const Header = ({ setSidebarOpen }: HeaderProps) => {
         fetchBranches();
     }, [fetchBranches]);
 
-    // Simplistic title mapping (could be improved)
+    // Section name from the first segment after /admin
+    const SECTION_TITLES: Record<string, string> = {
+        dashboard: 'Dashboard',
+        leads: 'Leads',
+        students: 'Students',
+        applications: 'Applications',
+        universities: 'Universities',
+        finance: 'Finance',
+        team: 'Team & Branches',
+        agents: 'Agents',
+        settings: 'Settings',
+    };
+
     const getPageTitle = () => {
-        const path = location.pathname.split('/')[1];
-        if (!path || path === 'dashboard') return 'Executive Dashboard';
-        if (path === 'finder') return 'Discovery Hub';
-        if (path === 'visas') return 'Visa Management';
-        if (path === 'pipeline') return 'Application Pipeline';
-        if (path === 'finance') return 'Financial Intelligence';
-        return path.charAt(0).toUpperCase() + path.slice(1).replace('-', ' ');
+        const section = location.pathname.split('/')[2] || 'dashboard';
+        return SECTION_TITLES[section] ?? section.charAt(0).toUpperCase() + section.slice(1).replace('-', ' ');
     };
 
     return (
-        <header className="h-20 bg-gradient-to-r from-white/80 via-white/70 to-purple-50/50 backdrop-blur-2xl border-b border-slate-200/60 flex items-center px-6 lg:px-10 sticky top-0 z-30 transition-all duration-300 shadow-[0_1px_3px_rgba(173,3,222,0.03)]">
+        <header className="h-16 bg-white border-b border-slate-200 flex items-center gap-3 px-4 lg:px-8 sticky top-0 z-30">
             <button
                 onClick={() => setSidebarOpen(true)}
-                className="lg:hidden p-2.5 text-slate-400 hover:text-[#AD03DE] hover:bg-slate-50 rounded-xl transition-all active:scale-90"
+                aria-label="Open menu"
+                className="lg:hidden p-2 -ml-2 text-slate-500 hover:text-slate-900 hover:bg-slate-100 rounded-lg transition-colors"
             >
-                <Menu className="w-6 h-6" />
+                <Menu className="w-5 h-5" />
             </button>
 
-            <h1 className="text-2xl font-serif font-extrabold text-slate-900 ml-3 lg:ml-0 flex-1 tracking-tight">
+            <h1 className="text-lg font-semibold text-slate-900 flex-1 tracking-tight">
                 {getPageTitle()}
             </h1>
 
             {/* Branch Selector */}
             {canSwitchBranch && (
-                <div className="flex items-center gap-3 bg-white/50 px-4 py-2 rounded-2xl border border-slate-200/60 shadow-sm hover:border-[#AD03DE]/30 transition-all group">
-                    <div className="flex flex-col">
-                        <span className="hidden sm:inline text-[9px] font-extrabold text-slate-600 uppercase tracking-[0.2em] leading-none mb-1">Active Branch</span>
-                        <select
-                            value={selectedBranch}
-                            onChange={(e) => setSelectedBranch(e.target.value)}
-                            className="bg-transparent border-none text-slate-900 text-sm focus:ring-0 cursor-pointer font-extrabold p-0 leading-none h-auto"
-                        >
-                            <option value="" className="bg-white text-slate-900">Global View</option>
-                            {branches.map(branch => (
-                                <option key={branch.id} value={branch.id} className="bg-white text-slate-900">
-                                    {branch.name}
-                                </option>
-                            ))}
-                        </select>
-                    </div>
-                </div>
+                <label className="flex items-center gap-2 text-sm">
+                    <span className="hidden sm:inline text-slate-500">Branch</span>
+                    <select
+                        value={selectedBranch}
+                        onChange={(e) => setSelectedBranch(e.target.value)}
+                        className="h-9 max-w-[150px] sm:max-w-none rounded-lg border border-slate-200 bg-white px-3 pr-8 text-sm font-medium text-slate-900 focus:outline-none focus:ring-2 focus:ring-violet-500/30 focus:border-violet-500 cursor-pointer"
+                    >
+                        <option value="">All branches</option>
+                        {branches.map(branch => (
+                            <option key={branch.id} value={branch.id}>
+                                {branch.name}
+                            </option>
+                        ))}
+                    </select>
+                </label>
             )}
         </header>
     );

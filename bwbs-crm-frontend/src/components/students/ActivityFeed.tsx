@@ -79,7 +79,7 @@ const ActivityFeed = ({ studentId }: ActivityFeedProps) => {
         // Custom mapping for models
         if (log.model === 'Application') {
             icon = GraduationCap;
-            color = 'text-[#AD03DE]';
+            color = 'text-[#7c3aed]';
         } else if (log.model === 'VisaCase') {
             icon = Stamp;
             color = 'text-orange-500';
@@ -116,7 +116,7 @@ const ActivityFeed = ({ studentId }: ActivityFeedProps) => {
             color = 'text-slate-500';
         } else if (log.communication_type === 'MEETING') {
             icon = Calendar;
-            color = 'text-[#AD03DE]';
+            color = 'text-[#7c3aed]';
         }
 
         return {
@@ -148,17 +148,17 @@ const ActivityFeed = ({ studentId }: ActivityFeedProps) => {
 
     if (isLoading) {
         return (
-            <div className="flex flex-col items-center justify-center p-12 space-y-4">
+            <div className="flex flex-col items-center justify-center p-6 space-y-4">
                 <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin" />
-                <p className="text-sm font-medium text-slate-400 animate-pulse">Synchronizing activity streams...</p>
+                <p className="text-sm font-medium text-slate-400 animate-pulse">Loading activity...</p>
             </div>
         );
     }
 
     if (allActivities.length === 0) {
         return (
-            <div className="flex flex-col items-center justify-center p-12 text-center">
-                <div className="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center mb-4">
+            <div className="flex flex-col items-center justify-center p-6 text-center">
+                <div className="w-10 h-10 bg-slate-50 rounded-full flex items-center justify-center mb-4">
                     <Clock className="w-8 h-8 text-slate-200" />
                 </div>
                 <h3 className="text-sm font-bold text-slate-900">No activity logged yet</h3>
@@ -174,7 +174,7 @@ const ActivityFeed = ({ studentId }: ActivityFeedProps) => {
 
             <div className="space-y-8 relative">
                 {allActivities.map((activity, idx) => (
-                    <div key={activity.id} className="flex gap-6 animate-in fade-in slide-in-from-left-4 duration-500" style={{ animationDelay: `${idx * 50}ms` }}>
+                    <div key={activity.id} className="flex gap-6 animate-in fade-in slide-in-from-left-4 duration-200" style={{ animationDelay: `${idx * 50}ms` }}>
                         {/* Icon Node */}
                         <div className={`relative z-10 w-12 h-12 flex-shrink-0 rounded-full bg-white border border-slate-100 shadow-sm flex items-center justify-center ${activity.color}`}>
                             <activity.icon className="w-5 h-5" />
@@ -183,8 +183,8 @@ const ActivityFeed = ({ studentId }: ActivityFeedProps) => {
                         {/* Content */}
                         <div className="flex-1 pt-1.5 pb-2">
                             <div className="flex justify-between items-start mb-1">
-                                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{activity.subtitle}</span>
-                                <span className="text-[10px] font-bold text-slate-400">{formatRelativeTime(activity.timestamp)}</span>
+                                <span className="text-xs text-slate-500">{activity.subtitle}</span>
+                                <span className="text-xs text-slate-500">{formatRelativeTime(activity.timestamp)}</span>
                             </div>
                             <h4 className="text-sm font-bold text-slate-900">{activity.title}</h4>
                             <p className="text-xs text-slate-500 mt-1 leading-relaxed">
@@ -195,13 +195,13 @@ const ActivityFeed = ({ studentId }: ActivityFeedProps) => {
                             {activity.type === 'COMMUNICATION' && activity.metadata?.logged_by && (
                                 <div className="mt-2 flex items-center gap-1.5">
                                     <div className="w-1.5 h-1.5 rounded-full bg-slate-200" />
-                                    <span className="text-[10px] text-slate-400 font-medium">Logged by {activity.metadata.logged_by}</span>
+                                    <span className="text-xs text-slate-400 font-medium">Logged by {activity.metadata.logged_by}</span>
                                 </div>
                             )}
 
                             {activity.type === 'AUDIT' && activity.metadata && Object.keys(activity.metadata).length > 0 && (
                                 <div className="mt-2 p-2 bg-slate-50/50 rounded-lg border border-slate-100 inline-block">
-                                    <span className="text-[9px] font-mono text-slate-400 lowercase">
+                                    <span className="text-[11px] font-mono text-slate-400 lowercase">
                                         payload sync: {Object.keys(activity.metadata).length} attributes
                                     </span>
                                 </div>
@@ -213,7 +213,7 @@ const ActivityFeed = ({ studentId }: ActivityFeedProps) => {
                 {/* Status Indicator */}
                 <div className="flex items-center gap-2 pl-12 py-4">
                     <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                    <span className="text-[10px] font-bold text-slate-300 uppercase tracking-widest">Live Stream Active</span>
+                    <span className="text-xs font-bold text-slate-300">Up to date</span>
                 </div>
             </div>
         </div>

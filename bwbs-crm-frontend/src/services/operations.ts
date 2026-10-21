@@ -1,7 +1,7 @@
 import api from './api';
 
 // ============================================================================
-// OPERATIONS SERVICE - BWBS Education CRM
+// OPERATIONS SERVICE - Education Consultancy ERP
 // ============================================================================
 
 export type ContractStatus = 'ACTIVE' | 'EXPIRED' | 'TERMINATED';

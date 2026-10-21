@@ -1,0 +1,6 @@
+from django.apps import AppConfig
+
+
+class RequirementsConfig(AppConfig):
+    name = 'apps.platform.requirements'
+    label = 'requirements'

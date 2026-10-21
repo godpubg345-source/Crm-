@@ -1,7 +1,7 @@
 import api from './api';
 
 // ============================================================================
-// MESSAGING SERVICE - BWBS Education CRM
+// MESSAGING SERVICE - Education Consultancy ERP
 // ============================================================================
 
 export type MessageChannel = 'EMAIL' | 'SMS' | 'WHATSAPP';

@@ -70,14 +70,14 @@ const VoiceInteractionRecorder = ({ onRecordingComplete, onCancel }: VoiceIntera
                     <span className="text-sm font-bold font-mono text-white">
                         {isRecording ? formatDuration(duration) : '0:00'}
                     </span>
-                    {error && <span className="text-[10px] text-rose-400 font-bold">{error}</span>}
+                    {error && <span className="text-xs text-rose-400 font-bold">{error}</span>}
                 </div>
 
                 <div className="flex items-center gap-2">
                     {!isRecording ? (
                         <button
                             onClick={startRecording}
-                            className="w-10 h-10 rounded-full bg-[#AD03DE] hover:bg-[#9302bb] flex items-center justify-center text-white transition-all shadow-lg shadow-[#AD03DE]/30 active:scale-90"
+                            className="w-10 h-10 rounded-full bg-[#7c3aed] hover:bg-[#9302bb] flex items-center justify-center text-white transition-all shadow-sm"
                             title="Start Recording"
                         >
                             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -87,7 +87,7 @@ const VoiceInteractionRecorder = ({ onRecordingComplete, onCancel }: VoiceIntera
                     ) : (
                         <button
                             onClick={stopRecording}
-                            className="w-10 h-10 rounded-full bg-rose-500 hover:bg-rose-600 flex items-center justify-center text-white transition-all shadow-lg shadow-rose-500/30 active:scale-95 animate-pulse"
+                            className="w-10 h-10 rounded-full bg-rose-500 hover:bg-rose-600 flex items-center justify-center text-white transition-all shadow-sm animate-pulse"
                             title="Stop Recording"
                         >
                             <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -112,7 +112,7 @@ const VoiceInteractionRecorder = ({ onRecordingComplete, onCancel }: VoiceIntera
                     {[...Array(24)].map((_, i) => (
                         <div
                             key={i}
-                            className="w-1 bg-[#AD03DE] rounded-full transition-all duration-300"
+                            className="w-1 bg-[#7c3aed] rounded-full transition-all duration-300"
                             style={{
                                 height: `${Math.random() * 100}%`,
                                 opacity: Math.max(0.2, Math.random())

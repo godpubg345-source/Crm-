@@ -1,7 +1,7 @@
 import api from './api';
 
 // ============================================================================
-// GOVERNANCE SERVICE - BWBS Education CRM
+// GOVERNANCE SERVICE - Education Consultancy ERP
 // ============================================================================
 
 export type EntityType = 'LEAD' | 'STUDENT' | 'DOCUMENT';

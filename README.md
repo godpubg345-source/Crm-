@@ -1,10 +1,13 @@
-# BWBS Education CRM
+# Education Consultancy ERP
 
-End-to-end CRM for managing leads, students, applications, visas, finance, and branch operations.
+End-to-end Education Consultancy ERP for managing leads, students, applications, finance, and branch operations.
+
+> 📖 **Portal architecture & audit:** See [CROSS_PORTAL_ANALYSIS.md](./CROSS_PORTAL_ANALYSIS.md) — 5 portals, auth tracks, data-flow bridges, and known issues.
 
 ## Repository Layout
 - `visa_crm_backend/` Django backend
 - `bwbs-crm-frontend/` React frontend
+- `immigration/` **Immigration Suite (separate product)** — `visas/` + `compliance/` Django apps, `ENABLE_IMMIGRATION_MODULE` flag se on/off (see [`immigration/README.md`](./immigration/README.md))
 - `extras/` Documentation, utility scripts, and miscellaneous artifacts
 - `docker-compose.yml` Local stack (Postgres + Redis + backend)
 

@@ -10,7 +10,7 @@ import {
 } from '../../services/communications';
 
 // ============================================================================
-// COMMUNICATIONS TAB - BWBS Education CRM
+// COMMUNICATIONS TAB - Education Consultancy ERP
 // ============================================================================
 
 interface CommunicationsTabProps {
@@ -19,7 +19,7 @@ interface CommunicationsTabProps {
 
 const typeConfig: Record<CommunicationType, { label: string; color: string; icon: React.ReactNode }> = {
     CALL: {
-        label: 'Voice Consult',
+        label: 'Call',
         color: 'bg-blue-50 text-blue-600 border-blue-100',
         icon: (
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -28,7 +28,7 @@ const typeConfig: Record<CommunicationType, { label: string; color: string; icon
         )
     },
     EMAIL: {
-        label: 'Official Email',
+        label: 'Email',
         color: 'bg-emerald-50 text-emerald-600 border-emerald-100',
         icon: (
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -37,7 +37,7 @@ const typeConfig: Record<CommunicationType, { label: string; color: string; icon
         )
     },
     SMS: {
-        label: 'Direct SMS',
+        label: 'SMS',
         color: 'bg-amber-50 text-amber-600 border-amber-100',
         icon: (
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -55,7 +55,7 @@ const typeConfig: Record<CommunicationType, { label: string; color: string; icon
         )
     },
     WHATSAPP: {
-        label: 'WhatsApp Chat',
+        label: 'WhatsApp',
         color: 'bg-green-50 text-green-600 border-green-100',
         icon: (
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -64,7 +64,7 @@ const typeConfig: Record<CommunicationType, { label: string; color: string; icon
         )
     },
     OTHER: {
-        label: 'Misc Artifact',
+        label: 'Other',
         color: 'bg-slate-50 text-slate-600 border-slate-100',
         icon: (
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -105,42 +105,42 @@ const CommunicationsTab = ({ studentId }: CommunicationsTabProps) => {
 
     if (isError) {
         return (
-            <div className="text-center py-12 bg-rose-50/30 rounded-3xl border border-rose-100">
-                <p className="text-rose-500 font-bold uppercase tracking-widest text-[10px]">Sync Protocol Failed</p>
-                <p className="text-rose-400 text-sm mt-1">Unable to retrieve student dossier history.</p>
+            <div className="text-center py-6 bg-rose-50/30 rounded-2xl border border-rose-100">
+                <p className="text-rose-500 font-bold text-xs">Couldn't load communications</p>
+                <p className="text-rose-400 text-sm mt-1">Something went wrong. Please try again.</p>
             </div>
         );
     }
 
     return (
-        <div className="space-y-8 animate-in fade-in duration-700">
+        <div className="space-y-8 animate-in fade-in duration-200">
             {/* Header Section */}
             <div className="flex items-center justify-between">
                 <div>
-                    <h3 className="text-2xl font-serif font-bold text-slate-900 font-bold">Conversational Ledger</h3>
-                    <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">Timeline of strategic engagements</p>
+                    <h3 className="text-2xl font-bold text-slate-900">Communications</h3>
+                    <p className="text-xs text-slate-500 mt-1">Calls, emails and meetings</p>
                 </div>
                 <button
                     onClick={() => setIsModalOpen(true)}
-                    className="inline-flex items-center gap-3 px-6 py-3 bg-[#AD03DE] hover:bg-[#9302bb] text-white text-xs font-bold rounded-2xl transition-all shadow-xl shadow-[#AD03DE]/20 active:scale-95 group"
+                    className="inline-flex items-center gap-3 px-4 py-2.5 bg-violet-600 hover:bg-[#9302bb] text-white text-sm font-bold rounded-lg transition-all shadow-sm group"
                 >
-                    <svg className="w-5 h-5 group-hover:rotate-12 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-5 h-5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 4v16m8-8H4" />
                     </svg>
-                    Log Engagement
+                    Log interaction
                 </button>
             </div>
 
             {logs.length === 0 ? (
-                <div className="text-center py-24 bg-slate-50/30 rounded-[3rem] border-2 border-dashed border-slate-100 flex flex-col items-center">
-                    <div className="w-20 h-20 rounded-3xl bg-white flex items-center justify-center mb-8 border border-slate-100 text-[#AD03DE] shadow-xl group hover:scale-110 transition-all duration-700">
+                <div className="text-center py-12 bg-slate-50/30 rounded-2xl border-2 border-dashed border-slate-100 flex flex-col items-center">
+                    <div className="w-10 h-10 rounded-lg bg-white flex items-center justify-center mb-8 border border-slate-200 text-[#7c3aed] group transition-all duration-200">
                         <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                         </svg>
                     </div>
-                    <h3 className="text-xl font-serif font-bold text-slate-900 font-bold mb-2">The Dossier is Silent</h3>
+                    <h3 className="text-xl font-bold text-slate-900 mb-2">No communications yet</h3>
                     <p className="text-slate-400 font-medium max-w-xs mx-auto text-sm leading-relaxed">
-                        No strategic communications recorded. Initialize the timeline by logging your first client touchpoint.
+                        Log a call, email or meeting to start this student's history.
                     </p>
                 </div>
             ) : (
@@ -153,27 +153,27 @@ const CommunicationsTab = ({ studentId }: CommunicationsTabProps) => {
                         return (
                             <div key={log.id} className="relative pl-14 group">
                                 {/* Timeline Node */}
-                                <div className={`absolute left-0 top-6 w-14 h-14 rounded-2xl bg-white border border-slate-100 flex items-center justify-center z-10 shadow-sm group-hover:shadow-md group-hover:border-[#AD03DE]/30 transition-all duration-500 ${config.color.split(' ')[1]}`}>
+                                <div className={`absolute left-0 top-6 w-14 h-14 rounded-2xl bg-white border border-slate-100 flex items-center justify-center z-10 shadow-sm group-hover:border-[#7c3aed]/30 transition-all duration-500 ${config.color.split(' ')[1]}`}>
                                     {config.icon}
                                 </div>
 
-                                <div className="p-6 rounded-[2rem] border border-border bg-white shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-500 group-hover:border-[#AD03DE]/10 overflow-hidden relative">
+                                <div className="p-6 rounded-xl border border-border bg-white transition-all duration-200 group-hover:border-[#7c3aed]/10 overflow-hidden relative">
                                     {/* Corner Decoration */}
                                     <div className={`absolute top-0 right-0 w-24 h-24 blur-[60px] opacity-10 transition-opacity group-hover:opacity-20 ${config.color.split(' ')[0]}`} />
 
                                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
                                         <div className="flex flex-wrap items-center gap-3">
-                                            <span className={`px-3 py-1 text-[10px] font-bold rounded-lg border uppercase tracking-widest ${config.color}`}>
+                                            <span className={`px-3 py-1 text-xs font-bold rounded-lg border ${config.color}`}>
                                                 {config.label}
                                             </span>
                                             <div className="flex items-center gap-2">
                                                 <div className={`w-1.5 h-1.5 rounded-full ${log.direction === 'OUTBOUND' ? 'bg-indigo-400' : 'bg-rose-400'}`} />
-                                                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-none">
+                                                <span className="text-xs text-slate-500 leading-none">
                                                     {log.direction_display || log.direction}
                                                 </span>
                                             </div>
                                             {log.subject && (
-                                                <h4 className="text-base font-serif font-bold text-slate-800 font-bold">
+                                                <h4 className="text-base font-bold text-slate-800">
                                                     {log.subject}
                                                 </h4>
                                             )}
@@ -182,7 +182,7 @@ const CommunicationsTab = ({ studentId }: CommunicationsTabProps) => {
                                             <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                                             </svg>
-                                            <span className="text-[10px] font-bold uppercase tracking-widest">
+                                            <span className="text-xs font-bold">
                                                 {new Date(log.created_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })}
                                             </span>
                                         </div>
@@ -203,7 +203,7 @@ const CommunicationsTab = ({ studentId }: CommunicationsTabProps) => {
                                                             </svg>
                                                         </div>
                                                         <div>
-                                                            <span className="text-[9px] font-bold text-slate-300 uppercase tracking-tighter block mb-0.5">Next Strategic Move</span>
+                                                            <span className="text-[11px] font-bold text-slate-300 tracking-tight block mb-0.5">Next step</span>
                                                             <p className="text-[11px] font-bold text-slate-600 leading-tight">{log.next_action}</p>
                                                         </div>
                                                     </div>
@@ -216,7 +216,7 @@ const CommunicationsTab = ({ studentId }: CommunicationsTabProps) => {
                                                             </svg>
                                                         </div>
                                                         <div>
-                                                            <span className="text-[9px] font-bold text-slate-300 uppercase tracking-tighter block mb-0.5">Scheduled Follow-up</span>
+                                                            <span className="text-[11px] font-bold text-slate-300 tracking-tight block mb-0.5">Scheduled Follow-up</span>
                                                             <p className="text-[11px] font-bold text-slate-600 leading-tight">
                                                                 {new Date(log.follow_up_at).toLocaleString('en-GB', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })}
                                                             </p>
@@ -228,13 +228,13 @@ const CommunicationsTab = ({ studentId }: CommunicationsTabProps) => {
                                     </div>
 
                                     <div className="mt-4 flex items-center gap-2">
-                                        <div className="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center shadow-inner overflow-hidden border border-white">
-                                            <span className="text-[8px] font-bold text-slate-400">
+                                        <div className="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center overflow-hidden border border-white">
+                                            <span className="text-[11px] text-slate-500">
                                                 {log.logged_by_details?.first_name?.[0] || 'S'}
                                             </span>
                                         </div>
-                                        <span className="text-[10px] font-bold text-slate-400">
-                                            Handled by {log.logged_by_details ? `${log.logged_by_details.first_name} ${log.logged_by_details.last_name}` : 'System Protocol'}
+                                        <span className="text-xs text-slate-500">
+                                            Handled by {log.logged_by_details ? `${log.logged_by_details.first_name} ${log.logged_by_details.last_name}` : 'System'}
                                         </span>
                                     </div>
                                 </div>
@@ -276,18 +276,18 @@ const LogCommunicationModal = ({ studentId, onClose, onSubmit, isSubmitting }: L
 
     return (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-            <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-xl animate-in fade-in duration-500" onClick={onClose} />
+            <div className="absolute inset-0 bg-slate-900/40 animate-in fade-in duration-200" onClick={onClose} />
 
-            <div className="bg-white rounded-[2.5rem] w-full max-w-xl shadow-[0_32px_128px_-16px_rgba(0,0,0,0.1)] border border-white relative z-50 overflow-hidden animate-in zoom-in-95 slide-in-from-bottom-10 duration-700">
+            <div className="bg-white rounded-xl w-full max-w-xl border border-slate-200 relative z-50 overflow-hidden animate-in zoom-in-95 slide-in-from-bottom-10 duration-200">
                 {/* Modal Header */}
                 <div className="px-8 pt-8 pb-6 flex justify-between items-start">
                     <div>
-                        <h2 className="text-3xl font-serif font-bold text-slate-900 font-bold">Log Engagement</h2>
-                        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">Archive new strategic touchpoint</p>
+                        <h2 className="text-3xl font-bold text-slate-900">Log interaction</h2>
+                        <p className="text-xs text-slate-500 mt-1">Record a call, email or meeting</p>
                     </div>
                     <button
                         onClick={onClose}
-                        className="p-3 bg-slate-50 text-slate-400 hover:text-rose-500 hover:bg-rose-50 rounded-2xl transition-all active:scale-90"
+                        className="p-3 bg-slate-50 text-slate-400 hover:text-rose-500 hover:bg-rose-50 rounded-2xl transition-all"
                     >
                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
@@ -298,71 +298,71 @@ const LogCommunicationModal = ({ studentId, onClose, onSubmit, isSubmitting }: L
                 <div className="px-8 pb-8 space-y-6">
                     <div className="grid grid-cols-2 gap-6">
                         <div className="space-y-2">
-                            <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">Modal Point</label>
+                            <label className="text-xs text-slate-500 ml-1">Channel</label>
                             <select
                                 value={formData.communication_type}
                                 onChange={(e) => setFormData({ ...formData, communication_type: e.target.value as CommunicationType })}
-                                className="w-full px-5 py-3.5 bg-slate-50 border border-slate-100 rounded-2xl text-slate-800 font-bold text-sm focus:outline-none focus:ring-4 focus:ring-[#AD03DE]/10 focus:border-[#AD03DE]/30 transition-all appearance-none cursor-pointer"
+                                className="w-full px-5 py-3.5 bg-slate-50 border border-slate-100 rounded-2xl text-slate-800 font-bold text-sm focus:outline-none focus:ring-4 focus:ring-[#7c3aed]/10 focus:border-[#7c3aed]/30 transition-all appearance-none cursor-pointer"
                             >
                                 <option value="CALL">Voice Call</option>
-                                <option value="EMAIL">Email Dispatch</option>
-                                <option value="SMS">Direct Message</option>
-                                <option value="MEETING">Executive Session</option>
-                                <option value="WHATSAPP">WhatsApp Flow</option>
-                                <option value="OTHER">Other Artifact</option>
+                                <option value="EMAIL">Email</option>
+                                <option value="SMS">SMS</option>
+                                <option value="MEETING">Meeting</option>
+                                <option value="WHATSAPP">WhatsApp</option>
+                                <option value="OTHER">Other</option>
                             </select>
                         </div>
                         <div className="space-y-2">
-                            <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">Flow Direction</label>
+                            <label className="text-xs text-slate-500 ml-1">Direction</label>
                             <select
                                 value={formData.direction}
                                 onChange={(e) => setFormData({ ...formData, direction: e.target.value as CommunicationDirection })}
-                                className="w-full px-5 py-3.5 bg-slate-50 border border-slate-100 rounded-2xl text-slate-800 font-bold text-sm focus:outline-none focus:ring-4 focus:ring-[#AD03DE]/10 focus:border-[#AD03DE]/30 transition-all appearance-none cursor-pointer"
+                                className="w-full px-5 py-3.5 bg-slate-50 border border-slate-100 rounded-2xl text-slate-800 font-bold text-sm focus:outline-none focus:ring-4 focus:ring-[#7c3aed]/10 focus:border-[#7c3aed]/30 transition-all appearance-none cursor-pointer"
                             >
-                                <option value="OUTBOUND">Outbound Consult</option>
-                                <option value="INBOUND">Inbound Inquiry</option>
+                                <option value="OUTBOUND">Outbound</option>
+                                <option value="INBOUND">Inbound</option>
                             </select>
                         </div>
                     </div>
 
                     <div className="space-y-2">
-                        <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">Subject Matter</label>
+                        <label className="text-xs text-slate-500 ml-1">Subject</label>
                         <input
                             value={formData.subject || ''}
                             onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                            placeholder="Primary focus of this engagement"
-                            className="w-full px-5 py-3.5 bg-slate-50 border border-slate-100 rounded-2xl text-slate-800 font-serif font-bold text-sm placeholder:text-slate-300 focus:outline-none focus:ring-4 focus:ring-[#AD03DE]/10 focus:border-[#AD03DE]/30 transition-all"
+                            placeholder="What was it about?"
+                            className="w-full px-5 py-3.5 bg-slate-50 border border-slate-100 rounded-2xl text-slate-800 font-bold text-sm placeholder:text-slate-300 focus:outline-none focus:ring-4 focus:ring-[#7c3aed]/10 focus:border-[#7c3aed]/30 transition-all"
                         />
                     </div>
 
                     <div className="space-y-2">
-                        <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">Strategic Summary *</label>
+                        <label className="text-xs text-slate-500 ml-1">Summary *</label>
                         <textarea
                             value={formData.summary}
                             onChange={(e) => setFormData({ ...formData, summary: e.target.value })}
                             rows={3}
-                            placeholder="Detailed artifacts and outcomes..."
-                            className="w-full px-5 py-3.5 bg-slate-50 border border-slate-100 rounded-2xl text-slate-800 font-medium text-sm placeholder:text-slate-300 focus:outline-none focus:ring-4 focus:ring-[#AD03DE]/10 focus:border-[#AD03DE]/30 transition-all resize-none leading-relaxed"
+                            placeholder="What was discussed?"
+                            className="w-full px-5 py-3.5 bg-slate-50 border border-slate-100 rounded-2xl text-slate-800 font-medium text-sm placeholder:text-slate-300 focus:outline-none focus:ring-4 focus:ring-[#7c3aed]/10 focus:border-[#7c3aed]/30 transition-all resize-none leading-relaxed"
                         />
                     </div>
 
                     <div className="grid grid-cols-2 gap-6">
                         <div className="space-y-2">
-                            <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">Next Action</label>
+                            <label className="text-xs text-slate-500 ml-1">Next Action</label>
                             <input
                                 value={formData.next_action || ''}
                                 onChange={(e) => setFormData({ ...formData, next_action: e.target.value })}
                                 placeholder="Mandatory follow-up"
-                                className="w-full px-5 py-3.5 bg-slate-50 border border-slate-100 rounded-2xl text-slate-800 font-bold text-sm placeholder:text-slate-300 focus:outline-none focus:ring-4 focus:ring-[#AD03DE]/10 focus:border-[#AD03DE]/30 transition-all"
+                                className="w-full px-5 py-3.5 bg-slate-50 border border-slate-100 rounded-2xl text-slate-800 font-bold text-sm placeholder:text-slate-300 focus:outline-none focus:ring-4 focus:ring-[#7c3aed]/10 focus:border-[#7c3aed]/30 transition-all"
                             />
                         </div>
                         <div className="space-y-2">
-                            <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">Follow-up At</label>
+                            <label className="text-xs text-slate-500 ml-1">Follow-up date</label>
                             <input
                                 type="datetime-local"
                                 value={formData.follow_up_at || ''}
                                 onChange={(e) => setFormData({ ...formData, follow_up_at: e.target.value || null })}
-                                className="w-full px-5 py-3.5 bg-slate-50 border border-slate-100 rounded-2xl text-slate-800 font-bold text-xs focus:outline-none focus:ring-4 focus:ring-[#AD03DE]/10 focus:border-[#AD03DE]/30 transition-all"
+                                className="w-full px-5 py-3.5 bg-slate-50 border border-slate-100 rounded-2xl text-slate-800 font-bold text-xs focus:outline-none focus:ring-4 focus:ring-[#7c3aed]/10 focus:border-[#7c3aed]/30 transition-all"
                             />
                         </div>
                     </div>
@@ -370,21 +370,21 @@ const LogCommunicationModal = ({ studentId, onClose, onSubmit, isSubmitting }: L
                     <div className="pt-4 flex items-center justify-between gap-4">
                         <button
                             onClick={onClose}
-                            className="px-8 py-4 text-xs font-bold text-slate-400 hover:text-slate-600 uppercase tracking-widest transition-colors"
+                            className="px-8 py-4 text-xs text-slate-500 hover:text-slate-600 transition-colors"
                         >
-                            Abort Entry
+                            Cancel
                         </button>
                         <button
                             onClick={() => onSubmit(formData)}
                             disabled={isSubmitting || !formData.summary.trim()}
-                            className="px-10 py-4 bg-slate-900 hover:bg-black text-white text-xs font-bold rounded-2xl transition-all shadow-xl shadow-slate-200 disabled:opacity-20 active:scale-95 flex items-center gap-3"
+                            className="px-4 py-2.5 bg-slate-900 hover:bg-black text-white text-sm font-bold rounded-lg transition-all shadow-sm disabled:opacity-20 flex items-center gap-3"
                         >
                             {isSubmitting ? 'Archiving...' : (
                                 <>
                                     <svg className="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                                     </svg>
-                                    Commit to Dossier
+                                    Save
                                 </>
                             )}
                         </button>

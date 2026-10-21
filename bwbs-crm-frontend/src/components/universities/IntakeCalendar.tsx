@@ -2,7 +2,7 @@ import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { motion } from 'framer-motion';
 import {
-    Calendar as CalendarIcon, Beaker, Map,
+    Calendar as CalendarIcon, Beaker, Map as MapIcon,
     TrendingUp, Users, ChevronRight,
     PieChart, Activity, Building, Loader2
 } from 'lucide-react';
@@ -62,20 +62,20 @@ export const IntakeCalendar: React.FC = () => {
     ) || sortedUpcoming[0];
 
     return (
-        <div className="bg-white rounded-[2.5rem] p-10 shadow-sm border border-slate-100 h-full">
-            <div className="flex items-center justify-between mb-10">
+        <div className="bg-white rounded-xl p-6 border border-slate-200 h-full">
+            <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center gap-4">
                     <div className="w-12 h-12 bg-indigo-50 rounded-2xl flex items-center justify-center">
                         <CalendarIcon className="w-5 h-5 text-indigo-600" />
                     </div>
                     <div>
-                        <h3 className="text-xl font-serif font-black text-slate-900 uppercase tracking-tight">Intake Vector</h3>
-                        <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Global Enrollment Cycles</p>
+                        <h3 className="text-xl font-semibold text-slate-900 tracking-tight">Intakes</h3>
+                        <p className="text-[11px] font-semibold text-slate-400">Upcoming intakes</p>
                     </div>
                 </div>
                 <div className="flex gap-2">
-                    <button className="px-4 py-2 bg-slate-50 text-[9px] font-black uppercase text-slate-400 rounded-xl border border-slate-100">Filter By Region</button>
-                    <button className="px-4 py-2 bg-slate-900 text-[9px] font-black uppercase text-white rounded-xl shadow-lg">{currentYear} Cycle</button>
+                    <button className="px-4 py-2 bg-slate-50 text-[11px] font-semibold text-slate-400 rounded-xl border border-slate-100">Filter By Region</button>
+                    <button className="px-4 py-2 bg-violet-600 hover:bg-violet-700 text-[11px] font-semibold text-white rounded-xl shadow-sm">{currentYear} Cycle</button>
                 </div>
             </div>
 
@@ -90,14 +90,14 @@ export const IntakeCalendar: React.FC = () => {
                             key={m}
                             whileHover={{ y: -5 }}
                             className={clsx(
-                                "relative aspect-square p-4 rounded-3xl border transition-all cursor-pointer overflow-hidden group",
-                                i === currentMonth ? "bg-[#AD03DE] border-[#AD03DE] shadow-xl shadow-purple-200" :
+                                "relative aspect-square p-4 rounded-2xl border transition-all cursor-pointer overflow-hidden group",
+                                i === currentMonth ? "bg-[#7c3aed] border-[#7c3aed] shadow-sm " :
                                     hasIntakes ? "bg-white border-slate-100" : "bg-slate-50 border-transparent opacity-60"
                             )}
                         >
                             <p className={clsx(
-                                "text-[10px] font-black tracking-widest leading-none mb-2",
-                                i === currentMonth ? "text-white" : "text-slate-400 uppercase"
+                                "text-xs font-semibold leading-none mb-2",
+                                i === currentMonth ? "text-white" : "text-slate-400 "
                             )}>{m}</p>
 
                             {isLoading && i === currentMonth && (
@@ -106,11 +106,11 @@ export const IntakeCalendar: React.FC = () => {
 
                             {hasIntakes && (
                                 <div className="space-y-2">
-                                    <div className="h-1.5 w-full bg-[#AD03DE]/20 rounded-full overflow-hidden">
-                                        <div className="h-full bg-[#AD03DE]" style={{ width: `${pct}%` }} />
+                                    <div className="h-1.5 w-full bg-[#7c3aed]/20 rounded-full overflow-hidden">
+                                        <div className="h-full bg-[#7c3aed]" style={{ width: `${pct}%` }} />
                                     </div>
                                     <p className={clsx(
-                                        "text-[8px] font-black uppercase",
+                                        "text-[11px] font-semibold ",
                                         i === currentMonth ? "text-white/80" : "text-slate-900"
                                     )}>{stat.count} Courses</p>
                                 </div>
@@ -120,14 +120,14 @@ export const IntakeCalendar: React.FC = () => {
                 })}
             </div>
 
-            <div className="mt-10 p-6 bg-slate-50 rounded-3xl border border-slate-100 flex items-center justify-between">
+            <div className="mt-6 p-6 bg-slate-50 rounded-2xl border border-slate-100 flex items-center justify-between">
                 <div className="flex items-center gap-4">
-                    <Beaker className="w-5 h-5 text-[#AD03DE]" />
-                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
+                    <Beaker className="w-5 h-5 text-[#7c3aed]" />
+                    <p className="text-xs font-semibold text-slate-400">
                         Next Critical Window: {nextWindow ? `${nextWindow.month} ${nextWindow.year}` : 'TBD'}
                     </p>
                 </div>
-                <button className="text-[9px] font-black text-[#AD03DE] uppercase tracking-widest hover:underline flex items-center gap-1">
+                <button className="text-[11px] font-semibold text-[#7c3aed] hover:underline flex items-center gap-1">
                     Manage Intakes <ChevronRight className="w-3 h-3" />
                 </button>
             </div>
@@ -156,8 +156,8 @@ export const UniversityAnalytics: React.FC<{ onViewForecast?: () => void }> = ({
     if (analyticsLoading || forecastLoading) {
         return (
             <div className="h-96 flex flex-col items-center justify-center">
-                <Loader2 className="w-10 h-10 text-[#AD03DE] animate-spin mb-4" />
-                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Calibrating Strategy Matrix...</p>
+                <Loader2 className="w-10 h-10 text-[#7c3aed] animate-spin mb-4" />
+                <p className="text-xs font-semibold text-slate-400">Loading...</p>
             </div>
         );
     }
@@ -179,32 +179,32 @@ export const UniversityAnalytics: React.FC<{ onViewForecast?: () => void }> = ({
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0 }}
-                    className="p-8 bg-white rounded-[2rem] border border-slate-100 shadow-sm group hover:border-[#AD03DE]/30 transition-all"
+                    className="p-6 bg-white rounded-xl border border-slate-200 group hover:border-[#7c3aed]/30 transition-all"
                 >
                     <div className="flex items-center justify-between mb-6">
-                        <div className="p-3 bg-slate-50 rounded-xl group-hover:bg-[#AD03DE]/10 transition-colors">
-                            <Building className="w-5 h-5 text-slate-400 group-hover:text-[#AD03DE]" />
+                        <div className="p-3 bg-slate-50 rounded-xl group-hover:bg-[#7c3aed]/10 transition-colors">
+                            <Building className="w-5 h-5 text-slate-400 group-hover:text-[#7c3aed]" />
                         </div>
-                        <span className="text-[9px] font-black text-emerald-500 bg-emerald-50 px-3 py-1 rounded-full uppercase tracking-widest">Active</span>
+                        <span className="text-[11px] font-semibold text-emerald-500 bg-emerald-50 px-3 py-1 rounded-full">Active</span>
                     </div>
-                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Partner Institutions</p>
-                    <h4 className="text-3xl font-serif font-black text-slate-900 tracking-tighter">{analytics?.total_partners || 0}</h4>
+                    <p className="text-xs font-semibold text-slate-400 mb-1">Partner Institutions</p>
+                    <h4 className="text-3xl font-semibold text-slate-900 tracking-tight">{analytics?.total_partners || 0}</h4>
                 </motion.div>
 
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.1 }}
-                    className="p-8 bg-white rounded-[2rem] border border-slate-100 shadow-sm group hover:border-[#AD03DE]/30 transition-all"
+                    className="p-6 bg-white rounded-xl border border-slate-200 group hover:border-[#7c3aed]/30 transition-all"
                 >
                     <div className="flex items-center justify-between mb-6">
-                        <div className="p-3 bg-slate-50 rounded-xl group-hover:bg-[#AD03DE]/10 transition-colors">
-                            <Users className="w-5 h-5 text-slate-400 group-hover:text-[#AD03DE]" />
+                        <div className="p-3 bg-slate-50 rounded-xl group-hover:bg-[#7c3aed]/10 transition-colors">
+                            <Users className="w-5 h-5 text-slate-400 group-hover:text-[#7c3aed]" />
                         </div>
-                        <span className="text-[9px] font-black text-blue-500 bg-blue-50 px-3 py-1 rounded-full uppercase tracking-widest">Pipeline</span>
+                        <span className="text-[11px] font-semibold text-blue-500 bg-blue-50 px-3 py-1 rounded-full">Pipeline</span>
                     </div>
-                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Active Applications</p>
-                    <h4 className="text-3xl font-serif font-black text-slate-900 tracking-tighter">
+                    <p className="text-xs font-semibold text-slate-400 mb-1">Active Applications</p>
+                    <h4 className="text-3xl font-semibold text-slate-900 tracking-tight">
                         {(forecast?.pipeline?.pending?.count || 0) + (forecast?.pipeline?.offer?.count || 0) + (forecast?.pipeline?.cas_received?.count || 0)}
                     </h4>
                 </motion.div>
@@ -213,47 +213,46 @@ export const UniversityAnalytics: React.FC<{ onViewForecast?: () => void }> = ({
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2 }}
-                    className="p-8 bg-white rounded-[2rem] border border-slate-100 shadow-sm group hover:border-[#AD03DE]/30 transition-all"
+                    className="p-6 bg-white rounded-xl border border-slate-200 group hover:border-[#7c3aed]/30 transition-all"
                 >
                     <div className="flex items-center justify-between mb-6">
-                        <div className="p-3 bg-slate-50 rounded-xl group-hover:bg-[#AD03DE]/10 transition-colors">
-                            <TrendingUp className="w-5 h-5 text-slate-400 group-hover:text-[#AD03DE]" />
+                        <div className="p-3 bg-slate-50 rounded-xl group-hover:bg-[#7c3aed]/10 transition-colors">
+                            <TrendingUp className="w-5 h-5 text-slate-400 group-hover:text-[#7c3aed]" />
                         </div>
-                        <span className="text-[9px] font-black text-purple-500 bg-purple-50 px-3 py-1 rounded-full uppercase tracking-widest">Forecast</span>
+                        <span className="text-[11px] font-semibold text-purple-500 bg-purple-50 px-3 py-1 rounded-full">Forecast</span>
                     </div>
-                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Projected Revenue</p>
-                    <h4 className="text-3xl font-serif font-black text-slate-900 tracking-tighter">{formatCurrency(forecast?.summary?.total_forecast || 0)}</h4>
+                    <p className="text-xs font-semibold text-slate-400 mb-1">Expected revenue</p>
+                    <h4 className="text-3xl font-semibold text-slate-900 tracking-tight">{formatCurrency(forecast?.summary?.total_forecast || 0)}</h4>
                 </motion.div>
 
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.3 }}
-                    className="p-8 bg-white rounded-[2rem] border border-slate-100 shadow-sm group hover:border-[#AD03DE]/30 transition-all"
+                    className="p-6 bg-white rounded-xl border border-slate-200 group hover:border-[#7c3aed]/30 transition-all"
                 >
                     <div className="flex items-center justify-between mb-6">
-                        <div className="p-3 bg-slate-50 rounded-xl group-hover:bg-[#AD03DE]/10 transition-colors">
-                            <Activity className="w-5 h-5 text-slate-400 group-hover:text-[#AD03DE]" />
+                        <div className="p-3 bg-slate-50 rounded-xl group-hover:bg-[#7c3aed]/10 transition-colors">
+                            <Activity className="w-5 h-5 text-slate-400 group-hover:text-[#7c3aed]" />
                         </div>
-                        <span className="text-[9px] font-black text-emerald-500 bg-emerald-50 px-3 py-1 rounded-full uppercase tracking-widest">Confirmed</span>
+                        <span className="text-[11px] font-semibold text-emerald-500 bg-emerald-50 px-3 py-1 rounded-full">Confirmed</span>
                     </div>
-                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Earned Commission</p>
-                    <h4 className="text-3xl font-serif font-black text-slate-900 tracking-tighter">{formatCurrency(forecast?.summary?.total_earned || 0)}</h4>
+                    <p className="text-xs font-semibold text-slate-400 mb-1">Earned Commission</p>
+                    <h4 className="text-3xl font-semibold text-slate-900 tracking-tight">{formatCurrency(forecast?.summary?.total_earned || 0)}</h4>
                 </motion.div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {/* Performance Map Matrix */}
-                <div className="md:col-span-2 bg-slate-900 rounded-[3rem] p-10 overflow-hidden relative">
-                    <div className="absolute top-0 right-0 w-80 h-80 bg-[#AD03DE]/20 rounded-full blur-[100px] translate-x-1/2 -translate-y-1/2" />
+                <div className="md:col-span-2 bg-slate-900 rounded-2xl p-6 overflow-hidden relative">
 
                     <div className="relative z-10 flex flex-col h-full">
-                        <div className="flex items-center justify-between mb-10">
+                        <div className="flex items-center justify-between mb-6">
                             <div>
-                                <h3 className="text-xl font-serif font-black text-white uppercase tracking-tight">Global Reach</h3>
-                                <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Geographic Partner Density</p>
+                                <h3 className="text-xl font-semibold text-white tracking-tight">Countries</h3>
+                                <p className="text-[11px] font-semibold text-slate-400">Partners by country</p>
                             </div>
-                            <Map className="w-6 h-6 text-[#AD03DE]" />
+                            <MapIcon className="w-6 h-6 text-[#7c3aed]" />
                         </div>
 
                         <div className="flex-1 flex items-center justify-center">
@@ -261,15 +260,15 @@ export const UniversityAnalytics: React.FC<{ onViewForecast?: () => void }> = ({
                                 {analytics?.geographic_reach && analytics.geographic_reach.length > 0 ? (
                                     analytics.geographic_reach.map((reg: any) => {
                                         const pct = analytics.total_universities > 0 ? (reg.count / analytics.total_universities) * 100 : 0;
-                                        const color = reg.country === 'United Kingdom' ? '#AD03DE' :
+                                        const color = reg.country === 'United Kingdom' ? '#7c3aed' :
                                             reg.country === 'United States' ? '#6366f1' :
                                                 reg.country === 'Canada' ? '#ec4899' : '#10b981';
 
                                         return (
                                             <div key={reg.country} className="space-y-2">
                                                 <div className="flex items-center justify-between">
-                                                    <p className="text-[10px] font-black text-white uppercase tracking-widest">{reg.country}</p>
-                                                    <p className="text-[10px] font-black text-slate-400">{pct.toFixed(1)}% ({reg.count})</p>
+                                                    <p className="text-xs font-semibold text-white">{reg.country}</p>
+                                                    <p className="text-xs font-semibold text-slate-400">{pct.toFixed(1)}% ({reg.count})</p>
                                                 </div>
                                                 <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
                                                     <motion.div
@@ -283,7 +282,7 @@ export const UniversityAnalytics: React.FC<{ onViewForecast?: () => void }> = ({
                                         );
                                     })
                                 ) : (
-                                    <div className="text-center py-10">
+                                    <div className="text-center py-6">
                                         <p className="text-sm text-slate-500 font-bold">No geographic data available</p>
                                     </div>
                                 )}
@@ -293,11 +292,11 @@ export const UniversityAnalytics: React.FC<{ onViewForecast?: () => void }> = ({
                 </div>
 
                 {/* Top Institutions List */}
-                <div className="bg-white rounded-[3rem] p-10 border border-slate-100 shadow-sm flex flex-col">
-                    <div className="flex items-center justify-between mb-10">
+                <div className="bg-white rounded-xl p-6 border border-slate-200 flex flex-col">
+                    <div className="flex items-center justify-between mb-6">
                         <div>
-                            <h3 className="text-xl font-serif font-black text-slate-900 uppercase tracking-tight">Top Partners</h3>
-                            <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest">By Revenue Projection</p>
+                            <h3 className="text-xl font-semibold text-slate-900 tracking-tight">Top Partners</h3>
+                            <p className="text-[11px] font-semibold text-slate-400">By Revenue Projection</p>
                         </div>
                         <PieChart className="w-6 h-6 text-slate-200" />
                     </div>
@@ -305,22 +304,22 @@ export const UniversityAnalytics: React.FC<{ onViewForecast?: () => void }> = ({
                     <div className="flex-1 space-y-6 max-h-[300px] overflow-y-auto custom-scrollbar pr-2">
                         {forecast?.universities && forecast.universities.length > 0 ? (
                             forecast.universities.slice(0, 5).map((uni: any, i: number) => (
-                                <div key={uni.university_id} className="flex items-center gap-4 group cursor-pointer hover:translate-x-1 transition-transform">
-                                    <div className="w-10 h-10 bg-slate-50 rounded-xl flex items-center justify-center font-black text-slate-400 text-[10px]">{i + 1}</div>
+                                <div key={uni.university_id} className="flex items-center gap-4 group cursor-pointer transition-transform">
+                                    <div className="w-10 h-10 bg-slate-50 rounded-xl flex items-center justify-center font-semibold text-slate-400 text-xs">{i + 1}</div>
                                     <div className="flex-1 min-w-0">
-                                        <p className="text-[11px] font-black text-slate-900 uppercase truncate" title={uni.university_name}>{uni.university_name}</p>
+                                        <p className="text-[11px] font-semibold text-slate-900 truncate" title={uni.university_name}>{uni.university_name}</p>
                                         <div className="flex items-center gap-2">
                                             <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full" />
-                                            <p className="text-[8px] font-bold text-slate-400 uppercase tracking-widest">
+                                            <p className="text-[11px] text-slate-500">
                                                 {formatCurrency(parseFloat(uni.earned) + parseFloat(uni.projected))}
                                             </p>
                                         </div>
                                     </div>
-                                    <ChevronRight className="w-4 h-4 text-slate-200 group-hover:text-[#AD03DE]" />
+                                    <ChevronRight className="w-4 h-4 text-slate-200 group-hover:text-[#7c3aed]" />
                                 </div>
                             ))
                         ) : (
-                            <div className="text-center py-10">
+                            <div className="text-center py-6">
                                 <p className="text-xs text-slate-400">No active partner data</p>
                             </div>
                         )}
@@ -328,7 +327,7 @@ export const UniversityAnalytics: React.FC<{ onViewForecast?: () => void }> = ({
 
                     <button
                         onClick={onViewForecast}
-                        className="w-full py-5 bg-slate-50 text-slate-400 rounded-2xl text-[10px] font-black uppercase tracking-widest hover:text-[#AD03DE] hover:bg-slate-100 transition-all mt-10"
+                        className="w-full py-5 bg-slate-50 text-slate-400 rounded-2xl text-xs font-semibold hover:text-[#7c3aed] hover:bg-slate-100 transition-all mt-6"
                     >
                         View Full Forecast Widget
                     </button>

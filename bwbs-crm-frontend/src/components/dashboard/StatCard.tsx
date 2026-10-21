@@ -14,23 +14,22 @@ export const StatCard = ({ title, value, icon: Icon, trend }: StatCardProps) => 
     const numericValue = typeof value === 'number' ? value : parseFloat(value.toString().replace(/[^0-9.-]+/g, "")) || 0;
 
     return (
-        <div className="bg-white rounded-2xl p-6 shadow-sm border border-border hover:border-[#AD03DE]/40 hover:shadow-xl hover:-translate-y-1 transition-all duration-500 group cursor-default active:scale-[0.98] relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-transparent to-[#AD03DE]/5 -mr-8 -mt-8 rounded-full blur-2xl group-hover:to-[#AD03DE]/10 transition-colors" />
+        <div className="bg-white rounded-xl p-6 border border-border hover:border-[#7c3aed]/40 transition-all duration-200 group cursor-default relative overflow-hidden">
 
             <div className="flex items-start justify-between relative z-10">
                 <div>
-                    <p className="text-slate-600 text-[10px] font-extrabold uppercase tracking-widest mb-1.5">{title}</p>
-                    <h3 className="text-3xl font-serif font-extrabold text-slate-900 mt-1">
+                    <p className="text-slate-600 text-xs font-semibold mb-1.5">{title}</p>
+                    <h3 className="text-3xl font-semibold text-slate-900 mt-1">
                         <AnimatedCounter value={numericValue} />
                     </h3>
                 </div>
-                <div className="w-12 h-12 rounded-xl bg-slate-50 flex items-center justify-center group-hover:bg-[#AD03DE] transition-all duration-500 shadow-inner group-hover:shadow-[#AD03DE]/20 group-hover:-rotate-6">
+                <div className="w-12 h-12 rounded-xl bg-slate-50 flex items-center justify-center group-hover:bg-[#7c3aed] transition-all duration-200">
                     <Icon className="w-6 h-6 text-slate-400 group-hover:text-white transition-colors" />
                 </div>
             </div>
 
             {trend && (
-                <div className="mt-6 flex items-center text-[10px] font-bold uppercase tracking-wider relative z-10">
+                <div className="mt-6 flex items-center text-xs font-bold relative z-10">
                     <span className={clsx(
                         "px-2 py-0.5 rounded-md",
                         isPositive ? "bg-emerald-50 text-emerald-600 border border-emerald-100" : "bg-red-50 text-red-600 border border-red-100"

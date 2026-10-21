@@ -100,29 +100,28 @@ export const ContactDirectory: React.FC<ContactDirectoryProps> = ({
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 onClick={onClose}
-                className="absolute inset-0 bg-slate-900/60 backdrop-blur-md"
+                className="absolute inset-0 bg-slate-900/60"
             />
 
             <motion.div
                 initial={{ opacity: 0, x: 100 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: 100 }}
-                className="relative w-full max-w-xl bg-white rounded-[3rem] shadow-2xl overflow-hidden max-h-[85vh] flex flex-col ml-auto mr-8"
+                className="relative w-full max-w-xl bg-white rounded-2xl shadow-sm overflow-hidden max-h-[85vh] flex flex-col ml-auto mr-8"
             >
                 {/* Header */}
-                <div className="p-8 bg-gradient-to-r from-slate-900 to-slate-800 relative overflow-hidden">
-                    <div className="absolute top-0 right-0 w-40 h-40 bg-[#AD03DE]/20 rounded-full blur-3xl" />
+                <div className="p-6 bg-gradient-to-r from-slate-900 to-slate-800 relative overflow-hidden">
 
                     <div className="relative z-10 flex items-center justify-between">
                         <div className="flex items-center gap-4">
-                            <div className="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center backdrop-blur-md border border-white/10">
-                                <User className="w-6 h-6 text-[#AD03DE]" />
+                            <div className="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center border border-white/10">
+                                <User className="w-6 h-6 text-[#7c3aed]" />
                             </div>
                             <div>
-                                <h2 className="text-2xl font-serif font-black text-white uppercase tracking-tight">
+                                <h2 className="text-2xl font-semibold text-white tracking-tight">
                                     Contacts
                                 </h2>
-                                <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest">
+                                <p className="text-[11px] font-semibold text-slate-400">
                                     {universityName}
                                 </p>
                             </div>
@@ -197,21 +196,21 @@ export const ContactDirectory: React.FC<ContactDirectoryProps> = ({
                                             type="checkbox"
                                             checked={formData.is_primary}
                                             onChange={(e) => setFormData({ ...formData, is_primary: e.target.checked })}
-                                            className="w-4 h-4 accent-[#AD03DE]"
+                                            className="w-4 h-4 accent-[#7c3aed]"
                                         />
-                                        <span className="text-[10px] font-bold text-slate-500">Set as Primary Contact</span>
+                                        <span className="text-xs font-bold text-slate-500">Set as Primary Contact</span>
                                     </label>
 
                                     <div className="flex gap-2">
                                         <button
                                             onClick={resetForm}
-                                            className="px-4 py-2 bg-slate-100 text-slate-600 rounded-xl text-[10px] font-black uppercase"
+                                            className="px-4 py-2 bg-slate-100 text-slate-600 rounded-xl text-xs font-semibold"
                                         >
                                             Cancel
                                         </button>
                                         <button
                                             onClick={handleSubmit}
-                                            className="px-6 py-2 bg-[#AD03DE] text-white rounded-xl text-[10px] font-black uppercase"
+                                            className="px-6 py-2 bg-[#7c3aed] text-white rounded-xl text-xs font-semibold"
                                         >
                                             {editingId ? 'Update' : 'Add Contact'}
                                         </button>
@@ -227,17 +226,17 @@ export const ContactDirectory: React.FC<ContactDirectoryProps> = ({
                     {!isAddMode && (
                         <button
                             onClick={() => setIsAddMode(true)}
-                            className="w-full p-4 border-2 border-dashed border-slate-200 rounded-2xl flex items-center justify-center gap-2 text-slate-400 hover:border-[#AD03DE] hover:text-[#AD03DE] transition-all"
+                            className="w-full p-4 border-2 border-dashed border-slate-200 rounded-2xl flex items-center justify-center gap-2 text-slate-400 hover:border-[#7c3aed] hover:text-[#7c3aed] transition-all"
                         >
                             <Plus className="w-4 h-4" />
-                            <span className="text-[10px] font-black uppercase tracking-widest">Add New Contact</span>
+                            <span className="text-xs font-semibold">Add New Contact</span>
                         </button>
                     )}
 
                     {contacts.length === 0 ? (
-                        <div className="text-center py-12">
+                        <div className="text-center py-6">
                             <User className="w-12 h-12 text-slate-200 mx-auto mb-4" />
-                            <p className="text-[11px] font-black text-slate-400 uppercase tracking-widest">
+                            <p className="text-[11px] font-semibold text-slate-400">
                                 No Contacts Added
                             </p>
                         </div>
@@ -248,30 +247,30 @@ export const ContactDirectory: React.FC<ContactDirectoryProps> = ({
                                 className={clsx(
                                     "p-4 rounded-2xl border transition-all group",
                                     contact.is_primary
-                                        ? "bg-[#AD03DE]/5 border-[#AD03DE]/20"
+                                        ? "bg-[#7c3aed]/5 border-[#7c3aed]/20"
                                         : "bg-slate-50 border-transparent hover:bg-slate-100"
                                 )}
                             >
                                 <div className="flex items-start gap-4">
-                                    <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-sm text-lg font-black text-slate-400">
+                                    <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-sm text-lg font-semibold text-slate-400">
                                         {contact.name.split(' ').map(n => n[0]).join('')}
                                     </div>
 
                                     <div className="flex-1 min-w-0">
                                         <div className="flex items-center gap-2">
-                                            <h4 className="text-sm font-black text-slate-900">{contact.name}</h4>
+                                            <h4 className="text-sm font-semibold text-slate-900">{contact.name}</h4>
                                             {contact.is_primary && (
-                                                <Star className="w-4 h-4 text-[#AD03DE] fill-[#AD03DE]" />
+                                                <Star className="w-4 h-4 text-[#7c3aed] fill-[#7c3aed]" />
                                             )}
                                         </div>
-                                        <p className="text-[9px] font-bold text-[#AD03DE] uppercase tracking-widest">
+                                        <p className="text-[11px] font-bold text-[#7c3aed]">
                                             {contact.role}
                                         </p>
 
                                         <div className="flex items-center gap-4 mt-3">
                                             <a
                                                 href={`mailto:${contact.email}`}
-                                                className="flex items-center gap-1 text-[9px] font-bold text-slate-400 hover:text-slate-600"
+                                                className="flex items-center gap-1 text-[11px] text-slate-500 hover:text-slate-600"
                                             >
                                                 <Mail className="w-3 h-3" />
                                                 {contact.email}
@@ -279,7 +278,7 @@ export const ContactDirectory: React.FC<ContactDirectoryProps> = ({
                                             {contact.phone && (
                                                 <a
                                                     href={`tel:${contact.phone}`}
-                                                    className="flex items-center gap-1 text-[9px] font-bold text-slate-400 hover:text-slate-600"
+                                                    className="flex items-center gap-1 text-[11px] text-slate-500 hover:text-slate-600"
                                                 >
                                                     <Phone className="w-3 h-3" />
                                                     {contact.phone}
@@ -289,7 +288,7 @@ export const ContactDirectory: React.FC<ContactDirectoryProps> = ({
                                                 <a
                                                     href={contact.linkedin}
                                                     target="_blank"
-                                                    className="flex items-center gap-1 text-[9px] font-bold text-slate-400 hover:text-blue-600"
+                                                    className="flex items-center gap-1 text-[11px] text-slate-500 hover:text-blue-600"
                                                 >
                                                     <Linkedin className="w-3 h-3" />
                                                     Profile

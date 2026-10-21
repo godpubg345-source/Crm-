@@ -3,7 +3,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { createStudent } from '../services/students';
 
 // ============================================================================
-// ADD STUDENT MODAL - BWBS Education CRM
+// ADD STUDENT MODAL - Education Consultancy ERP
 // ============================================================================
 
 interface AddStudentModalProps {
@@ -83,16 +83,16 @@ const AddStudentModal = ({ isOpen, onClose }: AddStudentModalProps) => {
         <div className="fixed inset-0 z-50 overflow-y-auto">
             {/* Backdrop */}
             <div
-                className="fixed inset-0 bg-black/60 backdrop-blur-sm transition-opacity"
+                className="fixed inset-0 bg-black/60 transition-opacity"
                 onClick={onClose}
             />
 
             {/* Modal */}
             <div className="flex min-h-full items-center justify-center p-4">
-                <div className="relative w-full max-w-lg transform rounded-2xl bg-white border border-border shadow-2xl transition-all animate-in zoom-in-95 duration-300">
+                <div className="relative w-full max-w-lg transform rounded-xl bg-white border border-border transition-all animate-in zoom-in-95 duration-300">
                     {/* Header */}
                     <div className="flex items-center justify-between px-6 py-4 border-b border-border bg-slate-50/50 rounded-t-2xl">
-                        <h2 className="text-xl font-bold text-slate-900 font-serif">Add New Student</h2>
+                        <h2 className="text-xl font-bold text-slate-900">Add New Student</h2>
                         <button
                             onClick={onClose}
                             className="p-2 text-slate-400 hover:text-slate-900 hover:bg-slate-100 rounded-lg transition-colors"
@@ -125,7 +125,7 @@ const AddStudentModal = ({ isOpen, onClose }: AddStudentModalProps) => {
                                     type="text"
                                     value={formData.first_name}
                                     onChange={handleChange('first_name')}
-                                    className={`w-full px-4 py-2.5 rounded-lg bg-white border text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#AD03DE]/30 focus:border-[#AD03DE] transition-all shadow-sm ${errors.first_name ? 'border-red-500' : 'border-border'
+                                    className={`w-full px-4 py-2.5 rounded-lg bg-white border text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#7c3aed]/30 focus:border-[#7c3aed] transition-all shadow-sm ${errors.first_name ? 'border-red-500' : 'border-border'
                                         }`}
                                     placeholder="John"
                                 />
@@ -139,7 +139,7 @@ const AddStudentModal = ({ isOpen, onClose }: AddStudentModalProps) => {
                                     type="text"
                                     value={formData.last_name}
                                     onChange={handleChange('last_name')}
-                                    className={`w-full px-4 py-2.5 rounded-lg bg-white border text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#AD03DE]/30 focus:border-[#AD03DE] transition-all shadow-sm ${errors.last_name ? 'border-red-500' : 'border-border'
+                                    className={`w-full px-4 py-2.5 rounded-lg bg-white border text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#7c3aed]/30 focus:border-[#7c3aed] transition-all shadow-sm ${errors.last_name ? 'border-red-500' : 'border-border'
                                         }`}
                                     placeholder="Doe"
                                 />
@@ -156,7 +156,7 @@ const AddStudentModal = ({ isOpen, onClose }: AddStudentModalProps) => {
                                 type="email"
                                 value={formData.email}
                                 onChange={handleChange('email')}
-                                className={`w-full px-4 py-2.5 rounded-lg bg-white border text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#AD03DE]/30 focus:border-[#AD03DE] transition-all shadow-sm ${errors.email ? 'border-red-500' : 'border-border'
+                                className={`w-full px-4 py-2.5 rounded-lg bg-white border text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#7c3aed]/30 focus:border-[#7c3aed] transition-all shadow-sm ${errors.email ? 'border-red-500' : 'border-border'
                                     }`}
                                 placeholder="john.doe@example.com"
                             />
@@ -171,7 +171,7 @@ const AddStudentModal = ({ isOpen, onClose }: AddStudentModalProps) => {
                                     type="tel"
                                     value={formData.phone}
                                     onChange={handleChange('phone')}
-                                    className="w-full px-4 py-2.5 rounded-lg bg-white border border-border text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#AD03DE]/30 focus:border-[#AD03DE] transition-all shadow-sm"
+                                    className="w-full px-4 py-2.5 rounded-lg bg-white border border-border text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#7c3aed]/30 focus:border-[#7c3aed] transition-all"
                                     placeholder="+44 7XXX XXXXXX"
                                 />
                             </div>
@@ -181,7 +181,7 @@ const AddStudentModal = ({ isOpen, onClose }: AddStudentModalProps) => {
                                     type="date"
                                     value={formData.date_of_birth}
                                     onChange={handleChange('date_of_birth')}
-                                    className="w-full px-4 py-2.5 rounded-lg bg-white border border-border text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#AD03DE]/30 focus:border-[#AD03DE] transition-all shadow-sm"
+                                    className="w-full px-4 py-2.5 rounded-lg bg-white border border-border text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#7c3aed]/30 focus:border-[#7c3aed] transition-all"
                                 />
                             </div>
                         </div>
@@ -195,7 +195,7 @@ const AddStudentModal = ({ isOpen, onClose }: AddStudentModalProps) => {
                                 type="text"
                                 value={formData.passport_number}
                                 onChange={handleChange('passport_number')}
-                                className={`w-full px-4 py-2.5 rounded-lg bg-white border text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#AD03DE]/30 focus:border-[#AD03DE] transition-all shadow-sm font-mono ${errors.passport_number ? 'border-red-500' : 'border-border'
+                                className={`w-full px-4 py-2.5 rounded-lg bg-white border text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#7c3aed]/30 focus:border-[#7c3aed] transition-all shadow-sm font-mono ${errors.passport_number ? 'border-red-500' : 'border-border'
                                     }`}
                                 placeholder="AB1234567"
                             />
@@ -207,14 +207,14 @@ const AddStudentModal = ({ isOpen, onClose }: AddStudentModalProps) => {
                             <button
                                 type="button"
                                 onClick={onClose}
-                                className="px-4 py-2.5 text-sm font-bold text-slate-600 hover:text-slate-900 bg-white border border-border rounded-lg transition-all hover:bg-slate-50 active:scale-95 shadow-sm"
+                                className="px-4 py-2.5 text-sm font-bold text-slate-600 hover:text-slate-900 bg-white border border-border rounded-lg transition-all hover:bg-slate-50"
                             >
                                 Cancel
                             </button>
                             <button
                                 type="submit"
                                 disabled={mutation.isPending}
-                                className="inline-flex items-center gap-2 px-6 py-2.5 text-sm font-bold text-white bg-[#AD03DE] hover:bg-[#9302bb] rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-[#AD03DE]/20 active:scale-95"
+                                className="inline-flex items-center gap-2 px-6 py-2.5 text-sm font-bold text-white bg-[#7c3aed] hover:bg-[#9302bb] rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-sm"
                             >
                                 {mutation.isPending ? (
                                     <>

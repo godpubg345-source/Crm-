@@ -1,11 +1,11 @@
 import api from './api';
 
 // ============================================================================
-// LEADS SERVICE - BWBS Education CRM
+// LEADS SERVICE - Education Consultancy ERP
 // ============================================================================
 
-export type LeadStatus = 'NEW' | 'CONTACTED' | 'QUALIFIED' | 'CONVERTED' | 'LOST';
-export type LeadSource = 'WALK_IN' | 'WEBSITE' | 'FACEBOOK' | 'REFERRAL' | 'EVENT' | 'OTHER';
+export type LeadStatus = 'NEW' | 'CONTACTED' | 'QUALIFIED' | 'CONVERTED' | 'LOST' | 'ARCHIVED';
+export type LeadSource = 'WALK_IN' | 'WEBSITE' | 'FACEBOOK' | 'REFERRAL' | 'EVENT' | 'MARKETING_IMPORT' | 'OTHER';
 export type LeadPriority = 'HOT' | 'WARM' | 'COLD';
 export type InteractionType = 'CALL' | 'WHATSAPP' | 'EMAIL' | 'MEETING' | 'NOTE';
 
@@ -22,6 +22,9 @@ export interface Lead {
     priority_display: string;
     score: number;
     target_country: string | null;
+    branch_name?: string;
+    is_active: boolean;
+    archive_reason?: string | null;
     is_sla_violated: boolean;
     win_probability: number;
     last_interaction_at: string | null;
@@ -129,6 +132,14 @@ export const getLeadById = async (id: string): Promise<Lead> => {
 // ============================================================================
 export const createLead = async (data: LeadCreateData): Promise<Lead> => {
     const response = await api.post<Lead>('/leads/', data);
+    return response.data;
+};
+
+// ============================================================================
+// BULK CREATE LEADS
+// ============================================================================
+export const bulkCreateLeads = async (leads: LeadCreateData[]): Promise<{ count: number; message: string }> => {
+    const response = await api.post<{ count: number; message: string }>('/leads/bulk_create/', { leads });
     return response.data;
 };
 
@@ -250,6 +261,7 @@ export const leadStatusColors: Record<LeadStatus, string> = {
     QUALIFIED: 'bg-emerald-100 text-emerald-700 border-emerald-200',
     CONVERTED: 'bg-purple-100 text-purple-700 border-purple-200',
     LOST: 'bg-rose-100 text-rose-700 border-rose-200',
+    ARCHIVED: 'bg-slate-200 text-slate-800 border-slate-300',
 };
 
 export const leadStatusLabels: Record<LeadStatus, string> = {
@@ -258,6 +270,7 @@ export const leadStatusLabels: Record<LeadStatus, string> = {
     QUALIFIED: 'Qualified',
     CONVERTED: 'Converted',
     LOST: 'Lost',
+    ARCHIVED: 'Archived',
 };
 
 export const leadPriorityColors: Record<LeadPriority, string> = {

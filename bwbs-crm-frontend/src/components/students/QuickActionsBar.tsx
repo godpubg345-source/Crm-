@@ -9,7 +9,7 @@ interface QuickActionsBarProps {
 
 const QuickActionsBar = ({ onLogCall, onAddNote, onAddTask, onSendEmail }: QuickActionsBarProps) => {
     return (
-        <div className="flex items-center gap-3 p-2 bg-white rounded-2xl border border-slate-100 shadow-sm">
+        <div className="flex items-center gap-3 p-2 bg-white rounded-xl border border-slate-200">
             <ActionButton icon={<Phone className="w-4 h-4" />} label="Log Call" onClick={onLogCall} color="text-emerald-600 bg-emerald-50 hover:bg-emerald-100" />
             <div className="w-px h-6 bg-slate-100" />
             <ActionButton icon={<FileText className="w-4 h-4" />} label="Note" onClick={onAddNote} color="text-blue-600 bg-blue-50 hover:bg-blue-100" />
@@ -24,7 +24,7 @@ const QuickActionsBar = ({ onLogCall, onAddNote, onAddTask, onSendEmail }: Quick
 const ActionButton = ({ icon, label, onClick, color }: { icon: React.ReactNode, label: string, onClick: () => void, color: string }) => (
     <button
         onClick={onClick}
-        className={`flex items-center gap-2 px-4 py-2 rounded-xl text-[10px] font-bold uppercase tracking-widest transition-all active:scale-95 ${color}`}
+        className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all ${color}`}
     >
         {icon}
         <span>{label}</span>
